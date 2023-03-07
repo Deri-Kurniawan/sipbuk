@@ -4,7 +4,7 @@ import React from "react";
 export default function Footer() {
   return (
     <>
-      <div className="px-[20px] lg:px-[119px]">
+      <div className="safe-horizontal-padding">
         <div className="flex flex-col md:flex-row md:justify-between md:items-center h-[80px] text-base md:text-base md:gap-5">
           <p>©{new Date().getFullYear()} SIPBUK All rights reserved.</p>
           <div className="flex flex-row gap-1">

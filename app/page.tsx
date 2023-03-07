@@ -16,7 +16,7 @@ export default function Home() {
     <>
       <SafeLayout>
         <Navbar />
-        <main className="px-[20px] lg:px-[119px] my-[16px] md:my-[48px]">
+        <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
           <div className="md:grid grid-flow-row grid-cols-12 gap-[32px] items-center">
             {/* hero left */}
             <div className="col-span-12 lg:col-span-7 lg:max-w-[600px]">

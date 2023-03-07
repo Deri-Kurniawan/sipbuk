@@ -22,7 +22,7 @@ export default function Navbar() {
     <nav className="sticky top-0 z-50">
       <div className="max-h-[76px] h-full bg-white py-2">
         {/* brand */}
-        <div className="flex flex-row justify-between items-center px-[20px] lg:px-[119px] w-full">
+        <div className="flex flex-row justify-between items-center safe-horizontal-padding w-full">
           <Link
             href="/"
             className="relative transition-colors duration-300 bg-gradient-to-r from-green-400 to-blue-400 text-transparent bg-clip-text hover:from-green-400 hover:to-green-400 hover:transition-transform hover:duration-1000"
