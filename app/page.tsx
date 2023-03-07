@@ -24,22 +24,22 @@ export default function Home() {
                 Diagnosa Hama dan Penyakit Pada Tanaman Jambu Kristal Anda
                 Sekarang
               </h2>
-              <p className="font-normal text-sm md:text-lg mb-3 md:mb-7">
+              <p className="font-normal text-base md:text-lg mb-3 md:mb-7">
                 Sistem berbasis web ini dapat membantu anda dalam mendiagnosa
                 hama dan penyakit pada tanaman jambu kristal anda, serta dapat
                 memberikan solusi atas masalah yang dialami oleh tanaman jambu
                 kristal anda secara gratis.
               </p>
 
-              <div className="flex flex-1 flex-wrap gap-4">
+              <div className="flex flex-1 flex-wrap gap-4 mt-4 md:mt-6">
                 <Link
-                  className="btn btn-outline btn-info text-sm md:text-base capitalize"
+                  className="btn btn-outline btn-info text-base md:text-base capitalize"
                   href="/consult"
                 >
                   Konsultasi Sekarang
                 </Link>
                 <Link
-                  className="btn btn-outline btn-success text-sm md:text-base capitalize"
+                  className="btn btn-outline btn-success text-base md:text-base capitalize"
                   href="/about"
                 >
                   Tentang Aplikasi
