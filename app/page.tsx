@@ -49,7 +49,7 @@ export default function Home() {
             {/* hero right */}
             <div className="hidden lg:flex justify-end lg:col-span-5">
               <Image
-                className="w-[481px] h-[410px] rounded-2xl object-cover"
+                className="w-[481px] h-[410px] bg-primary rounded-2xl object-cover"
                 src={guavaImg}
                 alt=""
                 priority
