@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import guavaImg from "../assets/guava.jpg";
+import guavaImg from "@/assets/guava.jpg";
 import Link from "next/link";
 import SafeLayout from "@/layouts/SafeLayout";
 import Footer from "@/components/Footer";
