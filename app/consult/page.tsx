@@ -126,7 +126,7 @@ export default function Consult() {
                 className="query-question"
                 id={`question-${index}`}
               >
-                <Question {...ql} />
+                <Question {...ql} index={index} />
               </div>
             ))}
             <div className="flex flex-col items-center justify-center text-center mb-[112px] lg:mb-[172px]">
