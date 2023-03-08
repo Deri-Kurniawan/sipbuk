@@ -38,7 +38,7 @@ export default function RadioButton({ sympCode }: Props) {
           className={`${
             selectedOption === option.label
               ? "bg-blue-500 text-white"
-              : "bg-gray-100 text-gray-700"
+              : "bg-primary"
           } col-span-1 text-sm text-center inline-flex justify-center lg:h-[42px] items-center px-4 py-2 rounded-lg transition-all duration-300 hover:cursor-pointer`}
         >
           <input
