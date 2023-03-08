@@ -38,7 +38,16 @@ export default function Consult() {
     const formData = new FormData(form);
 
     const data = Object.fromEntries(formData.entries());
-    console.log(data);
+
+    const remapData: any = {};
+
+    for (const key in data) {
+      if (Object.prototype.hasOwnProperty.call(data, key)) {
+        remapData[key] = Number(data[key]);
+      }
+    }
+
+    console.log(remapData);
   };
 
   useEffect(() => {
