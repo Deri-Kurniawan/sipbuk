@@ -51,6 +51,48 @@ export default function Consult() {
   };
 
   useEffect(() => {
+    const handleRightArrowKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowRight") {
+        const nextQuestionIndex = questionOnViewport.index + 1;
+        const nextQuestionId = `question-${nextQuestionIndex}`;
+
+        const nextQuestionElement = document.getElementById(nextQuestionId);
+
+        if (nextQuestionElement) {
+          nextQuestionElement.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }
+      }
+    };
+
+    const handleLeftArrowKey = (e: KeyboardEvent) => {
+      if (e.key === "ArrowLeft") {
+        const prevQuestionIndex = questionOnViewport.index - 1;
+        const prevQuestionId = `question-${prevQuestionIndex}`;
+
+        const prevQuestionElement = document.getElementById(prevQuestionId);
+
+        if (prevQuestionElement) {
+          prevQuestionElement.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
+        }
+      }
+    };
+
+    document.addEventListener("keydown", handleRightArrowKey);
+    document.addEventListener("keydown", handleLeftArrowKey);
+
+    return () => {
+      document.removeEventListener("keydown", handleRightArrowKey);
+      document.removeEventListener("keydown", handleLeftArrowKey);
+    };
+  }, [questionOnViewport.index]);
+
+  useEffect(() => {
     const questionElements = document.querySelectorAll(".query-question");
     questionElements.forEach((questionElement) => {
       const observer = new IntersectionObserver(
