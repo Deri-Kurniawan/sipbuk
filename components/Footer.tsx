@@ -9,12 +9,18 @@ export default function Footer() {
           <p>©{new Date().getFullYear()} SIPBUK All rights reserved.</p>
           <div className="flex flex-row gap-1">
             {/* Terms modal trigger */}
-            <label htmlFor="terms-modal" className="hover:cursor-pointer">
+            <label
+              htmlFor="terms-modal"
+              className="text-blue-500 hover:cursor-pointer"
+            >
               Terms
             </label>
             <span className="hover:cursor-default"> • </span>
             {/* Policy modal trigger */}
-            <label htmlFor="policy-modal" className="hover:cursor-pointer">
+            <label
+              htmlFor="policy-modal"
+              className="text-blue-500 hover:cursor-pointer"
+            >
               Policy
             </label>
           </div>
@@ -25,7 +31,7 @@ export default function Footer() {
       {/* Terms modal */}
       <input type="checkbox" id="terms-modal" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box w-6/12 max-w-5xl px-[108px]">
+        <div className="max-w-5xl px-10 text-justify modal-box w-1/1 md:w-2/3 lg:w-3/4 md:px-14 lg:px-24">
           <h3 className="text-4xl font-bold text-center">Terms</h3>
           <div className="py-4">
             <p>
@@ -72,7 +78,7 @@ export default function Footer() {
                 memberikan diagnosa serta rekomendasi tindakan yang tepat.
               </li>
             </ol>
-            <div className="mt-4 flex justify-center">
+            <div className="flex justify-center mt-4">
               <label htmlFor="terms-modal" className="btn btn-active btn-ghost">
                 Saya Mengerti
               </label>
@@ -84,7 +90,7 @@ export default function Footer() {
       {/* Policy modal */}
       <input type="checkbox" id="policy-modal" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box w-6/12 max-w-5xl px-[108px]">
+        <div className="max-w-5xl px-10 text-justify modal-box w-1/1 md:w-2/3 lg:w-3/4 md:px-14 lg:px-24">
           <h3 className="text-4xl font-bold text-center">Policy</h3>
           <div className="py-4">
             <p>
@@ -138,7 +144,7 @@ export default function Footer() {
                 jambu kristal.
               </li>
             </ol>
-            <div className="mt-4 flex justify-center">
+            <div className="flex justify-center mt-4">
               <label
                 htmlFor="policy-modal"
                 className="btn btn-active btn-ghost"
