@@ -26,50 +26,50 @@ export default function Register() {
               <h2 className="text-[30px] md:text-[40px] font-bold leading-[38px] md:leading-[48px] mb-2 md:mb-4">
                 Daftar
               </h2>
-              <p className="font-normal text-base md:text-lg mb-4 max-w-xl">
+              <p className="max-w-xl mb-4 text-base font-normal">
                 Dengan mendaftar, anda dapat masuk serta melihat riwayat
                 konsultasi sebelumnya dan menyimpan riwayat konsultasi
                 selanjutnya.
               </p>
               <form>
                 {/* name */}
-                <div className="form-control w-full max-w-xl">
+                <div className="w-full max-w-xl form-control">
                   <label className="label" htmlFor="fullname">
-                    <span className="label-text text-base">Nama Lengkap</span>
+                    <span className="text-base label-text">Nama Lengkap</span>
                   </label>
                   <input
                     type="fullname"
-                    className="input input-bordered w-full"
+                    className="w-full input input-bordered"
                     id="fullname"
                     placeholder=""
                   />
                 </div>
                 {/* email */}
-                <div className="form-control w-full max-w-xl">
+                <div className="w-full max-w-xl form-control">
                   <label className="label" htmlFor="email">
-                    <span className="label-text text-base">Email</span>
+                    <span className="text-base label-text">Email</span>
                   </label>
                   <input
                     type="email"
-                    className="input input-bordered w-full"
+                    className="w-full input input-bordered"
                     id="email"
                     placeholder=""
                   />
                 </div>
                 {/* password */}
-                <div className="form-control w-full max-w-xl">
+                <div className="w-full max-w-xl form-control">
                   <label className="label" htmlFor="password">
-                    <span className="label-text text-base">Kata sandi</span>
+                    <span className="text-base label-text">Kata sandi</span>
                   </label>
                   <input
                     type="password"
-                    className="input input-bordered w-full"
+                    className="w-full input input-bordered"
                     id="password"
                     placeholder=""
                   />
                 </div>
                 <button
-                  className="btn btn-outline btn-ghost w-full max-w-xl mt-4"
+                  className="w-full max-w-xl mt-4 btn btn-outline btn-ghost"
                   type="submit"
                 >
                   Daftar
