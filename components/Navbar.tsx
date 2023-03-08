@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 const navLinks = [
@@ -21,6 +24,8 @@ interface Props {
 }
 
 export default function Navbar({ isSticky = true }: Props) {
+  const pathname = usePathname();
+
   return (
     <nav className={`${isSticky ? "sticky top-0" : ""} z-50`}>
       <div className="max-h-[76px] h-full bg-white py-2">
@@ -41,8 +46,8 @@ export default function Navbar({ isSticky = true }: Props) {
             <div className="hidden lg:block">
               {navLinks.map((nl, index) => (
                 <Link
-                  className={`${
-                    index === navLinks.length ? "" : "mr-[38px]"
+                  className={`${index === navLinks.length ? "" : "mr-[38px]"} ${
+                    pathname === nl.path ? "font-semibold" : ""
                   } text-base`}
                   key={index}
                   href={nl.path}
