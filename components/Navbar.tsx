@@ -1,5 +1,4 @@
 import Link from "next/link";
-import React from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 const navLinks = [
@@ -17,17 +16,21 @@ const navLinks = [
   },
 ];
 
-export default function Navbar() {
+interface Props {
+  isSticky?: boolean;
+}
+
+export default function Navbar({ isSticky = true }: Props) {
   return (
-    <nav className="sticky top-0 z-50">
+    <nav className={`${isSticky ? "sticky top-0" : ""} z-50`}>
       <div className="max-h-[76px] h-full bg-white py-2">
         {/* brand */}
-        <div className="flex flex-row justify-between items-center safe-horizontal-padding w-full">
+        <div className="flex flex-row items-center justify-between w-full safe-horizontal-padding">
           <Link
             href="/"
-            className="relative transition-colors duration-300 bg-gradient-to-r from-green-400 to-blue-400 text-transparent bg-clip-text hover:from-green-400 hover:to-green-400 hover:transition-transform hover:duration-1000"
+            className="relative text-transparent transition-colors duration-300 bg-gradient-to-r from-green-400 to-blue-400 bg-clip-text hover:from-green-400 hover:to-green-400 hover:transition-transform hover:duration-1000"
           >
-            <h1 className="font-kodchasan font-bold text-4xl">SIPBUK</h1>
+            <h1 className="text-4xl font-bold font-kodchasan">SIPBUK</h1>
             <p className="font-kodchasan font-bold text-[10px]">
               Sistem Pakar Jambu Kristal
             </p>
@@ -48,7 +51,7 @@ export default function Navbar() {
                 </Link>
               ))}
               <Link
-                className="btn btn-outline btn-success text-base capitalize w-24"
+                className="w-24 text-base capitalize btn btn-outline btn-success"
                 href="/login"
               >
                 Masuk
@@ -60,13 +63,13 @@ export default function Navbar() {
               <div className="dropdown dropdown-bottom dropdown-end">
                 <label
                   tabIndex={0}
-                  className="btn btn-outline btn-success m-1 text-white"
+                  className="m-1 text-white btn btn-outline btn-success"
                 >
                   <RxHamburgerMenu />
                 </label>
                 <ul
                   tabIndex={0}
-                  className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
+                  className="p-2 shadow dropdown-content menu bg-base-100 rounded-box w-52"
                 >
                   {navLinks.map((nl, index) => (
                     <li key={index}>
