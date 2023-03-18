@@ -4,6 +4,7 @@ import SafeLayout from "@/layouts/SafeLayout";
 import Image from "next/image";
 import expertImg from "@/assets/expert.jpg";
 import developerImg from "@/assets/developer.jpg";
+import Head from "next/head";
 
 export const metadata = {
   title: "Tentang | SIPBUK",
@@ -14,6 +15,10 @@ export const metadata = {
 export default function About() {
   return (
     <SafeLayout>
+      <Head>
+        <title>Tentang - SIPBUK</title>
+        <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
+      </Head>
       <Navbar />
       <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
         {/* about the app */}
@@ -47,7 +52,7 @@ export default function About() {
               <h3 className="font-bold text-2xl md:text-3xl leading-[37px] md:leading-[48px] mb-4">
                 Tentang Pakar
               </h3>
-              <table className="text-left mb-4">
+              <table className="mb-4 text-left">
                 <tbody>
                   <tr className="align-text-top">
                     <th>Nama</th>
@@ -80,7 +85,7 @@ export default function About() {
         {/* expert info */}
         <div className="grid grid-flow-row grid-cols-2 items-center gap-[40px] md:gap-[80px] lg:gap-[50px]">
           {/* image */}
-          <div className="col-span-2 md:col-span-1 md:order-last flex justify-start md:justify-end">
+          <div className="flex justify-start col-span-2 md:col-span-1 md:order-last md:justify-end">
             <Image
               src={developerImg}
               className="lg:max-h-[432px] object-cover md:h-[332px] md:w-[380px] lg:h-auto lg:w-[480px] bg-primary rounded-2xl"
@@ -93,7 +98,7 @@ export default function About() {
               <h3 className="font-bold text-2xl md:text-3xl leading-[37px] md:leading-[48px] mb-4">
                 Tentang Pengembang
               </h3>
-              <table className="text-left mb-4">
+              <table className="mb-4 text-left">
                 <tbody>
                   <tr className="align-text-top">
                     <th>Nama</th>

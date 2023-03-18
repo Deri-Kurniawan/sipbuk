@@ -4,16 +4,15 @@ import guavaImg from "@/assets/guava.jpg";
 import Link from "next/link";
 import SafeLayout from "@/layouts/SafeLayout";
 import Footer from "@/components/Footer";
-
-export const metadata = {
-  title: "Beranda | SIPBUK",
-  description:
-    "Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis.",
-};
+import Head from "next/head";
 
 export default function Home() {
   return (
     <>
+      <Head>
+        <title>Register - SIPBUK</title>
+        <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
+      </Head>
       <SafeLayout>
         <Navbar />
         <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
@@ -24,22 +23,22 @@ export default function Home() {
                 Diagnosa Hama dan Penyakit Pada Tanaman Jambu Kristal Anda
                 Sekarang
               </h2>
-              <p className="font-normal text-base md:text-lg mb-3 md:mb-7">
+              <p className="mb-3 text-base font-normal md:text-lg md:mb-7">
                 Sistem berbasis web ini dapat membantu anda dalam mendiagnosa
                 hama dan penyakit pada tanaman jambu kristal anda, serta dapat
                 memberikan solusi atas masalah yang dialami oleh tanaman jambu
                 kristal anda secara gratis.
               </p>
 
-              <div className="flex flex-1 flex-wrap gap-4 mt-4 md:mt-6">
+              <div className="flex flex-wrap flex-1 gap-4 mt-4 md:mt-6">
                 <Link
-                  className="btn btn-outline btn-info text-base md:text-base capitalize"
+                  className="text-base capitalize btn btn-outline btn-info md:text-base"
                   href="/consult"
                 >
                   Konsultasi Sekarang
                 </Link>
                 <Link
-                  className="btn btn-outline btn-success text-base md:text-base capitalize"
+                  className="text-base capitalize btn btn-outline btn-success md:text-base"
                   href="/about"
                 >
                   Tentang Aplikasi
@@ -47,7 +46,7 @@ export default function Home() {
               </div>
             </div>
             {/* hero right */}
-            <div className="hidden lg:flex justify-end lg:col-span-5">
+            <div className="justify-end hidden lg:flex lg:col-span-5">
               <Image
                 className="w-[481px] h-[410px] bg-primary rounded-2xl object-cover"
                 src={guavaImg}

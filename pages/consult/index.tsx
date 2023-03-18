@@ -6,6 +6,7 @@ import guavaImg from "@/assets/guava.jpg";
 import Question from "@/components/Question";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { FormEventHandler, useEffect, useState } from "react";
+import Head from "next/head";
 
 const questionList = [
   {
@@ -115,6 +116,10 @@ export default function Consult() {
 
   return (
     <>
+      <Head>
+        <title>Konsultasi - SIPBUK</title>
+        <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
+      </Head>
       <Navbar isSticky={false} />
       <SafeLayout>
         <main className="safe-horizontal-padding my-[16px] md:my-[48px]">

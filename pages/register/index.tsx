@@ -4,14 +4,19 @@ import SafeLayout from "@/layouts/SafeLayout";
 import Image from "next/image";
 import guavaImg from "@/assets/guava.jpg";
 import Link from "next/link";
+import Head from "next/head";
 
-export default function Login() {
+export default function Register() {
   return (
     <>
+      <Head>
+        <title>Daftar - SIPBUK</title>
+        <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
+      </Head>
       <Navbar />
       <SafeLayout>
         <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
-          <div className="md:grid grid-flow-row grid-cols-2 gap-[32px] items-center">
+          <div className="md:grid grid-flow-row grid-cols-2 gap-[32px] items-start">
             {/* image */}
             <div className="hidden lg:block">
               <Image
@@ -24,13 +29,26 @@ export default function Login() {
             {/* form */}
             <div className="col-span-2 lg:col-span-1">
               <h2 className="text-[30px] md:text-[40px] font-bold leading-[38px] md:leading-[48px] mb-2 md:mb-4">
-                Masuk
+                Daftar
               </h2>
               <p className="max-w-xl mb-4 text-base font-normal">
-                Dengan masuk, anda dapat melihat riwayat konsultasi sebelumnya
-                dan menyimpan riwayat konsultasi selanjutnya.
+                Dengan mendaftar, anda dapat masuk serta melihat riwayat
+                konsultasi sebelumnya dan menyimpan riwayat konsultasi
+                selanjutnya.
               </p>
               <form>
+                {/* name */}
+                <div className="w-full max-w-xl form-control">
+                  <label className="label" htmlFor="fullname">
+                    <span className="text-base label-text">Nama Lengkap</span>
+                  </label>
+                  <input
+                    type="fullname"
+                    className="w-full input input-bordered"
+                    id="fullname"
+                    placeholder=""
+                  />
+                </div>
                 {/* email */}
                 <div className="w-full max-w-xl form-control">
                   <label className="label" htmlFor="email">
@@ -42,7 +60,6 @@ export default function Login() {
                     id="email"
                     placeholder=""
                   />
-                  {/* email error */}
                 </div>
                 {/* password */}
                 <div className="w-full max-w-xl form-control">
@@ -55,25 +72,18 @@ export default function Login() {
                     id="password"
                     placeholder=""
                   />
-                  {/* password error */}
                 </div>
-                <p className="mt-4">
-                  Lupa Kata sandi?{" "}
-                  <Link className="text-blue-400" href="#">
-                    Atur ulang Kata sandi
-                  </Link>
-                </p>
                 <button
                   className="w-full max-w-xl mt-4 btn btn-outline btn-ghost"
                   type="submit"
                 >
-                  Masuk
+                  Daftar
                 </button>
               </form>
               <p className="mt-4">
-                Belum Punya Akun?{" "}
-                <Link className="text-blue-400" href="/register">
-                  Daftar disini
+                Sudah Punya Akun?{" "}
+                <Link className="text-blue-400" href="/login">
+                  Masuk disini
                 </Link>
               </p>
             </div>
