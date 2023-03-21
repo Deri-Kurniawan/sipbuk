@@ -95,7 +95,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
       data: {
         password: serverSideAESEncrypt(password),
         // @ts-ignore
-        passwordResetToken: newToken,
+        passwordResetToken: null,
       },
     });
 
