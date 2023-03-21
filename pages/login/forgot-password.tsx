@@ -6,9 +6,9 @@ import forgotPasswordImage from "@/assets/forgot-password.jpg";
 import Head from "next/head";
 import { toast } from "react-hot-toast";
 import { PrismaClient } from "@prisma/client";
-import CryptoJS from "crypto-js";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { clientSideAESEncrypt } from "@/utils/cryptoAES";
 
 const prisma = new PrismaClient();
 
@@ -33,14 +33,12 @@ export async function getServerSideProps(context: any) {
       },
     });
 
-    console.log(user)
-
     if (!user) {
       return {
         props: {
           AES_KEY: process.env.AES_KEY,
           _nextStep: false,
-          _token: null,
+          _token: 'invalid',
         },
       };
     }
@@ -78,6 +76,14 @@ export default function ForgotPassword({
   const [nextStep, setNextStep] = useState(() => _nextStep);
   const [fetchIsLoading, setFetchIsLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (_token && !_nextStep) {
+      toast.error("Link rusak atau token sudah kadaluarsa", {
+        duration: 5000,
+      });
+    }
+  }, [_token, _nextStep])
 
   const handleFormFirstStep = (e: any) => {
     e.preventDefault();
@@ -132,19 +138,12 @@ export default function ForgotPassword({
       formData.entries()
     );
 
-    console.log("token", _token);
-
     (async () => {
       const payload = JSON.stringify({
         token: _token,
-        password: CryptoJS.AES.encrypt(password.toString(), AES_KEY).toString() || '',
-        passwordConfirm: CryptoJS.AES.encrypt(
-          passwordConfirm.toString() || '',
-          AES_KEY
-        ).toString(),
+        password: clientSideAESEncrypt(password.toString() || '', AES_KEY),
+        passwordConfirm: clientSideAESEncrypt(passwordConfirm.toString() || '', AES_KEY)
       });
-
-      console.log(payload)
 
       try {
         setFetchIsLoading(true);
@@ -254,7 +253,7 @@ export default function ForgotPassword({
                     className={`w-full max-w-xl mt-4 btn btn-outline btn-ghost ${fetchIsLoading ? 'loading' : ''}`}
                     type="submit"
                   >
-                    {fetchIsLoading ? "Memuat" : `Kirim Email Reset Kata Sandi`}
+                    {fetchIsLoading ? "Memuat" : `Ubah Kata Sandi`}
                   </button>
                 </form>
               ) : (

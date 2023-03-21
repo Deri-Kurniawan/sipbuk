@@ -1,19 +1,11 @@
-import CryptoJS from "crypto-js";
-import nodemailer from "nodemailer";
+import { transporter } from "@/utils/nodemailer/transporter";
+import { serverSideAESDecrypt, serverSideAESEncrypt } from "@/utils/cryptoAES";
 import { PrismaClient } from "@prisma/client";
 import { NextApiResponse } from "next";
 import { NextApiRequest } from "next";
 import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
-
-const transporter = nodemailer.createTransport({
-  service: process.env.NODEMAILER_SERVICE,
-  auth: {
-    user: process.env.NODEMAILER_USER,
-    pass: process.env.NODEMAILER_PASS,
-  },
-});
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
@@ -33,18 +25,9 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 
 async function POST(req: NextApiRequest, res: NextApiResponse) {
   const hashAES = req.body;
-
   const token = req.body.token;
-
-  const password = CryptoJS.AES.decrypt(
-    hashAES.password,
-    `${process.env.AES_KEY}`
-  ).toString(CryptoJS.enc.Utf8);
-
-  const passwordConfirm = CryptoJS.AES.decrypt(
-    hashAES.passwordConfirm,
-    `${process.env.AES_KEY}`
-  ).toString(CryptoJS.enc.Utf8);
+  const password = serverSideAESDecrypt(hashAES.password);
+  const passwordConfirm = serverSideAESDecrypt(hashAES.passwordConfirm);
 
   if (!token) {
     return res.status(400).json({
@@ -56,28 +39,35 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
   if (!password) {
     return res.status(400).json({
       code: 400,
-      message: "Password tidak boleh kosong",
-    });
-  }
-
-  if (!passwordConfirm) {
-    return res.status(400).json({
-      code: 400,
-      message: "Konfirmasi password tidak boleh kosong",
-    });
-  }
-
-  if (password !== passwordConfirm) {
-    return res.status(400).json({
-      code: 400,
-      message: "Password dan konfirmasi password tidak sama",
+      message: "Kata Sandi tidak boleh kosong",
     });
   }
 
   if (password.length < 6) {
     return res.status(400).json({
       code: 400,
-      message: "Password minimal 6 karakter",
+      message: "Kata Sandi minimal 6 karakter",
+    });
+  }
+
+  if (!passwordConfirm) {
+    return res.status(400).json({
+      code: 400,
+      message: "Konfirmasi Kata Sandi tidak boleh kosong",
+    });
+  }
+
+  if (passwordConfirm.length < 6) {
+    return res.status(400).json({
+      code: 400,
+      message: "Konfirmasi Kata Sandi minimal 6 karakter",
+    });
+  }
+
+  if (password !== passwordConfirm) {
+    return res.status(400).json({
+      code: 400,
+      message: "Kata Sandi dan Konfirmasi Kata Sandi tidak sama",
     });
   }
 
@@ -103,10 +93,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
         id: user.id,
       },
       data: {
-        password: CryptoJS.AES.encrypt(
-          password,
-          `${process.env.AES_KEY}`
-        ).toString(),
+        password: serverSideAESEncrypt(password),
         // @ts-ignore
         passwordResetToken: newToken,
       },

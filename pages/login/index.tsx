@@ -7,8 +7,8 @@ import Link from "next/link";
 import Head from "next/head";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
-import CryptoJS from "crypto-js";
 import { setCookie } from 'cookies-next';
+import { clientSideAESEncrypt } from "@/utils/cryptoAES";
 
 export function getStaticProps() {
   return {
@@ -34,7 +34,7 @@ export default function Login({ AES_KEY }: LoginProps) {
     (async () => {
       const payload = JSON.stringify({
         email,
-        password: CryptoJS.AES.encrypt(password.toString() || '', AES_KEY).toString(),
+        password: clientSideAESEncrypt(password.toString() || '', AES_KEY),
       })
 
       try {

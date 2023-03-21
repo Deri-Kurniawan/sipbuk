@@ -8,13 +8,61 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
-  uuid        String   @unique
-  fullname    String
-  email       String   @unique
-  password    String
-  isVerified  Boolean  @default(false)
-  verifyToken String?   @unique
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           Int            @id @default(autoincrement())
+  uuid         String         @unique
+  fullname     String
+  email        String         @unique
+  password     String
+  isVerified   Boolean        @default(false)
+  verifyToken  String?        @unique
+  passwordResetToken String?   @unique
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  user_consult User_Consult[]
+}
+
+model OTP {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique
+  otp       String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Pests_Deseases {
+  id           Int            @id @default(autoincrement())
+  code         String         @unique
+  name         String         @unique
+  description  String
+  solution     String
+  imageSrc     String
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  user_consult User_Consult[]
+  symptoms     Symptoms[]     @relation("Pests_DeseasesToSymptoms")
+}
+
+model Symptoms {
+  id             Int              @id @default(autoincrement())
+  code           String           @unique
+  name           String           @unique
+  description    String
+  imageSrc       String
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime         @updatedAt
+  user_consult   User_Consult[]
+  pests_deseases Pests_Deseases[] @relation("Pests_DeseasesToSymptoms")
+}
+
+model User_Consult {
+  id                Int            @id @default(autoincrement())
+  uuid              String         @unique
+  user_id           Int
+  pests_deseases_id Int
+  symptoms_id       Int
+  createdAt         DateTime       @default(now())
+  updatedAt         DateTime       @updatedAt
+  symptoms          Symptoms       @relation(fields: [symptoms_id], references: [id])
+  pests_deseases    Pests_Deseases @relation(fields: [pests_deseases_id], references: [id])
+  user              User           @relation(fields: [user_id], references: [id])
 }

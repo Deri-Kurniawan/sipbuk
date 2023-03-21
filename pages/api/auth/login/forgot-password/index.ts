@@ -1,18 +1,11 @@
-import nodemailer from "nodemailer";
+import { regexp } from "@/utils/regexp";
 import { PrismaClient } from "@prisma/client";
 import { NextApiResponse } from "next";
 import { NextApiRequest } from "next";
 import { v4 as uuidv4 } from "uuid";
+import { transporter } from "@/utils/nodemailer/transporter";
 
 const prisma = new PrismaClient();
-
-const transporter = nodemailer.createTransport({
-  service: process.env.NODEMAILER_SERVICE,
-  auth: {
-    user: process.env.NODEMAILER_USER,
-    pass: process.env.NODEMAILER_PASS,
-  },
-});
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
@@ -33,16 +26,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 async function POST(req: NextApiRequest, res: NextApiResponse) {
   const { email } = req.body;
 
-  const emailRegex =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
   if (!email) {
     return res
       .status(400)
       .json({ code: 400, message: "Email tidak boleh kosong!" });
   }
 
-  if (!emailRegex.test(email)) {
+  if (!regexp.email.test(email)) {
     return res.status(400).json({ code: 400, message: "Email tidak valid!" });
   }
 

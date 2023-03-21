@@ -6,9 +6,9 @@ import loginRegisterImage from "@/assets/login-register.jpg";
 import Link from "next/link";
 import Head from "next/head";
 import { toast } from "react-hot-toast";
-import CryptoJS from "crypto-js";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { clientSideAESEncrypt } from "@/utils/cryptoAES";
 
 export function getStaticProps() {
   return {
@@ -36,7 +36,7 @@ export default function Register({ AES_KEY }: RegisterProps) {
       const payload = JSON.stringify({
         fullname,
         email,
-        password: CryptoJS.AES.encrypt(password.toString() || '', AES_KEY).toString()
+        password: clientSideAESEncrypt(password.toString() || '', AES_KEY),
       })
 
       try {

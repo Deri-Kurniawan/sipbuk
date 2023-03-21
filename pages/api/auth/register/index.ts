@@ -1,18 +1,11 @@
+import { serverSideAESDecrypt } from "@/utils/cryptoAES";
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
-import nodemailer from "nodemailer";
-import CryptoJS from "crypto-js";
+import { regexp } from "@/utils/regexp";
+import { transporter } from "@/utils/nodemailer/transporter";
 
 const prisma = new PrismaClient();
-
-const transporter = nodemailer.createTransport({
-  service: process.env.NODEMAILER_SERVICE,
-  auth: {
-    user: process.env.NODEMAILER_USER,
-    pass: process.env.NODEMAILER_PASS,
-  },
-});
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;
@@ -34,19 +27,9 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
   const hashAES: {
     password: string;
   } = req.body;
-
   const fullname = req.body.fullname;
   const email = req.body.email;
-
-  const password = CryptoJS.AES.decrypt(
-    hashAES.password,
-    `${process.env.AES_KEY}`
-  ).toString(CryptoJS.enc.Utf8);
-
-  // validation
-  const fullnameRegex = /^[a-zA-Z ]{2,30}$/;
-  const emailRegex =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const password = serverSideAESDecrypt(hashAES.password);
 
   if (!fullname) {
     return res
@@ -61,7 +44,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
     });
   }
 
-  if (!fullnameRegex.test(fullname)) {
+  if (!regexp.fullname.test(fullname)) {
     return res
       .status(400)
       .json({ code: 400, message: "Nama Lengkap harus berupa huruf alfabet!" });
@@ -73,7 +56,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
       .json({ code: 400, message: "Email tidak boleh kosong!" });
   }
 
-  if (!emailRegex.test(email)) {
+  if (!regexp.email.test(email)) {
     return res.status(400).json({ code: 400, message: "Email tidak valid!" });
   }
 
@@ -89,7 +72,6 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
       message: "Password setidaknya terdiri dari 6 karakter!",
     });
   }
-  // end of validation
 
   try {
     const userExist = await prisma.user.findUnique({
