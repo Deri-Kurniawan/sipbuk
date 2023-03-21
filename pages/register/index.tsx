@@ -5,8 +5,66 @@ import Image from "next/image";
 import guavaImg from "@/assets/guava.jpg";
 import Link from "next/link";
 import Head from "next/head";
+import { toast } from "react-hot-toast";
 
 export default function Register() {
+
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData.entries());
+
+    (async () => {
+      const payload = JSON.stringify({
+        fullname: data.fullname,
+        email: data.email,
+        password: data.password
+      })
+
+      try {
+        const response = await fetch('/api/auth/register', {
+          method: 'POST',
+          body: payload,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const result = await response.json();
+
+        if (result.code === 201) {
+          toast('Berhasil mendaftar, silahkan cek email anda untuk melakukan verifikasi', {
+            duration: 6000,
+            icon: '👍',
+          })
+        }
+
+        if (result.code === 400) {
+          toast(result.message, {
+            duration: 6000,
+            icon: '😟',
+          })
+        }
+
+        if (result.code === 500) {
+          toast(result.message, {
+            duration: 6000,
+            icon: '😟',
+          })
+        }
+      } catch (error: any) {
+        console.log("client catch", error);
+        if (error.code === 400) {
+          toast(error.message, {
+            duration: 6000,
+            icon: '😟',
+          })
+        }
+      }
+    })();
+  }
+
   return (
     <>
       <Head>
@@ -36,7 +94,7 @@ export default function Register() {
                 konsultasi sebelumnya dan menyimpan riwayat konsultasi
                 selanjutnya.
               </p>
-              <form>
+              <form onSubmit={handleFormSubmit}>
                 {/* name */}
                 <div className="w-full max-w-xl form-control">
                   <label className="label" htmlFor="fullname">
@@ -45,6 +103,7 @@ export default function Register() {
                   <input
                     type="fullname"
                     className="w-full input input-bordered"
+                    name="fullname"
                     id="fullname"
                     placeholder=""
                   />
@@ -57,6 +116,7 @@ export default function Register() {
                   <input
                     type="email"
                     className="w-full input input-bordered"
+                    name="email"
                     id="email"
                     placeholder=""
                   />
@@ -69,6 +129,7 @@ export default function Register() {
                   <input
                     type="password"
                     className="w-full input input-bordered"
+                    name="password"
                     id="password"
                     placeholder=""
                   />

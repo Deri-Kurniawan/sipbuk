@@ -5,8 +5,72 @@ import Image from "next/image";
 import guavaImg from "@/assets/guava.jpg";
 import Link from "next/link";
 import Head from "next/head";
+import { toast } from "react-hot-toast";
+import { useRouter } from "next/router";
 
 export default function Login() {
+
+  const router = useRouter();
+
+  const handleFormSubmit = (e: any) => {
+    e.preventDefault();
+
+    const formData = new FormData(e.target);
+    const { email, password } = Object.fromEntries(formData.entries());
+
+    (async () => {
+      const payload = JSON.stringify({
+        email,
+        password,
+      })
+
+      try {
+        const response = await fetch('/api/auth/login', {
+          method: 'POST',
+          body: payload,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const result = await response.json();
+
+        if (result.code === 200) {
+          window.localStorage.setItem('user', JSON.stringify(result.data));
+
+          toast(`Selamat datang ${result.data.fullname}!`, {
+            duration: 6000,
+            icon: '👋',
+          })
+
+          router.push('/');
+        }
+
+        if (result.code === 400) {
+          toast(result.message, {
+            duration: 6000,
+            icon: '😟',
+          })
+        }
+
+        if (result.code === 500) {
+          toast(result.message, {
+            duration: 6000,
+            icon: '😟',
+          })
+        }
+      } catch (error: any) {
+        console.log("client catch", error);
+        if (error.code === 400) {
+          toast(error.message, {
+            duration: 6000,
+            icon: '😟',
+          })
+        }
+      }
+    })();
+  }
+
   return (
     <>
       <Head>
@@ -35,7 +99,7 @@ export default function Login() {
                 Dengan masuk, anda dapat melihat riwayat konsultasi sebelumnya
                 dan menyimpan riwayat konsultasi selanjutnya.
               </p>
-              <form>
+              <form onSubmit={handleFormSubmit}>
                 {/* email */}
                 <div className="w-full max-w-xl form-control">
                   <label className="label" htmlFor="email">
@@ -44,6 +108,7 @@ export default function Login() {
                   <input
                     type="email"
                     className="w-full input input-bordered"
+                    name="email"
                     id="email"
                     placeholder=""
                   />
@@ -57,6 +122,7 @@ export default function Login() {
                   <input
                     type="password"
                     className="w-full input input-bordered"
+                    name="password"
                     id="password"
                     placeholder=""
                   />
