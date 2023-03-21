@@ -25,25 +25,30 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
   POST.Validation(req, res, req.body);
 
   try {
-    const userExist = await prisma.user.findFirst({
+    const user = await prisma.user.findFirst({
       where: {
         email,
       },
     });
 
-    if (!userExist) {
+    if (!user) {
       return res
         .status(400)
         .json({ code: 400, message: "Email tidak terdaftar!" });
     }
 
-    if (userExist.password !== password) {
+    if (user.password !== password) {
       return res.status(400).json({ code: 400, message: "Password salah!" });
     }
 
-    res
-      .status(200)
-      .json({ code: 200, message: "Login Berhasil!", data: userExist });
+    if (!user.isVerified) {
+      return res.status(400).json({
+        code: 400,
+        message: `Hallo ${user.fullname}, \nEmail anda belum terverifikasi! \nSilahkan cek email anda`,
+      });
+    }
+
+    res.status(200).json({ code: 200, message: "Masuk Berhasil!", data: user });
 
     // res.redirect(200, "/auth/email-verified");
   } catch (error) {
