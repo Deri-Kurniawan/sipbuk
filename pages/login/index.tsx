@@ -9,6 +9,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { setCookie } from 'cookies-next';
 import { clientSideAESEncrypt } from "@/utils/cryptoAES";
+import { useState } from "react";
 
 export function getStaticProps() {
   return {
@@ -23,6 +24,7 @@ interface LoginProps {
 }
 
 export default function Login({ AES_KEY }: LoginProps) {
+  const [fetchIsLoading, setFetchIsLoading] = useState(false);
   const router = useRouter();
 
   const handleFormSubmit = (e: any) => {
@@ -38,6 +40,7 @@ export default function Login({ AES_KEY }: LoginProps) {
       })
 
       try {
+        setFetchIsLoading(true);
         const response = await fetch('/api/auth/login', {
           method: 'POST',
           body: payload,
@@ -73,6 +76,7 @@ export default function Login({ AES_KEY }: LoginProps) {
             duration: 5000,
           })
         }
+        setFetchIsLoading(false);
       } catch (error: any) {
         console.log("client catch", error);
         if (error.code === 400) {
@@ -80,6 +84,7 @@ export default function Login({ AES_KEY }: LoginProps) {
             duration: 5000,
           })
         }
+        setFetchIsLoading(false);
       }
     })();
   };
@@ -148,10 +153,11 @@ export default function Login({ AES_KEY }: LoginProps) {
                   </Link>
                 </p>
                 <button
-                  className="w-full max-w-xl mt-4 btn btn-outline btn-ghost"
+                  className={`w-full max-w-xl mt-4 btn btn-outline btn-ghost ${fetchIsLoading ? 'loading' : ''}`}
                   type="submit"
+                  disabled={fetchIsLoading}
                 >
-                  Masuk
+                  {fetchIsLoading ? "Memuat" : "Masuk"}
                 </button>
               </form>
               <p className="mt-4">

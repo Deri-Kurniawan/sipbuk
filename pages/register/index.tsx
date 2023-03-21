@@ -154,6 +154,7 @@ export default function Register({ AES_KEY }: RegisterProps) {
                 <button
                   className={`w-full max-w-xl mt-4 btn btn-outline btn-ghost ${fetchIsLoading ? 'loading' : ''}`}
                   type="submit"
+                  disabled={fetchIsLoading}
                 >
                   {fetchIsLoading ? "Memuat" : "Daftar"}
                 </button>
