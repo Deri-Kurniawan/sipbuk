@@ -43,7 +43,53 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
     `${process.env.AES_KEY}`
   ).toString(CryptoJS.enc.Utf8);
 
-  POST.Validation(req, res, { fullname, email, password });
+  // validation
+  const fullnameRegex = /^[a-zA-Z ]{2,30}$/;
+  const emailRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!fullname) {
+    return res
+      .status(400)
+      .json({ code: 400, message: "Nama Lengkap tidak boleh kosong!" });
+  }
+
+  if (fullname.length < 2) {
+    return res.status(400).json({
+      code: 400,
+      message: "Nama Lengkap setidaknya terdiri dari 2 huruf!",
+    });
+  }
+
+  if (!fullnameRegex.test(fullname)) {
+    return res
+      .status(400)
+      .json({ code: 400, message: "Nama Lengkap harus berupa huruf alfabet!" });
+  }
+
+  if (!email) {
+    return res
+      .status(400)
+      .json({ code: 400, message: "Email tidak boleh kosong!" });
+  }
+
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ code: 400, message: "Email tidak valid!" });
+  }
+
+  if (!password) {
+    return res
+      .status(400)
+      .json({ code: 400, message: "Password tidak boleh kosong!" });
+  }
+
+  if (password.length < 6) {
+    return res.status(400).json({
+      code: 400,
+      message: "Password setidaknya terdiri dari 6 karakter!",
+    });
+  }
+  // end of validation
 
   try {
     const userExist = await prisma.user.findUnique({
@@ -95,75 +141,3 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 
   prisma.$disconnect();
 }
-
-POST.Validation = async (
-  req: NextApiRequest,
-  res: NextApiResponse,
-  payload: {
-    fullname: string;
-    email: string;
-    password: string;
-  }
-) => {
-  const { fullname, email, password } = payload;
-  const fullnameRegex = /^[a-zA-Z ]{2,30}$/;
-  const emailRegex =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-  if (!fullname) {
-    return res
-      .status(400)
-      .json({ code: 400, message: "Nama Lengkap tidak boleh kosong!" });
-  }
-
-  if (fullname.length < 2) {
-    return res.status(400).json({
-      code: 400,
-      message: "Nama Lengkap setidaknya terdiri dari 2 huruf!",
-    });
-  }
-
-  if (!fullnameRegex.test(fullname)) {
-    return res
-      .status(400)
-      .json({ code: 400, message: "Nama Lengkap harus berupa huruf alfabet!" });
-  }
-
-  if (!email) {
-    return res
-      .status(400)
-      .json({ code: 400, message: "Email tidak boleh kosong!" });
-  }
-
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ code: 400, message: "Email tidak valid!" });
-  }
-
-  const userExist = await prisma.user.findUnique({
-    where: {
-      email,
-    },
-    select: {
-      email: true,
-    },
-  });
-
-  if (userExist) {
-    return res
-      .status(400)
-      .json({ code: 400, message: "Email sudah terdaftar!" });
-  }
-
-  if (!password) {
-    return res
-      .status(400)
-      .json({ code: 400, message: "Password tidak boleh kosong!" });
-  }
-
-  if (password.length < 6) {
-    return res.status(400).json({
-      code: 400,
-      message: "Password setidaknya terdiri dari 6 karakter!",
-    });
-  }
-};

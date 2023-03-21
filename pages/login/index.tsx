@@ -55,7 +55,7 @@ export default function Login({ AES_KEY }: LoginProps) {
           });
 
           toast.success(`Selamat datang ${result.data.fullname}!`, {
-            duration: 6000,
+            duration: 5000,
             icon: '👋',
           })
 
@@ -64,20 +64,20 @@ export default function Login({ AES_KEY }: LoginProps) {
 
         if (result.code === 400) {
           toast.error(result.message, {
-            duration: 6000,
+            duration: 5000,
           })
         }
 
         if (result.code === 500) {
           toast.error(result.message, {
-            duration: 6000,
+            duration: 5000,
           })
         }
       } catch (error: any) {
         console.log("client catch", error);
         if (error.code === 400) {
           toast.error(error.message, {
-            duration: 6000,
+            duration: 5000,
           })
         }
       }

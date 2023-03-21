@@ -7,6 +7,8 @@ import Link from "next/link";
 import Head from "next/head";
 import { toast } from "react-hot-toast";
 import CryptoJS from "crypto-js";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export function getStaticProps() {
   return {
@@ -21,6 +23,8 @@ interface RegisterProps {
 }
 
 export default function Register({ AES_KEY }: RegisterProps) {
+  const [fetchIsLoading, setFetchIsLoading] = useState(false);
+  const router = useRouter();
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
@@ -36,6 +40,7 @@ export default function Register({ AES_KEY }: RegisterProps) {
       })
 
       try {
+        setFetchIsLoading(true);
         const response = await fetch('/api/auth/register', {
           method: 'POST',
           body: payload,
@@ -48,26 +53,29 @@ export default function Register({ AES_KEY }: RegisterProps) {
 
         if (result.code === 201) {
           toast.success('Berhasil mendaftar, silahkan cek email anda untuk melakukan verifikasi', {
-            duration: 6000,
+            duration: 5000,
           })
+          router.push('/login');
         }
 
         if (result.code === 400) {
           toast.error(result.message, {
-            duration: 6000,
+            duration: 5000,
           })
         }
 
         if (result.code === 500) {
           toast.error(result.message, {
-            duration: 6000,
+            duration: 5000,
           })
         }
+        setFetchIsLoading(false);
       } catch (error: any) {
+        setFetchIsLoading(false);
         console.log("client catch", error);
         if (error.code === 400) {
           toast.error(error.message, {
-            duration: 6000,
+            duration: 5000,
           })
         }
       }
@@ -144,10 +152,10 @@ export default function Register({ AES_KEY }: RegisterProps) {
                   />
                 </div>
                 <button
-                  className="w-full max-w-xl mt-4 btn btn-outline btn-ghost"
+                  className={`w-full max-w-xl mt-4 btn btn-outline btn-ghost ${fetchIsLoading ? 'loading' : ''}`}
                   type="submit"
                 >
-                  Daftar
+                  {fetchIsLoading ? "Memuat" : "Daftar"}
                 </button>
               </form>
               <p className="mt-4">

@@ -12,6 +12,12 @@ export default function App({ Component, pageProps }: AppProps) {
         position="bottom-left"
         reverseOrder={false}
         gutter={8}
+        toastOptions={{
+          style: {
+            background: "#363636",
+            color: "#fff",
+          },
+        }}
       />
       <div className={inter.className}>
         <Component className={inter.className} {...pageProps} />

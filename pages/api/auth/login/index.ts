@@ -32,7 +32,26 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
     `${process.env.AES_KEY}`
   ).toString(CryptoJS.enc.Utf8);
 
-  POST.Validation(req, res, { email, password });
+  // validation
+  const emailRegex =
+    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!email) {
+    return res
+      .status(400)
+      .json({ code: 400, message: "Email tidak boleh kosong!" });
+  }
+
+  if (!emailRegex.test(email)) {
+    return res.status(400).json({ code: 400, message: "Email tidak valid!" });
+  }
+
+  if (!password) {
+    return res
+      .status(400)
+      .json({ code: 400, message: "Password tidak boleh kosong!" });
+  }
+  // end of validation
 
   try {
     const user = await prisma.user.findFirst({
@@ -77,32 +96,3 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 
   prisma.$disconnect();
 }
-
-POST.Validation = async (
-  req: NextApiRequest,
-  res: NextApiResponse,
-  payload: {
-    email: string;
-    password: string;
-  }
-) => {
-  const { email, password } = payload;
-  const emailRegex =
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-  if (!email) {
-    return res
-      .status(400)
-      .json({ code: 400, message: "Email tidak boleh kosong!" });
-  }
-
-  if (!emailRegex.test(email)) {
-    return res.status(400).json({ code: 400, message: "Email tidak valid!" });
-  }
-
-  if (!password) {
-    return res
-      .status(400)
-      .json({ code: 400, message: "Password tidak boleh kosong!" });
-  }
-};
