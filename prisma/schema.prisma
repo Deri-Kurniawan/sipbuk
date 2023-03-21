@@ -3,30 +3,23 @@ generator client {
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model User {
-  id           Int            @id @default(autoincrement())
-  uuid         String         @unique
-  fullname     String
-  email        String         @unique
-  password     String
-  isVerified   Boolean        @default(false)
-  verifyToken  String?        @unique
-  passwordResetToken String?   @unique
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
-  user_consult User_Consult[]
-}
-
-model OTP {
-  id        Int      @id @default(autoincrement())
-  uuid      String   @unique
-  otp       String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                 Int            @id @default(autoincrement())
+  uuid               String         @unique
+  fullname           String
+  email              String         @unique
+  password           String
+  isVerified         Boolean        @default(false)
+  verifyToken        String?        @unique
+  passwordResetToken String?        @unique
+  createdAt          DateTime       @default(now())
+  updatedAt          DateTime       @updatedAt
+  user_consult       User_Consult[]
 }
 
 model Pests_Deseases {
@@ -65,4 +58,13 @@ model User_Consult {
   symptoms          Symptoms       @relation(fields: [symptoms_id], references: [id])
   pests_deseases    Pests_Deseases @relation(fields: [pests_deseases_id], references: [id])
   user              User           @relation(fields: [user_id], references: [id])
+}
+
+model Pests_DeseasesToSymptoms {
+  A Int
+  B Int
+
+  @@unique([A, B], map: "_Pests_DeseasesToSymptoms_AB_unique")
+  @@index([B], map: "_Pests_DeseasesToSymptoms_B_index")
+  @@map("_Pests_DeseasesToSymptoms")
 }
