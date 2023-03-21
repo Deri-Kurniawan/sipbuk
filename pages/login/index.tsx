@@ -2,7 +2,7 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import SafeLayout from "@/layouts/SafeLayout";
 import Image from "next/image";
-import guavaImg from "@/assets/guava.jpg";
+import loginRegisterImage from "@/assets/login-register.jpg";
 import Link from "next/link";
 import Head from "next/head";
 import { toast } from "react-hot-toast";
@@ -84,8 +84,8 @@ export default function Login() {
             {/* image */}
             <div className="hidden lg:block">
               <Image
-                className="w-[481px] h-[410px] bg-primary rounded-2xl object-cover"
-                src={guavaImg}
+                className="object-cover bg-primary"
+                src={loginRegisterImage}
                 alt=""
                 priority
               />
