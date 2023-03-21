@@ -76,7 +76,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
       from: `SIPBUK <${process.env.NODEMAILER_USER}>`,
       to: email,
       subject: "Verifikasi Akun Email SIPBUK",
-      html: `<h2>Hallo ${fullname}!</h2><p>Untuk melanjutkan pendaftaran anda di aplikasi SIPBUK (Sistem Pakar Jambu Kristal), silahkan <a href="${`${process.env.BASE_URL}/api/auth/email?token=${verifyToken}&reason=email_verification`}">Klik disini</a> untuk melakukan verifikasi akun anda</p>`,
+      html: `<h2>Hallo ${fullname}!</h2><p>Untuk melanjutkan pendaftaran anda di aplikasi SIPBUK (Sistem Pakar Jambu Kristal), silahkan <a href="${`${process.env.BASE_URL}/api/auth/register/account-activation?token=${verifyToken}`}">Klik disini</a> untuk melakukan verifikasi akun anda</p>`,
     };
 
     transporter.sendMail(mailOptions, function (error: any, info: any) {

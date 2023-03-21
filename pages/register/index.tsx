@@ -47,31 +47,27 @@ export default function Register({ AES_KEY }: RegisterProps) {
         const result = await response.json();
 
         if (result.code === 201) {
-          toast('Berhasil mendaftar, silahkan cek email anda untuk melakukan verifikasi', {
+          toast.success('Berhasil mendaftar, silahkan cek email anda untuk melakukan verifikasi', {
             duration: 6000,
-            icon: '👍',
           })
         }
 
         if (result.code === 400) {
-          toast(result.message, {
+          toast.error(result.message, {
             duration: 6000,
-            icon: '😟',
           })
         }
 
         if (result.code === 500) {
-          toast(result.message, {
+          toast.error(result.message, {
             duration: 6000,
-            icon: '😟',
           })
         }
       } catch (error: any) {
         console.log("client catch", error);
         if (error.code === 400) {
-          toast(error.message, {
+          toast.error(error.message, {
             duration: 6000,
-            icon: '😟',
           })
         }
       }

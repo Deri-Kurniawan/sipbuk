@@ -54,7 +54,7 @@ export default function Login({ AES_KEY }: LoginProps) {
             path: '/',
           });
 
-          toast(`Selamat datang ${result.data.fullname}!`, {
+          toast.success(`Selamat datang ${result.data.fullname}!`, {
             duration: 6000,
             icon: '👋',
           })
@@ -63,29 +63,26 @@ export default function Login({ AES_KEY }: LoginProps) {
         }
 
         if (result.code === 400) {
-          toast(result.message, {
+          toast.error(result.message, {
             duration: 6000,
-            icon: '😟',
           })
         }
 
         if (result.code === 500) {
-          toast(result.message, {
+          toast.error(result.message, {
             duration: 6000,
-            icon: '😟',
           })
         }
       } catch (error: any) {
         console.log("client catch", error);
         if (error.code === 400) {
-          toast(error.message, {
+          toast.error(error.message, {
             duration: 6000,
-            icon: '😟',
           })
         }
       }
     })();
-  }
+  };
 
   return (
     <>
@@ -146,7 +143,7 @@ export default function Login({ AES_KEY }: LoginProps) {
                 </div>
                 <p className="mt-4">
                   Lupa Kata sandi?{" "}
-                  <Link className="text-blue-400" href="#">
+                  <Link className="text-blue-400" href="/login/forgot-password">
                     Atur ulang Kata sandi
                   </Link>
                 </p>
