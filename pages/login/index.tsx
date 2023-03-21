@@ -7,9 +7,22 @@ import Link from "next/link";
 import Head from "next/head";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
+import CryptoJS from "crypto-js";
+import { setCookie } from 'cookies-next';
 
-export default function Login() {
+export function getStaticProps() {
+  return {
+    props: {
+      AES_KEY: process.env.AES_KEY
+    }
+  }
+}
 
+interface LoginProps {
+  AES_KEY: string;
+}
+
+export default function Login({ AES_KEY }: LoginProps) {
   const router = useRouter();
 
   const handleFormSubmit = (e: any) => {
@@ -21,7 +34,7 @@ export default function Login() {
     (async () => {
       const payload = JSON.stringify({
         email,
-        password,
+        password: CryptoJS.AES.encrypt(password.toString() || '', AES_KEY).toString(),
       })
 
       try {
@@ -36,7 +49,10 @@ export default function Login() {
         const result = await response.json();
 
         if (result.code === 200) {
-          window.localStorage.setItem('user', JSON.stringify(result.data));
+          setCookie('user', JSON.stringify(result.data), {
+            maxAge: 60 * 60 * 24 * 7,
+            path: '/',
+          });
 
           toast(`Selamat datang ${result.data.fullname}!`, {
             duration: 6000,

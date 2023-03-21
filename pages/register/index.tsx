@@ -6,20 +6,33 @@ import loginRegisterImage from "@/assets/login-register.jpg";
 import Link from "next/link";
 import Head from "next/head";
 import { toast } from "react-hot-toast";
+import CryptoJS from "crypto-js";
 
-export default function Register() {
+export function getStaticProps() {
+  return {
+    props: {
+      AES_KEY: process.env.AES_KEY
+    }
+  }
+}
+
+interface RegisterProps {
+  AES_KEY: string;
+}
+
+export default function Register({ AES_KEY }: RegisterProps) {
 
   const handleFormSubmit = (e: any) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const data = Object.fromEntries(formData.entries());
+    const { fullname, email, password } = Object.fromEntries(formData.entries());
 
     (async () => {
       const payload = JSON.stringify({
-        fullname: data.fullname,
-        email: data.email,
-        password: data.password
+        fullname,
+        email,
+        password: CryptoJS.AES.encrypt(password.toString() || '', AES_KEY).toString()
       })
 
       try {

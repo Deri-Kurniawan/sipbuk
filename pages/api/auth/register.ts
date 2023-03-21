@@ -2,6 +2,7 @@ import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 import nodemailer from "nodemailer";
+import CryptoJS from "crypto-js";
 
 const prisma = new PrismaClient();
 
@@ -30,9 +31,19 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 }
 
 async function POST(req: NextApiRequest, res: NextApiResponse) {
-  const { fullname, email, password } = req.body;
+  const hashAES: {
+    password: string;
+  } = req.body;
 
-  POST.Validation(req, res, req.body);
+  const fullname = req.body.fullname;
+  const email = req.body.email;
+
+  const password = CryptoJS.AES.decrypt(
+    hashAES.password,
+    `${process.env.AES_KEY}`
+  ).toString(CryptoJS.enc.Utf8);
+
+  POST.Validation(req, res, { fullname, email, password });
 
   try {
     const userExist = await prisma.user.findUnique({
@@ -54,7 +65,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
         uuid: `user-${uuidv4()}`,
         fullname,
         email,
-        password,
+        password: hashAES.password,
         isVerified: false,
         verifyToken,
       },
