@@ -110,7 +110,7 @@ export default function Consult({ user }: ConsultProps) {
 
   useEffect(() => {
     const handleRightArrowKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight") {
+      if (e.ctrlKey && e.key === "ArrowRight") {
         const nextQuestionIndex = questionOnViewport.index + 1;
         if (nextQuestionIndex < questionList.length) {
           const nextQuestionId = `question-${nextQuestionIndex}`;
@@ -131,7 +131,7 @@ export default function Consult({ user }: ConsultProps) {
     };
 
     const handleLeftArrowKey = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") {
+      if (e.ctrlKey && e.key === "ArrowLeft") {
         const prevQuestionIndex = questionOnViewport.index - 1;
         if (prevQuestionIndex >= 0) {
           const prevQuestionId = `question-${prevQuestionIndex}`;
