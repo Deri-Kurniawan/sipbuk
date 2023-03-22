@@ -74,19 +74,58 @@ export default function Consult({ user }: ConsultProps) {
     console.log(remapData);
   };
 
+  const handleClickNextQuestion = () => {
+    const nextQuestionIndex = questionOnViewport.index + 1;
+    if (nextQuestionIndex < questionList.length) {
+      const nextQuestion = document.getElementById(
+        `question-${nextQuestionIndex}`
+      );
+      setQuestionOnViewPort({
+        id: `question-${nextQuestionIndex}`,
+        index: nextQuestionIndex,
+      });
+      nextQuestion?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
+  const handleClickPrevQuestion = () => {
+    const prevQuestionIndex = questionOnViewport.index - 1;
+    if (prevQuestionIndex >= 0) {
+      const prevQuestion = document.getElementById(
+        `question-${prevQuestionIndex}`
+      );
+      setQuestionOnViewPort({
+        id: `question-${prevQuestionIndex}`,
+        index: prevQuestionIndex,
+      });
+      prevQuestion?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  };
+
   useEffect(() => {
     const handleRightArrowKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") {
         const nextQuestionIndex = questionOnViewport.index + 1;
-        const nextQuestionId = `question-${nextQuestionIndex}`;
+        if (nextQuestionIndex < questionList.length) {
+          const nextQuestionId = `question-${nextQuestionIndex}`;
+          const nextQuestionElement = document.getElementById(nextQuestionId);
 
-        const nextQuestionElement = document.getElementById(nextQuestionId);
-
-        if (nextQuestionElement) {
-          nextQuestionElement.scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-          });
+          if (nextQuestionElement) {
+            setQuestionOnViewPort({
+              id: nextQuestionId,
+              index: nextQuestionIndex,
+            });
+            nextQuestionElement.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+          }
         }
       }
     };
@@ -94,15 +133,20 @@ export default function Consult({ user }: ConsultProps) {
     const handleLeftArrowKey = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") {
         const prevQuestionIndex = questionOnViewport.index - 1;
-        const prevQuestionId = `question-${prevQuestionIndex}`;
+        if (prevQuestionIndex >= 0) {
+          const prevQuestionId = `question-${prevQuestionIndex}`;
+          const prevQuestionElement = document.getElementById(prevQuestionId);
 
-        const prevQuestionElement = document.getElementById(prevQuestionId);
-
-        if (prevQuestionElement) {
-          prevQuestionElement.scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-          });
+          if (prevQuestionElement) {
+            setQuestionOnViewPort({
+              id: prevQuestionId,
+              index: prevQuestionIndex,
+            });
+            prevQuestionElement.scrollIntoView({
+              behavior: "smooth",
+              block: "center",
+            });
+          }
         }
       }
     };
@@ -182,18 +226,7 @@ export default function Consult({ user }: ConsultProps) {
           {/* previous */}
           <button
             className="flex-1 md:flex-none btn btn-ghost"
-            onClick={() => {
-              const prevQuestionIndex = questionOnViewport.index - 1;
-              if (prevQuestionIndex >= 0) {
-                const prevQuestion = document.getElementById(
-                  `question-${prevQuestionIndex}`
-                );
-                prevQuestion?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
-              }
-            }}
+            onClick={handleClickPrevQuestion}
           >
             <GrPrevious className="text-lg font-extrabold" /> &nbsp;
             <p className="hidden text-base font-bold md:block">
@@ -202,23 +235,14 @@ export default function Consult({ user }: ConsultProps) {
           </button>
           {/* middle */}
           <p className="text-base font-bold">
-            {questionOnViewport.index + 1} dari {questionList.length}
+            <span>
+              {questionOnViewport.index + 1} dari {questionList.length}
+            </span>
           </p>
           {/* next */}
           <button
             className="flex-1 md:flex-none btn btn-ghost"
-            onClick={() => {
-              const nextQuestionIndex = questionOnViewport.index + 1;
-              if (nextQuestionIndex < questionList.length) {
-                const nextQuestion = document.getElementById(
-                  `question-${nextQuestionIndex}`
-                );
-                nextQuestion?.scrollIntoView({
-                  behavior: "smooth",
-                  block: "start",
-                });
-              }
-            }}
+            onClick={handleClickNextQuestion}
           >
             <p className="hidden text-base font-bold md:block">
               Pertanyaan Selanjutnya
