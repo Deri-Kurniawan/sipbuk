@@ -77,14 +77,18 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
     transporter.sendMail(mailOptions, function (error: any, info: any) {
       if (error) {
         console.log(error);
+        res.status(200).json({
+          code: 200,
+          message:
+            "Email untuk ubah kata sandi gagal dikirim! silahkan coba lagi",
+        });
       } else {
         console.log("Email sent: " + info.response);
+        res.status(200).json({
+          code: 200,
+          message: "Email untuk ubah kata sandi berhasil dikirim!",
+        });
       }
-    });
-
-    res.status(200).json({
-      code: 200,
-      message: "Email untuk ubah kata sandi berhasil dikirim!",
     });
   } catch (error) {
     console.log(error);

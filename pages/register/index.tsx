@@ -52,8 +52,8 @@ export default function Register({ AES_KEY }: RegisterProps) {
         const result = await response.json();
 
         if (result.code === 201) {
-          toast.success('Berhasil mendaftar, silahkan cek email anda untuk melakukan verifikasi', {
-            duration: 5000,
+          toast.success(result.message, {
+            duration: 10000,
           })
           router.push('/login');
         }

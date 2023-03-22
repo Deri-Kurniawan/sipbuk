@@ -59,5 +59,5 @@ async function GET(req: NextApiRequest, res: NextApiResponse) {
     res.redirect(`/register/email-verification?status=failed`);
   }
 
-  prisma.$disconnect();
+  await prisma.$disconnect();
 }

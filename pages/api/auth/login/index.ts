@@ -87,7 +87,7 @@ export default async function handler(
         res.status(500).json({ code: 500, message: "Internal server error!" });
       }
 
-      prisma.$disconnect();
+      await prisma.$disconnect();
       break;
     default:
       res.setHeader("Allow", ["GET", "POST"]);

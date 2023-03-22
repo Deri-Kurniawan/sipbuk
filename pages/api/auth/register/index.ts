@@ -88,9 +88,8 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 
     const verifyToken = uuidv4();
 
-    const user = await prisma.user.create({
+    await prisma.user.create({
       data: {
-        uuid: `user-${uuidv4()}`,
         fullname,
         email,
         password: hashAES.password,
@@ -109,17 +108,24 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
 
     transporter.sendMail(mailOptions, function (error: any, info: any) {
       if (error) {
-        console.log(error);
+        console.log("nodemailer transporter", error);
+        res.status(500).json({
+          code: 500,
+          message:
+            "Daftar Berhasil! Email verifikasi gagal dikirim karena kesalahan server",
+        });
       } else {
         console.log("Email sent: " + info.response);
+        res.status(201).json({
+          code: 201,
+          message: `Daftar Berhasil! Silahkan cek email anda untuk melakukan verifikasi akun. Jika tidak ada di inbox, silahkan cek di folder spam atau promosi.`,
+        });
       }
     });
-
-    res.status(201).json({ code: 201, message: "Daftar Berhasil!", user });
   } catch (error) {
     console.log("api", error);
     res.status(500).json({ code: 500, message: "Internal server error!" });
   }
 
-  prisma.$disconnect();
+  await prisma.$disconnect();
 }
