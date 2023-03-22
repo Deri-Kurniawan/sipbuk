@@ -89,7 +89,7 @@ export default function Login({ AES_KEY }: LoginProps) {
         }
         setFetchIsLoading(false);
       } catch (error: any) {
-        console.log("client catch", error);
+        // console.log(error);
         if (error.code === 400) {
           toast.error(error.message, {
             duration: 5000,

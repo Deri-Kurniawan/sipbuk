@@ -84,7 +84,7 @@ export default function Register({ AES_KEY }: RegisterProps) {
         setFetchIsLoading(false);
       } catch (error: any) {
         setFetchIsLoading(false);
-        console.log("client catch", error);
+        // console.log(error);
         if (error.code === 400) {
           toast.error(error.message, {
             duration: 5000,

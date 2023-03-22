@@ -36,7 +36,7 @@ export async function getServerSideProps({ req, res }: { req: any, res: any }) {
       }
     }
   } catch (error) {
-    console.log(error)
+    // console.log(error)
     return {
       props: {
         user: null,

@@ -62,7 +62,7 @@ export async function getServerSideProps({ query, req, res }: { query: any, req:
       },
     };
   } catch (error: any) {
-    console.log(error);
+    // console.log(error);
     return {
       props: {
         AES_KEY: process.env.AES_KEY,
@@ -132,7 +132,7 @@ export default function ForgotPassword({
         }
         setFetchIsLoading(false);
       } catch (error) {
-        console.log("client error", error);
+        // console.log(error);
         toast.error("Terjadi kesalahan, silahkan coba lagi.", {
           duration: 5000,
         });
@@ -183,7 +183,7 @@ export default function ForgotPassword({
         }
         setFetchIsLoading(false);
       } catch (error) {
-        console.log("client error", error);
+        // console.log(error);
         toast.error("Terjadi kesalahan, silahkan coba lagi.", {
           duration: 5000,
         });
