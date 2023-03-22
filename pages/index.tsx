@@ -5,8 +5,33 @@ import Link from "next/link";
 import SafeLayout from "@/layouts/SafeLayout";
 import Footer from "@/components/Footer";
 import Head from "next/head";
+import { getCookie } from "cookies-next";
 
-export default function Home() {
+export async function getServerSideProps({ req, res }: { req: any, res: any }) {
+  try {
+    // @ts-ignore
+    const userCookie = JSON.parse(getCookie("user", { req, res }));
+
+    return {
+      props: {
+        user: userCookie,
+      }
+    }
+  } catch (error) {
+    console.log(error)
+    return {
+      props: {
+        user: null,
+      }
+    };
+  }
+}
+
+interface HomeProps {
+  user: any;
+}
+
+export default function Home({ user }: HomeProps) {
   return (
     <>
       <Head>
@@ -14,7 +39,7 @@ export default function Home() {
         <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
       </Head>
       <SafeLayout>
-        <Navbar />
+        <Navbar user={user} />
         <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
           <div className="md:grid grid-flow-row grid-cols-12 gap-[32px] items-center">
             {/* hero left */}

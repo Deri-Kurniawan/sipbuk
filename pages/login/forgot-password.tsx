@@ -9,23 +9,34 @@ import { PrismaClient } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { clientSideAESEncrypt } from "@/utils/cryptoAES";
+import { hasCookie } from "cookies-next";
 
 const prisma = new PrismaClient();
 
-export async function getServerSideProps(context: any) {
-  const { token = null } = context.query;
+export async function getServerSideProps({ query, req, res }: { query: any, req: any, res: any }) {
+  const hasLoggedIn = hasCookie("user", { req, res });
 
-  if (!token) {
+  if (hasLoggedIn) {
     return {
-      props: {
-        AES_KEY: process.env.AES_KEY,
-        _nextStep: false,
-        _token: null,
-      },
-    };
+      redirect: {
+        destination: '/dashboard',
+        permanent: true,
+      }
+    }
   }
 
+  const { token = null } = query;
+
   try {
+    if (!token) {
+      return {
+        props: {
+          AES_KEY: process.env.AES_KEY,
+          _nextStep: false,
+          _token: null,
+        },
+      };
+    }
     const user = await prisma.user.findUnique({
       where: {
         // @ts-ignore

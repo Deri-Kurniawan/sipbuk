@@ -7,11 +7,22 @@ import Link from "next/link";
 import Head from "next/head";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
-import { setCookie } from 'cookies-next';
+import { hasCookie, setCookie } from 'cookies-next';
 import { clientSideAESEncrypt } from "@/utils/cryptoAES";
 import { useState } from "react";
 
-export function getStaticProps() {
+export async function getServerSideProps({ req, res }: { req: any, res: any }) {
+  const hasLoggedIn = hasCookie("user", { req, res });
+
+  if (hasLoggedIn) {
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: true,
+      }
+    }
+  }
+
   return {
     props: {
       AES_KEY: process.env.AES_KEY
@@ -62,7 +73,7 @@ export default function Login({ AES_KEY }: LoginProps) {
             icon: '👋',
           })
 
-          router.push('/');
+          router.push('/dashboard');
         }
 
         if (result.code === 400) {

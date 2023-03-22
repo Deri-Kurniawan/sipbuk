@@ -3,9 +3,21 @@ import Head from 'next/head'
 import emailVerifiedImage from '@/assets/email-verified.jpg'
 import somethingWrongImage from '@/assets/something-wrong.jpg'
 import Image from 'next/image'
+import { hasCookie } from 'cookies-next'
 
-export function getServerSideProps(context: any) {
-    const { status = null, email = null, reason = null } = context.query;
+export function getServerSideProps({ query, req, res }: any) {
+    const hasLoggedIn = hasCookie("user", { req, res });
+
+    if (hasLoggedIn) {
+        return {
+            redirect: {
+                destination: '/dashboard',
+                permanent: true,
+            }
+        }
+    }
+
+    const { status = null, email = null, reason = null } = query;
 
     if (!status && !email && !reason) {
         return {

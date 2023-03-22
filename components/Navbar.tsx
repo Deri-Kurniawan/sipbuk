@@ -1,8 +1,9 @@
-"use client";
-
+import { deleteCookie } from "cookies-next";
 import Link from "next/link";
 // @ts-ignore
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/router";
+import { toast } from "react-hot-toast";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 const navLinks = [
@@ -22,10 +23,20 @@ const navLinks = [
 
 interface Props {
   isSticky?: boolean;
+  user?: any;
 }
 
-export default function Navbar({ isSticky = true }: Props) {
+export default function Navbar({ isSticky = true, user = null }: Props) {
+  const router = useRouter();
   const pathname = usePathname();
+
+  const handleClickLogout = () => {
+    deleteCookie("user");
+    toast.success("Berhasil keluar", {
+      duration: 5000,
+    });
+    router.push("/login");
+  }
 
   return (
     <nav className={`${isSticky ? "sticky top-0" : ""} z-50`}>
@@ -55,12 +66,34 @@ export default function Navbar({ isSticky = true }: Props) {
                   {nl.label}
                 </Link>
               ))}
-              <Link
-                className="w-24 text-base capitalize btn btn-outline btn-success"
-                href="/login"
-              >
-                Masuk
-              </Link>
+              {user ? (
+                <div className="dropdown dropdown-bottom dropdown-end">
+                  <label
+                    tabIndex={0}
+                    className="m-1 text-white btn btn-outline btn-success"
+                  >
+                    {user.fullname}
+                  </label>
+                  <ul
+                    tabIndex={0}
+                    className="p-2 shadow dropdown-content menu bg-base-100 rounded-box w-52"
+                  >
+                    <li>
+                      <Link href="/dashboard">Dashboard</Link>
+                    </li>
+                    <li>
+                      <button onClick={handleClickLogout}>Keluar</button>
+                    </li>
+                  </ul>
+                </div>
+              ) : (
+                <Link
+                  className="w-24 text-base capitalize btn btn-outline btn-success"
+                  href="/login"
+                >
+                  Masuk
+                </Link>
+              )}
             </div>
 
             {/* mobile navlink */}
@@ -76,13 +109,22 @@ export default function Navbar({ isSticky = true }: Props) {
                   tabIndex={0}
                   className="p-2 shadow dropdown-content menu bg-base-100 rounded-box w-52"
                 >
+                  {user && (
+                    <li>
+                      <Link href="/dashboard">Dashboard</Link>
+                    </li>
+                  )}
                   {navLinks.map((nl, index) => (
                     <li key={index}>
                       <Link href={nl.path}>{nl.label}</Link>
                     </li>
                   ))}
                   <li>
-                    <Link href="/login">Masuk</Link>
+                    {user ? (
+                      <button onClick={handleClickLogout}>Keluar</button>
+                    ) : (
+                      <Link href="/login">Masuk</Link>
+                    )}
                   </li>
                 </ul>
               </div>

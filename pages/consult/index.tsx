@@ -1,5 +1,3 @@
-"use client";
-
 import Navbar from "@/components/Navbar";
 import SafeLayout from "@/layouts/SafeLayout";
 import guavaImg from "@/assets/guava.jpg";
@@ -7,6 +5,7 @@ import Question from "@/components/Question";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { FormEventHandler, useEffect, useState } from "react";
 import Head from "next/head";
+import { getCookie, hasCookie } from "cookies-next";
 
 const questionList = [
   {
@@ -26,7 +25,31 @@ const questionList = [
   },
 ];
 
-export default function Consult() {
+export async function getServerSideProps({ req, res }: { req: any, res: any }) {
+  try {
+    // @ts-ignore
+    const userCookie = JSON.parse(getCookie("user", { req, res }));
+
+    return {
+      props: {
+        user: userCookie,
+      }
+    }
+  } catch (error) {
+    console.log(error)
+    return {
+      props: {
+        user: null,
+      }
+    };
+  }
+}
+
+interface ConsultProps {
+  user: any;
+}
+
+export default function Consult({ user }: ConsultProps) {
   const [questionOnViewport, setQuestionOnViewPort] = useState({
     id: "question-0",
     index: 0,
@@ -120,7 +143,7 @@ export default function Consult() {
         <title>Konsultasi - SIPBUK</title>
         <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
       </Head>
-      <Navbar isSticky={false} />
+      <Navbar isSticky={false} user={user} />
       <SafeLayout>
         <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
           {/* questions */}

@@ -9,8 +9,20 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { clientSideAESEncrypt } from "@/utils/cryptoAES";
+import { hasCookie } from "cookies-next";
 
-export function getStaticProps() {
+export async function getServerSideProps({ req, res }: { req: any, res: any }) {
+  const hasLoggedIn = hasCookie("user", { req, res });
+
+  if (hasLoggedIn) {
+    return {
+      redirect: {
+        destination: '/dashboard',
+        permanent: true,
+      }
+    }
+  }
+
   return {
     props: {
       AES_KEY: process.env.AES_KEY
