@@ -238,6 +238,7 @@ export default function ForgotPassword({
                       name="password"
                       id="password"
                       placeholder=""
+                      disabled={fetchIsLoading}
                     />
                   </div>
 
@@ -253,6 +254,7 @@ export default function ForgotPassword({
                       name="passwordConfirm"
                       id="confirm-password"
                       placeholder=""
+                      disabled={fetchIsLoading}
                     />
                   </div>
 
@@ -281,6 +283,7 @@ export default function ForgotPassword({
                       name="email"
                       id="email"
                       placeholder=""
+                      disabled={fetchIsLoading}
                     />
                   </div>
 

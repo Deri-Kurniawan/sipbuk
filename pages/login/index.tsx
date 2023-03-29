@@ -140,6 +140,7 @@ export default function Login({ AES_KEY }: LoginProps) {
                     name="email"
                     id="email"
                     placeholder=""
+                    disabled={fetchIsLoading}
                   />
                   {/* email error */}
                 </div>
@@ -154,6 +155,7 @@ export default function Login({ AES_KEY }: LoginProps) {
                     name="password"
                     id="password"
                     placeholder=""
+                    disabled={fetchIsLoading}
                   />
                   {/* password error */}
                 </div>
