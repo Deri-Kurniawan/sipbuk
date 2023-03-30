@@ -3,29 +3,29 @@ import SafeLayout from "@/layouts/SafeLayout";
 import guavaImg from "@/assets/guava.jpg";
 import Question from "@/components/Question";
 import { GrPrevious, GrNext } from "react-icons/gr";
-import { FormEventHandler, useEffect, useState } from "react";
+import { FormEventHandler, Fragment, useEffect, useState } from "react";
 import Head from "next/head";
 import { getCookie, hasCookie } from "cookies-next";
+import { PrismaClient } from "@prisma/client";
+import Link from "next/link";
+import { toast } from "react-hot-toast";
 
-const questionList = [
-  {
-    sympCode: "G1",
-    question: "Daun jambu dilapisi lapisan berwarna hitam seperti arang?",
-    image: guavaImg,
-  },
-  {
-    sympCode: "G2",
-    question: "Daun memiliki bercak berwarna merah bata?",
-    image: guavaImg,
-  },
-  {
-    sympCode: "G3",
-    question: "Warna daun berubah menjadi kuning?",
-    image: guavaImg,
-  },
-];
+const prisma = new PrismaClient();
 
 export async function getServerSideProps({ req, res }: { req: any, res: any }) {
+
+  const fetchSymptoms = await prisma.symptoms.findMany({
+    orderBy: {
+      code: "asc",
+    },
+  });
+
+  const questionList = fetchSymptoms.map(({ code, info, imageUrl }, index) => ({
+    sympCode: code,
+    question: info,
+    image: imageUrl,
+  }));
+
   try {
     // @ts-ignore
     const userCookie = JSON.parse(getCookie("user", { req, res }));
@@ -33,6 +33,7 @@ export async function getServerSideProps({ req, res }: { req: any, res: any }) {
     return {
       props: {
         user: userCookie,
+        questionList: JSON.parse(JSON.stringify(questionList)),
       }
     }
   } catch (error) {
@@ -40,6 +41,7 @@ export async function getServerSideProps({ req, res }: { req: any, res: any }) {
     return {
       props: {
         user: null,
+        questionList: JSON.parse(JSON.stringify(questionList)),
       }
     };
   }
@@ -47,15 +49,17 @@ export async function getServerSideProps({ req, res }: { req: any, res: any }) {
 
 interface ConsultProps {
   user: any;
+  questionList: any;
 }
 
-export default function Consult({ user }: ConsultProps) {
+export default function Consult({ user, questionList }: ConsultProps) {
+  const [fetchIsLoading, setFetchIsLoading] = useState(false);
   const [questionOnViewport, setQuestionOnViewPort] = useState({
     id: "question-0",
     index: 0,
   });
 
-  const handleFormSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const handleFormSubmit: FormEventHandler<HTMLFormElement> = async (e: any) => {
     e.preventDefault();
 
     const form = e.target as HTMLFormElement;
@@ -63,15 +67,57 @@ export default function Consult({ user }: ConsultProps) {
 
     const data = Object.fromEntries(formData.entries());
 
-    const remapData: any = {};
+    const remapDataToObject: any = {};
 
     for (const key in data) {
       if (Object.prototype.hasOwnProperty.call(data, key)) {
-        remapData[key] = Number(data[key]);
+        remapDataToObject[key] = Number(data[key]);
       }
     }
 
-    console.log(remapData);
+    // check if value is 0 for all keys
+    const isAllValueZero = Object.values(remapDataToObject).every(
+      (value) => value === 0
+    );
+
+    if (isAllValueZero) {
+      toast.error("Mohon pilih salah satu jawaban pada setiap pertanyaan");
+      return;
+    }
+
+    // manipulate for test purpose (development only)
+    // remapDataToObject["13"] = 0.4;
+    // remapDataToObject["19"] = 0.6;
+    // remapDataToObject["20"] = 0.8;
+
+    const remapDataToArray = [remapDataToObject];
+
+    try {
+      setFetchIsLoading(true);
+      const fetchCertaintyFactorInferenceEngine = (async () => await fetch("/api/certainty-factor", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          data: remapDataToArray,
+        }),
+      }))();
+
+      const fetchCertaintyFactorInferenceEngineJSON = await (await fetchCertaintyFactorInferenceEngine).json()
+
+      toast.promise(fetchCertaintyFactorInferenceEngine, {
+        loading: 'Sistem sedang mendiagnosa',
+        success: 'Sistem berhasil mendiagnosa',
+        error: 'Sistem gagal mendiagnosa',
+      });
+
+      console.log(fetchCertaintyFactorInferenceEngineJSON);
+      setFetchIsLoading(false)
+    } catch (error) {
+      console.error(error);
+      setFetchIsLoading(false)
+    }
   };
 
   const handleClickNextQuestion = () => {
@@ -158,7 +204,7 @@ export default function Consult({ user }: ConsultProps) {
       document.removeEventListener("keydown", handleRightArrowKey);
       document.removeEventListener("keydown", handleLeftArrowKey);
     };
-  }, [questionOnViewport.index]);
+  }, [questionOnViewport.index, questionList.length]);
 
   useEffect(() => {
     const questionElements = document.querySelectorAll(".query-question");
@@ -190,34 +236,51 @@ export default function Consult({ user }: ConsultProps) {
       <Navbar isSticky={false} user={user} />
       <SafeLayout>
         <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
-          {/* questions */}
-          <form onSubmit={handleFormSubmit}>
-            {questionList.map((ql, index) => (
-              <div
-                key={index}
-                className="query-question"
-                id={`question-${index}`}
-              >
-                <Question {...ql} index={index} />
-              </div>
-            ))}
+          {questionList && questionList?.length > 0 ? (
+            <Fragment>
+              {/* questions */}
+              <form onSubmit={handleFormSubmit}>
+                {questionList.map((ql: any, index: number) => (
+                  <div
+                    key={index}
+                    className="query-question"
+                    id={`question-${index}`}
+                  >
+                    <Question {...ql} index={index} />
+                  </div>
+                ))}
+                <div className="flex flex-col items-center justify-center text-center mb-[112px] lg:mb-[172px]">
+                  <h4 className="mb-3 text-3xl font-bold max-w-[552px]">
+                    Apakah anda sudah yakin dengan semua jawaban anda?
+                  </h4>
+                  <p className="mb-6 text-base max-w-[552px]">
+                    Jika belum yakin, anda dapat mengeceknya kembali. Jika sudah
+                    yakin, anda bisa klik tombol <b>*Yakin dan Diagnosa*</b> berikut
+                  </p>
+                  <button
+                    className={`${fetchIsLoading ? 'loading' : ''} capitalize btn btn-active btn-ghost`}
+                    type="submit"
+                    disabled={fetchIsLoading}
+                  >
+                    {fetchIsLoading ? 'Memproses...' : 'Yakin dan Diagnosa'}
+                  </button>
+                </div>
+              </form>
+              {/* end of questions */}
+            </Fragment>
+          ) : (
             <div className="flex flex-col items-center justify-center text-center mb-[112px] lg:mb-[172px]">
               <h4 className="mb-3 text-3xl font-bold max-w-[552px]">
-                Apakah anda sudah yakin dengan semua jawaban anda?
+                Maaf, terjadi kesalahan
               </h4>
               <p className="mb-6 text-base max-w-[552px]">
-                Jika belum yakin, anda dapat mengeceknya kembali. Jika sudah
-                yakin, anda bisa klik tombol <b>*Yakin dan Diagnosa*</b> berikut
+                Terjadi kesalahan pada sistem. Silahkan coba lagi nanti.
               </p>
-              <button
-                className="capitalize btn btn-active btn-ghost"
-                type="submit"
-              >
-                Yakin dan Diagnosa
-              </button>
+              <Link href="/" className="capitalize btn btn-active btn-ghost">
+                Kembali ke Beranda
+              </Link>
             </div>
-          </form>
-          {/* end of questions */}
+          )}
         </main>
       </SafeLayout>
       {/* floating question navigator bar */}

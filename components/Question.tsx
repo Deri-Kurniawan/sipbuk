@@ -20,9 +20,12 @@ export default function Question({
       <div className="col-span-2 md:col-span-1">
         <Image
           src={image}
-          className="object-cover md:h-[332px] md:w-[380px] lg:h-auto lg:w-[480px] bg-primary rounded-2xl"
+          className="object-cover md:h-[332px] md:w-[380px] lg:h-[432px] lg:w-[480px] bg-primary rounded-2xl"
           alt=""
-          priority
+          width={480}
+          height={432}
+          loader={({ src }) => src.toString()}
+          unoptimized
         />
       </div>
       {/* info */}
