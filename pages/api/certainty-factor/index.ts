@@ -1,52 +1,84 @@
-import { PestsAndDeseasesHasSymptoms, PrismaClient } from "@prisma/client";
+import Prisma from "@prisma/client";
 import { NextApiResponse } from "next";
 import { NextApiRequest } from "next";
+import { v4 as uuidv4 } from "uuid";
+
+const { PrismaClient } = Prisma;
 
 interface ICertaintyFactorInferenceEngine {
-  (
-    data: {
-      code: number;
-      name: string;
-      imageUrl: string;
-      createdAt: Date;
-      updatedAt: Date;
-      PestsAndDeseasesHasSymptoms: PestsAndDeseasesHasSymptoms[];
-    }[]
-  ): { data: any; highestCF: any };
+  (userInputData: { [key: string]: number }[]): any;
 }
 
-const CertaintyFactorInferenceEngine: ICertaintyFactorInferenceEngine = (
-  data
+const CertaintyFactorInferenceEngine: ICertaintyFactorInferenceEngine = async (
+  userInputData
 ) => {
-  const calculatedSingleRule = data.map((rule) => {
-    const { PestsAndDeseasesHasSymptoms } = rule;
+  const prisma = new PrismaClient();
 
-    if (PestsAndDeseasesHasSymptoms.length === 1) {
-      const { userCF, expertCF }: any = PestsAndDeseasesHasSymptoms[0];
-      const CF = userCF * expertCF;
+  const knowledgeBaseRule = await prisma.pestsAndDeseases.findMany({
+    include: {
+      PestsAndDeseasesHasSymptoms: {
+        include: {
+          symptoms: true,
+        },
+      },
+    },
+  });
+
+  const knowledgeBaseRuleWithUserInputData = knowledgeBaseRule.map(
+    (rule: any) => {
+      const { PestsAndDeseasesHasSymptoms } = rule;
+
+      const remap = PestsAndDeseasesHasSymptoms.map((item: any) => {
+        const {
+          symptoms: { code },
+        } = item;
+
+        const userCF = userInputData[0][code];
+
+        return {
+          ...item,
+          userCF,
+        };
+      });
 
       return {
         ...rule,
-        calculatedSingleRuleCF: [CF],
+        PestsAndDeseasesHasSymptoms: remap,
       };
     }
+  );
 
-    const calculatedSingleRuleCF = PestsAndDeseasesHasSymptoms.map(
-      ({ userCF, expertCF }: any) => {
+  const calculatedSingleRule = knowledgeBaseRuleWithUserInputData.map(
+    (rule: any) => {
+      const { PestsAndDeseasesHasSymptoms } = rule;
+
+      if (PestsAndDeseasesHasSymptoms.length === 1) {
+        const { userCF, expertCF }: any = PestsAndDeseasesHasSymptoms[0];
         const CF = userCF * expertCF;
 
-        return CF;
+        return {
+          ...rule,
+          calculatedSingleRuleCF: [CF],
+        };
       }
-    );
 
-    return {
-      ...rule,
-      calculatedSingleRuleCF,
-    };
-  });
+      const calculatedSingleRuleCF = PestsAndDeseasesHasSymptoms.map(
+        ({ userCF, expertCF }: any) => {
+          const CF = userCF * expertCF;
+
+          return CF;
+        }
+      );
+
+      return {
+        ...rule,
+        calculatedSingleRuleCF,
+      };
+    }
+  );
 
   // combination rule
-  const combinationRule = calculatedSingleRule.map((rule) => {
+  const combinationRule = calculatedSingleRule.map((rule: any) => {
     const { calculatedSingleRuleCF, name } = rule;
 
     let finalCF = 0;
@@ -67,7 +99,7 @@ const CertaintyFactorInferenceEngine: ICertaintyFactorInferenceEngine = (
 
       default:
         if (calculatedSingleRuleCF.length > 2) {
-          calculatedSingleRuleCF.reduce((prevCF, currentCF) => {
+          calculatedSingleRuleCF.reduce((prevCF: number, currentCF: number) => {
             // CF[H,E]a,b = CF[H,E]a * CF[H,E]b (1 - CF[H,E]a)
             const newCombinationCF = currentCF + prevCF * (1 - currentCF);
             combinationRuleCF.push(newCombinationCF);
@@ -91,15 +123,32 @@ const CertaintyFactorInferenceEngine: ICertaintyFactorInferenceEngine = (
     };
   });
 
-  const getHighestFinalCF = combinationRule.reduce(
-    (prev, current) => (prev.finalCF > current.finalCF ? prev : current),
-    { finalCF: 0 }
-  );
+  try {
+    const getHighestFinalCF = combinationRule.reduce(
+      (prev: any, current: any) =>
+        prev.finalCF > current.finalCF ? prev : current,
+      { finalCF: 0 }
+    );
 
-  return { data: combinationRule, highestCF: getHighestFinalCF };
+    // @ts-ignore
+    const saveDiagnoseHistory = await prisma.usersDiagnoseHistory.create({
+      data: {
+        id: `diagnose-history-${uuidv4()}`,
+        userId: "",
+        pestAndDeseaseCode: getHighestFinalCF.code,
+        finalCF: getHighestFinalCF.finalCF,
+        userInputData: JSON.stringify(userInputData),
+      },
+    });
+
+    return {
+      diagnoseId: saveDiagnoseHistory.id,
+    };
+  } catch (error: any) {
+    console.log(error);
+    throw new Error(error);
+  }
 };
-
-const prisma = new PrismaClient();
 
 export default async function handler(
   req: NextApiRequest,
@@ -111,44 +160,9 @@ export default async function handler(
       res.status(200).json({ name: "John Doe" });
       break;
     case "POST":
-      const { data: userInputData } = req.body;
-      const knowledgeBaseRule = await prisma.pestsAndDeseases.findMany({
-        include: {
-          PestsAndDeseasesHasSymptoms: {
-            include: {
-              symptoms: true,
-            },
-          },
-        },
-      });
+      const { data } = req.body;
 
-      const knowledgeBaseRuleWithUserInputData = knowledgeBaseRule.map(
-        (rule) => {
-          const { PestsAndDeseasesHasSymptoms } = rule;
-
-          const remap = PestsAndDeseasesHasSymptoms.map((item) => {
-            const {
-              symptoms: { code },
-            } = item;
-
-            const userCF = userInputData[0][code];
-
-            return {
-              ...item,
-              userCF,
-            };
-          });
-
-          return {
-            ...rule,
-            PestsAndDeseasesHasSymptoms: remap,
-          };
-        }
-      );
-
-      const result = CertaintyFactorInferenceEngine(
-        knowledgeBaseRuleWithUserInputData
-      );
+      const result = await CertaintyFactorInferenceEngine(data);
 
       res.status(200).json(result);
       break;

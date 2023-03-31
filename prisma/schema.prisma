@@ -9,15 +9,16 @@ datasource db {
 }
 
 model User {
-  id                 String   @id @default(uuid())
-  fullname           String   @db.VarChar(255)
-  email              String   @unique
-  password           String
-  isVerified         Boolean  @default(false)
-  verifyToken        String?  @unique
-  passwordResetToken String?  @unique
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
+  id                   String                 @id @default(uuid())
+  fullname             String                 @db.VarChar(255)
+  email                String                 @unique
+  password             String
+  isVerified           Boolean                @default(false)
+  verifyToken          String?                @unique
+  passwordResetToken   String?                @unique
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  UsersDiagnoseHistory UsersDiagnoseHistory[]
 }
 
 model PestsAndDeseases {
@@ -28,6 +29,7 @@ model PestsAndDeseases {
   updatedAt                   DateTime                      @updatedAt
   symptoms                    Symptoms[]                    @relation("PestsAndDeseasesHasSymptoms")
   PestsAndDeseasesHasSymptoms PestsAndDeseasesHasSymptoms[]
+  UsersDiagnoseHistory        UsersDiagnoseHistory[]
 }
 
 model Symptoms {
@@ -52,10 +54,17 @@ model PestsAndDeseasesHasSymptoms {
   @@index([pestAndDeseaseCode])
 }
 
-model UncertaintyValue {
-  id        Int      @id @default(autoincrement())
-  value     Float    @default(0)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  name      String   @db.VarChar(255)
+model UsersDiagnoseHistory {
+  id                 String           @id @default(uuid())
+  userId             String
+  pestAndDeseaseCode Int
+  finalCF            Float            @default(0)
+  userInputData      Json
+  createdAt          DateTime         @default(now())
+  updatedAt          DateTime         @updatedAt
+  user               User?            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  pestsAndDeseases   PestsAndDeseases @relation(fields: [pestAndDeseaseCode], references: [code])
+
+  @@index([userId])
+  @@index([pestAndDeseaseCode])
 }

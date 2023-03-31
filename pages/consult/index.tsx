@@ -8,10 +8,11 @@ import { getCookie } from "cookies-next";
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
-const prisma = new PrismaClient();
 
 export async function getServerSideProps({ req, res }: { req: any, res: any }) {
+  const prisma = new PrismaClient();
 
   const fetchSymptoms = await prisma.symptoms.findMany({
     orderBy: {
@@ -19,7 +20,7 @@ export async function getServerSideProps({ req, res }: { req: any, res: any }) {
     },
   });
 
-  const questionList = fetchSymptoms.map(({ code, info, imageUrl }, index) => ({
+  const questionList = fetchSymptoms.map(({ code, info, imageUrl }: { code: number, info: string, imageUrl: string }, index: number) => ({
     sympCode: code,
     question: info,
     image: imageUrl,
@@ -57,6 +58,7 @@ export default function Consult({ user, questionList }: ConsultProps) {
     id: "question-0",
     index: 0,
   });
+  const router = useRouter();
 
   const handleFormSubmit: FormEventHandler<HTMLFormElement> = async (e: any) => {
     e.preventDefault();
@@ -85,9 +87,9 @@ export default function Consult({ user, questionList }: ConsultProps) {
     // }
 
     // manipulate for test purpose (development only)
-    // remapDataToObject["13"] = 0.4;
-    // remapDataToObject["19"] = 0.6;
-    // remapDataToObject["20"] = 0.8;
+    // remapDataToObject["13"] = 0.4; //sedikit yakin
+    // remapDataToObject["19"] = 0.6; // cukup yakin
+    // remapDataToObject["20"] = 0.8; // yakin
 
     const remapDataToArray = [remapDataToObject];
 
@@ -103,7 +105,7 @@ export default function Consult({ user, questionList }: ConsultProps) {
         }),
       }))();
 
-      const fetchCertaintyFactorInferenceEngineJSON = await (await fetchCertaintyFactorInferenceEngine).json()
+      const { diagnoseId } = await (await fetchCertaintyFactorInferenceEngine).json()
 
       toast.promise(fetchCertaintyFactorInferenceEngine, {
         loading: 'Sistem sedang mendiagnosa',
@@ -111,12 +113,12 @@ export default function Consult({ user, questionList }: ConsultProps) {
         error: 'Sistem gagal mendiagnosa',
       });
 
-      console.log(fetchCertaintyFactorInferenceEngineJSON);
-      setFetchIsLoading(false)
+      router.push(`/consult/${diagnoseId}`);
+      setFetchIsLoading(false);
     } catch (error) {
       toast.error('Sistem gagal mendiagnosa, ada kesalahan pada sistem');
       // console.error(error);
-      setFetchIsLoading(false)
+      setFetchIsLoading(false);
     }
   };
 
