@@ -47,7 +47,7 @@ const CertaintyFactorInferenceEngine: ICertaintyFactorInferenceEngine = (
 
   // combination rule
   const combinationRule = calculatedSingleRule.map((rule) => {
-    const { calculatedSingleRuleCF } = rule;
+    const { calculatedSingleRuleCF, name } = rule;
 
     let finalCF = 0;
     const combinationRuleCF: number[] = [];
@@ -66,13 +66,22 @@ const CertaintyFactorInferenceEngine: ICertaintyFactorInferenceEngine = (
         break;
 
       default:
-        calculatedSingleRuleCF.reduce((prevCF, currentCF) => {
-          // CF[H,E]a,b = CF[H,E]a * CF[H,E]b (1 - CF[H,E]a)
-          const newCombinationCF = currentCF + prevCF * (1 - currentCF);
-          combinationRuleCF.push(newCombinationCF);
-          finalCF = newCombinationCF;
-          return newCombinationCF;
-        });
+        if (calculatedSingleRuleCF.length > 2) {
+          calculatedSingleRuleCF.reduce((prevCF, currentCF) => {
+            // CF[H,E]a,b = CF[H,E]a * CF[H,E]b (1 - CF[H,E]a)
+            const newCombinationCF = currentCF + prevCF * (1 - currentCF);
+            combinationRuleCF.push(newCombinationCF);
+            finalCF = newCombinationCF;
+            return newCombinationCF;
+          });
+        } else {
+          throw new Error(
+            `"${name}" pest or desease has ${calculatedSingleRuleCF.length} PestsAndDeseaseHasSymptoms records`,
+            {
+              cause: `"${name}" pest or desease needs at least 1 PestsAndDeseaseHasSymptoms record`,
+            }
+          );
+        }
     }
 
     return {
