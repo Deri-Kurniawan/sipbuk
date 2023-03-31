@@ -227,12 +227,12 @@ export const pestsAndDeseasesRawData = [
 ];
 
 export const uncertaintyValueRawData = [
-  { id: 1, name: "Tidak Ada", value: 0 },
-  { id: 2, name: "Tidak Tahu", value: 0.2 },
-  { id: 3, name: "Mungkin Ada", value: 0.4 },
-  { id: 4, name: "Kemungkinan Besar Ada", value: 0.6 },
-  { id: 5, name: "Hampir Pasti Ada", value: 0.8 },
-  { id: 6, name: "Pasti Ada", value: 1 },
+  { label: "Sangat Yakin", value: 1 },
+  { label: "Yakin", value: 0.8 },
+  { label: "Cukup Yakin", value: 0.6 },
+  { label: "Sedikit Yakin", value: 0.4 },
+  { label: "Tidak Yakin", value: 0.2 },
+  { label: "Sangat Tidak Yakin", value: 0 },
 ];
 
 export const pestsAndDeseasesHasSymptomsRawData = [
