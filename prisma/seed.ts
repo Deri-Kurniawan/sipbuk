@@ -2,7 +2,6 @@ import {
   pestsAndDeseasesHasSymptomsRawData,
   pestsAndDeseasesRawData,
   symptomsRawData,
-  uncertaintyValueRawData,
 } from "./data";
 import { PrismaClient } from "@prisma/client";
 
@@ -12,11 +11,6 @@ async function main() {
   // pests and disease seed
   await prisma.pestsAndDeseases.createMany({
     data: pestsAndDeseasesRawData,
-  });
-
-  // UncertaintyValue seed
-  await prisma.uncertaintyValue.createMany({
-    data: uncertaintyValueRawData,
   });
 
   // Symptoms seed
