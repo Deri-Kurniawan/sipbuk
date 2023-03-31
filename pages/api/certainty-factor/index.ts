@@ -21,6 +21,16 @@ const CertaintyFactorInferenceEngine: ICertaintyFactorInferenceEngine = (
   const calculatedSingleRule = data.map((rule) => {
     const { PestsAndDeseasesHasSymptoms } = rule;
 
+    if (PestsAndDeseasesHasSymptoms.length === 1) {
+      const { userCF, expertCF }: any = PestsAndDeseasesHasSymptoms[0];
+      const CF = userCF * expertCF;
+
+      return {
+        ...rule,
+        calculatedSingleRuleCF: [CF],
+      };
+    }
+
     const calculatedSingleRuleCF = PestsAndDeseasesHasSymptoms.map(
       ({ userCF, expertCF }: any) => {
         const CF = userCF * expertCF;
