@@ -1,11 +1,10 @@
 import Navbar from "@/components/Navbar";
 import SafeLayout from "@/layouts/SafeLayout";
-import guavaImg from "@/assets/guava.jpg";
 import Question from "@/components/Question";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { FormEventHandler, Fragment, useEffect, useState } from "react";
 import Head from "next/head";
-import { getCookie, hasCookie } from "cookies-next";
+import { getCookie } from "cookies-next";
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
@@ -76,14 +75,14 @@ export default function Consult({ user, questionList }: ConsultProps) {
     }
 
     // check if value is 0 for all keys
-    const isAllValueZero = Object.values(remapDataToObject).every(
-      (value) => value === 0
-    );
+    // const isAllValueZero = Object.values(remapDataToObject).every(
+    //   (value) => value === 0
+    // );
 
-    if (isAllValueZero) {
-      toast.error("Mohon pilih salah satu jawaban pada setiap pertanyaan");
-      return;
-    }
+    // if (isAllValueZero) {
+    //   toast.error("Mohon pilih salah satu jawaban");
+    //   return;
+    // }
 
     // manipulate for test purpose (development only)
     // remapDataToObject["13"] = 0.4;
@@ -115,7 +114,8 @@ export default function Consult({ user, questionList }: ConsultProps) {
       console.log(fetchCertaintyFactorInferenceEngineJSON);
       setFetchIsLoading(false)
     } catch (error) {
-      console.error(error);
+      toast.error('Sistem gagal mendiagnosa, ada kesalahan pada sistem');
+      // console.error(error);
       setFetchIsLoading(false)
     }
   };
