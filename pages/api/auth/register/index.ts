@@ -86,7 +86,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
         .json({ code: 400, message: "Email sudah terdaftar!" });
     }
 
-    const verifyToken = uuidv4();
+    const verifyToken = `vt-${uuidv4()}`;
 
     await prisma.user.create({
       data: {

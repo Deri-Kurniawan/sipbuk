@@ -133,7 +133,7 @@ const CertaintyFactorInferenceEngine: ICertaintyFactorInferenceEngine = async (
     // @ts-ignore
     const saveDiagnoseHistory = await prisma.usersDiagnoseHistory.create({
       data: {
-        id: `diagnose-history-${uuidv4()}`,
+        id: `dh-${uuidv4()}`,
         userId: "",
         pestAndDeseaseCode: getHighestFinalCF.code,
         finalCF: getHighestFinalCF.finalCF,

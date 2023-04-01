@@ -53,7 +53,7 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    const newToken = uuidv4();
+    const newToken = `t-${uuidv4()}`;
 
     const userUpdated = await prisma.user.update({
       where: {
