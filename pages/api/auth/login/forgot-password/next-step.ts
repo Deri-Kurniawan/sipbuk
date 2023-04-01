@@ -3,7 +3,6 @@ import { serverSideAESDecrypt, serverSideAESEncrypt } from "@/utils/cryptoAES";
 import { PrismaClient } from "@prisma/client";
 import { NextApiResponse } from "next";
 import { NextApiRequest } from "next";
-import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
 
@@ -86,8 +85,6 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
   }
 
   try {
-    const newToken = uuidv4();
-
     const userUpdated = await prisma.user.update({
       where: {
         id: user.id,
