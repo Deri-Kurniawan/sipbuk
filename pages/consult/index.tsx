@@ -114,7 +114,6 @@ export default function Consult({ user, questionList }: ConsultProps) {
       });
 
       router.push(`/consult/${diagnoseId}`);
-      setFetchIsLoading(false);
     } catch (error) {
       toast.error('Sistem gagal mendiagnosa, ada kesalahan pada sistem');
       // console.error(error);
