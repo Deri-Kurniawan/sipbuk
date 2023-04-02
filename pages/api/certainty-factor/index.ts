@@ -1,4 +1,4 @@
-import CertaintyFactor from "@/utils/CertaintyFactor";
+import CertaintyFactor from "@/utils/certaintyFactor";
 import { PrismaClient } from "@prisma/client";
 import { NextApiResponse } from "next";
 import { NextApiRequest } from "next";
