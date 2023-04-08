@@ -102,10 +102,11 @@ export default function Consult({ user, questionList }: ConsultProps) {
         },
         body: JSON.stringify({
           data: remapDataToArray,
+          userId: user === null ? "" : user.id,
         }),
       }))();
 
-      const { diagnoseId } = await (await fetchCertaintyFactorInferenceEngine).json()
+      const { diagnoseId }: { diagnoseId: string } = await (await fetchCertaintyFactorInferenceEngine).json()
 
       toast.promise(fetchCertaintyFactorInferenceEngine, {
         loading: 'Sistem sedang mendiagnosa',
@@ -113,7 +114,21 @@ export default function Consult({ user, questionList }: ConsultProps) {
         error: 'Sistem gagal mendiagnosa',
       });
 
+      if (typeof window !== undefined && !user) {
+        const diagnosesHistoryId = localStorage.getItem("diagnosesHistoryId");
+
+        if (diagnosesHistoryId === null) {
+          const newData = [diagnoseId];
+          localStorage.setItem("diagnosesHistoryId", JSON.stringify(newData));
+        } else {
+          const oldData = JSON.parse(diagnosesHistoryId);
+          const newData = [...oldData, diagnoseId];
+          localStorage.setItem("diagnosesHistoryId", JSON.stringify(newData));
+        }
+      }
+
       router.push(`/consult/${diagnoseId}`);
+      setFetchIsLoading(false);
     } catch (error) {
       toast.error('Sistem gagal mendiagnosa, ada kesalahan pada sistem');
       // console.error(error);
