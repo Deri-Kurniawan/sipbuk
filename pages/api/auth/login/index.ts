@@ -51,6 +51,7 @@ export default async function handler(
             email,
           },
           select: {
+            id: true,
             email: true,
             fullname: true,
             password: true,
