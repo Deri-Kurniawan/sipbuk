@@ -13,8 +13,7 @@ export default async function handler(
   const { method } = req;
   switch (method) {
     case "POST":
-      const { data: userInputData } = req.body;
-
+      const { data: userInputData, userId } = req.body;
       const instance = new CertaintyFactor(userInputData);
       const conclusion = (await instance.generateConclusion()).conclusion;
 
@@ -23,7 +22,7 @@ export default async function handler(
         const saveDiagnoseHistory = await prisma.usersDiagnoseHistory.create({
           data: {
             id: `dh-${uuidv4()}`,
-            userId: "",
+            userId: userId,
             pestAndDeseaseCode: conclusion.code,
             finalCF: conclusion.finalCF,
             userInputData: JSON.stringify(userInputData),
