@@ -28,6 +28,8 @@ model PestsAndDeseases {
   createdAt                   DateTime                      @default(now())
   updatedAt                   DateTime                      @updatedAt
   symptoms                    Symptoms[]                    @relation("PestsAndDeseasesHasSymptoms")
+  solution                    String                        @db.Text
+  activeIngredient            String                        @db.Text
   PestsAndDeseasesHasSymptoms PestsAndDeseasesHasSymptoms[]
   UsersDiagnoseHistory        UsersDiagnoseHistory[]
 }

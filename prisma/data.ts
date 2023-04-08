@@ -181,48 +181,325 @@ export const pestsAndDeseasesRawData = [
     name: "Hama Lalat buah",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+    solution: `
+      <ol>
+        <li>
+          <p>Membersihkan area sekitar tanaman</p>
+          <p>Pastikan area sekitar tanaman jambu kristal selalu bersih dari sisa-sisa buah yang jatuh atau buah yang busuk. Sisa-sisa buah yang jatuh dapat menjadi tempat berkembang biaknya hama lalat buah.</p>
+        </li>
+        <li>
+          <p>Pemangkasan cabang dan daun yang terinfeksi</p>
+          <p>Cabang atau daun yang terinfeksi oleh hama lalat buah harus segera dipangkas dan dibuang jauh dari tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Menggunakan perangkap lalat buah</p>
+          <p>Anda dapat menggunakan perangkap lalat buah untuk menangkap hama lalat buah yang berkeliaran di sekitar tanaman. Pastikan untuk membersihkan perangkap secara teratur.</p>
+        </li>
+        <li>
+          <p>Penggunaan Insektisida</p>
+          <p>Anda juga dapat menggunakan insektisida untuk membunuh hama lalat buah. Namun, pastikan untuk memilih insektisida yang aman dan tidak merusak tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Memanfaatkan predator alami</p>
+          <p>Beberapa jenis serangga seperti lebah dan capung dapat menjadi predator alami dari hama lalat buah. Anda dapat mempertimbangkan untuk menanam tanaman-tanaman tertentu yang menarik kedatangan serangga-serangga tersebut.</p>
+        </li>
+        <li>
+          <p>Menerapkan rotasi tanaman</p>
+          <p>Hama lalat buah dapat bertahan hidup dalam tanah untuk waktu yang lama. Oleh karena itu, melakukan rotasi tanaman dapat membantu mengurangi keberadaan hama lalat buah pada tanaman jambu kristal.</p>
+        </li>
+      </ol>
+      `,
+    activeIngredient: `
+      <ol>
+        <li>Mankozeb 80%</li>
+        <li>
+      </ol>
+      `,
   },
   {
     code: 2,
     name: "Hama Kutu Putih",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+    solution: `
+      <ol>
+        <li>
+          <p>Membersihkan area sekitar tanaman</p>
+          <p>Pastikan area sekitar tanaman jambu kristal selalu bersih dari sisa-sisa buah yang jatuh atau buah yang busuk. Sisa-sisa buah yang jatuh dapat menjadi tempat berkembang biaknya hama lalat buah.</p>
+        </li>
+        <li>
+          <p>Pemangkasan cabang dan daun yang terinfeksi</p>
+          <p>Cabang atau daun yang terinfeksi oleh hama lalat buah harus segera dipangkas dan dibuang jauh dari tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Menggunakan perangkap lalat buah</p>
+          <p>Anda dapat menggunakan perangkap lalat buah untuk menangkap hama lalat buah yang berkeliaran di sekitar tanaman. Pastikan untuk membersihkan perangkap secara teratur.</p>
+        </li>
+        <li>
+          <p>Penggunaan Insektisida</p>
+          <p>Anda juga dapat menggunakan insektisida untuk membunuh hama lalat buah. Namun, pastikan untuk memilih insektisida yang aman dan tidak merusak tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Memanfaatkan predator alami</p>
+          <p>Beberapa jenis serangga seperti lebah dan capung dapat menjadi predator alami dari hama lalat buah. Anda dapat mempertimbangkan untuk menanam tanaman-tanaman tertentu yang menarik kedatangan serangga-serangga tersebut.</p>
+        </li>
+        <li>
+          <p>Menerapkan rotasi tanaman</p>
+          <p>Hama lalat buah dapat bertahan hidup dalam tanah untuk waktu yang lama. Oleh karena itu, melakukan rotasi tanaman dapat membantu mengurangi keberadaan hama lalat buah pada tanaman jambu kristal.</p>
+        </li>
+      </ol>
+      `,
+    activeIngredient: `
+      <ol>
+        <li>Mankozeb 80%</li>
+        <li>
+      </ol>
+      `,
   },
   {
     code: 3,
     name: "Hama Ulat Kantong",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+    solution: `
+      <ol>
+        <li>
+          <p>Membersihkan area sekitar tanaman</p>
+          <p>Pastikan area sekitar tanaman jambu kristal selalu bersih dari sisa-sisa buah yang jatuh atau buah yang busuk. Sisa-sisa buah yang jatuh dapat menjadi tempat berkembang biaknya hama lalat buah.</p>
+        </li>
+        <li>
+          <p>Pemangkasan cabang dan daun yang terinfeksi</p>
+          <p>Cabang atau daun yang terinfeksi oleh hama lalat buah harus segera dipangkas dan dibuang jauh dari tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Menggunakan perangkap lalat buah</p>
+          <p>Anda dapat menggunakan perangkap lalat buah untuk menangkap hama lalat buah yang berkeliaran di sekitar tanaman. Pastikan untuk membersihkan perangkap secara teratur.</p>
+        </li>
+        <li>
+          <p>Penggunaan Insektisida</p>
+          <p>Anda juga dapat menggunakan insektisida untuk membunuh hama lalat buah. Namun, pastikan untuk memilih insektisida yang aman dan tidak merusak tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Memanfaatkan predator alami</p>
+          <p>Beberapa jenis serangga seperti lebah dan capung dapat menjadi predator alami dari hama lalat buah. Anda dapat mempertimbangkan untuk menanam tanaman-tanaman tertentu yang menarik kedatangan serangga-serangga tersebut.</p>
+        </li>
+        <li>
+          <p>Menerapkan rotasi tanaman</p>
+          <p>Hama lalat buah dapat bertahan hidup dalam tanah untuk waktu yang lama. Oleh karena itu, melakukan rotasi tanaman dapat membantu mengurangi keberadaan hama lalat buah pada tanaman jambu kristal.</p>
+        </li>
+      </ol>
+      `,
+    activeIngredient: `
+      <ol>
+        <li>Mankozeb 80%</li>
+        <li>
+      </ol>
+      `,
   },
   {
     code: 4,
     name: "Hama Belalang",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+    solution: `
+      <ol>
+        <li>
+          <p>Membersihkan area sekitar tanaman</p>
+          <p>Pastikan area sekitar tanaman jambu kristal selalu bersih dari sisa-sisa buah yang jatuh atau buah yang busuk. Sisa-sisa buah yang jatuh dapat menjadi tempat berkembang biaknya hama lalat buah.</p>
+        </li>
+        <li>
+          <p>Pemangkasan cabang dan daun yang terinfeksi</p>
+          <p>Cabang atau daun yang terinfeksi oleh hama lalat buah harus segera dipangkas dan dibuang jauh dari tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Menggunakan perangkap lalat buah</p>
+          <p>Anda dapat menggunakan perangkap lalat buah untuk menangkap hama lalat buah yang berkeliaran di sekitar tanaman. Pastikan untuk membersihkan perangkap secara teratur.</p>
+        </li>
+        <li>
+          <p>Penggunaan Insektisida</p>
+          <p>Anda juga dapat menggunakan insektisida untuk membunuh hama lalat buah. Namun, pastikan untuk memilih insektisida yang aman dan tidak merusak tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Memanfaatkan predator alami</p>
+          <p>Beberapa jenis serangga seperti lebah dan capung dapat menjadi predator alami dari hama lalat buah. Anda dapat mempertimbangkan untuk menanam tanaman-tanaman tertentu yang menarik kedatangan serangga-serangga tersebut.</p>
+        </li>
+        <li>
+          <p>Menerapkan rotasi tanaman</p>
+          <p>Hama lalat buah dapat bertahan hidup dalam tanah untuk waktu yang lama. Oleh karena itu, melakukan rotasi tanaman dapat membantu mengurangi keberadaan hama lalat buah pada tanaman jambu kristal.</p>
+        </li>
+      </ol>
+      `,
+    activeIngredient: `
+      <ol>
+        <li>Mankozeb 80%</li>
+        <li>
+      </ol>
+      `,
   },
   {
     code: 5,
     name: "Penyakit Karat Daun",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+    solution: `
+      <ol>
+        <li>
+          <p>Membersihkan area sekitar tanaman</p>
+          <p>Pastikan area sekitar tanaman jambu kristal selalu bersih dari sisa-sisa buah yang jatuh atau buah yang busuk. Sisa-sisa buah yang jatuh dapat menjadi tempat berkembang biaknya hama lalat buah.</p>
+        </li>
+        <li>
+          <p>Pemangkasan cabang dan daun yang terinfeksi</p>
+          <p>Cabang atau daun yang terinfeksi oleh hama lalat buah harus segera dipangkas dan dibuang jauh dari tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Menggunakan perangkap lalat buah</p>
+          <p>Anda dapat menggunakan perangkap lalat buah untuk menangkap hama lalat buah yang berkeliaran di sekitar tanaman. Pastikan untuk membersihkan perangkap secara teratur.</p>
+        </li>
+        <li>
+          <p>Penggunaan Insektisida</p>
+          <p>Anda juga dapat menggunakan insektisida untuk membunuh hama lalat buah. Namun, pastikan untuk memilih insektisida yang aman dan tidak merusak tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Memanfaatkan predator alami</p>
+          <p>Beberapa jenis serangga seperti lebah dan capung dapat menjadi predator alami dari hama lalat buah. Anda dapat mempertimbangkan untuk menanam tanaman-tanaman tertentu yang menarik kedatangan serangga-serangga tersebut.</p>
+        </li>
+        <li>
+          <p>Menerapkan rotasi tanaman</p>
+          <p>Hama lalat buah dapat bertahan hidup dalam tanah untuk waktu yang lama. Oleh karena itu, melakukan rotasi tanaman dapat membantu mengurangi keberadaan hama lalat buah pada tanaman jambu kristal.</p>
+        </li>
+      </ol>
+      `,
+    activeIngredient: `
+      <ol>
+        <li>Mankozeb 80%</li>
+        <li>
+      </ol>
+      `,
   },
   {
     code: 6,
     name: "Penyakit Embun Jelaga",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+    solution: `
+      <ol>
+        <li>
+          <p>Membersihkan area sekitar tanaman</p>
+          <p>Pastikan area sekitar tanaman jambu kristal selalu bersih dari sisa-sisa buah yang jatuh atau buah yang busuk. Sisa-sisa buah yang jatuh dapat menjadi tempat berkembang biaknya hama lalat buah.</p>
+        </li>
+        <li>
+          <p>Pemangkasan cabang dan daun yang terinfeksi</p>
+          <p>Cabang atau daun yang terinfeksi oleh hama lalat buah harus segera dipangkas dan dibuang jauh dari tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Menggunakan perangkap lalat buah</p>
+          <p>Anda dapat menggunakan perangkap lalat buah untuk menangkap hama lalat buah yang berkeliaran di sekitar tanaman. Pastikan untuk membersihkan perangkap secara teratur.</p>
+        </li>
+        <li>
+          <p>Penggunaan Insektisida</p>
+          <p>Anda juga dapat menggunakan insektisida untuk membunuh hama lalat buah. Namun, pastikan untuk memilih insektisida yang aman dan tidak merusak tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Memanfaatkan predator alami</p>
+          <p>Beberapa jenis serangga seperti lebah dan capung dapat menjadi predator alami dari hama lalat buah. Anda dapat mempertimbangkan untuk menanam tanaman-tanaman tertentu yang menarik kedatangan serangga-serangga tersebut.</p>
+        </li>
+        <li>
+          <p>Menerapkan rotasi tanaman</p>
+          <p>Hama lalat buah dapat bertahan hidup dalam tanah untuk waktu yang lama. Oleh karena itu, melakukan rotasi tanaman dapat membantu mengurangi keberadaan hama lalat buah pada tanaman jambu kristal.</p>
+        </li>
+      </ol>
+      `,
+    activeIngredient: `
+      <ol>
+        <li>Mankozeb 80%</li>
+        <li>
+      </ol>
+      `,
   },
   {
     code: 7,
     name: "Penyakit Busuk Buah",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+    solution: `
+      <ol>
+        <li>
+          <p>Membersihkan area sekitar tanaman</p>
+          <p>Pastikan area sekitar tanaman jambu kristal selalu bersih dari sisa-sisa buah yang jatuh atau buah yang busuk. Sisa-sisa buah yang jatuh dapat menjadi tempat berkembang biaknya hama lalat buah.</p>
+        </li>
+        <li>
+          <p>Pemangkasan cabang dan daun yang terinfeksi</p>
+          <p>Cabang atau daun yang terinfeksi oleh hama lalat buah harus segera dipangkas dan dibuang jauh dari tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Menggunakan perangkap lalat buah</p>
+          <p>Anda dapat menggunakan perangkap lalat buah untuk menangkap hama lalat buah yang berkeliaran di sekitar tanaman. Pastikan untuk membersihkan perangkap secara teratur.</p>
+        </li>
+        <li>
+          <p>Penggunaan Insektisida</p>
+          <p>Anda juga dapat menggunakan insektisida untuk membunuh hama lalat buah. Namun, pastikan untuk memilih insektisida yang aman dan tidak merusak tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Memanfaatkan predator alami</p>
+          <p>Beberapa jenis serangga seperti lebah dan capung dapat menjadi predator alami dari hama lalat buah. Anda dapat mempertimbangkan untuk menanam tanaman-tanaman tertentu yang menarik kedatangan serangga-serangga tersebut.</p>
+        </li>
+        <li>
+          <p>Menerapkan rotasi tanaman</p>
+          <p>Hama lalat buah dapat bertahan hidup dalam tanah untuk waktu yang lama. Oleh karena itu, melakukan rotasi tanaman dapat membantu mengurangi keberadaan hama lalat buah pada tanaman jambu kristal.</p>
+        </li>
+      </ol>
+      `,
+    activeIngredient: `
+      <ol>
+        <li>Mankozeb 80% wp</li>
+        <li>
+        <p>Deltamethrin</p>
+        <ul>
+          <li>Nama produk: Decis 2.5 EC</li>
+        </ul>
+        </li>
+      </ol>
+      `,
   },
   {
     code: 8,
     name: "Penyakit Busuk Akar",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+    solution: `
+      <ol>
+        <li>
+          <p>Membersihkan area sekitar tanaman</p>
+          <p>Pastikan area sekitar tanaman jambu kristal selalu bersih dari sisa-sisa buah yang jatuh atau buah yang busuk. Sisa-sisa buah yang jatuh dapat menjadi tempat berkembang biaknya hama lalat buah.</p>
+        </li>
+        <li>
+          <p>Pemangkasan cabang dan daun yang terinfeksi</p>
+          <p>Cabang atau daun yang terinfeksi oleh hama lalat buah harus segera dipangkas dan dibuang jauh dari tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Menggunakan perangkap lalat buah</p>
+          <p>Anda dapat menggunakan perangkap lalat buah untuk menangkap hama lalat buah yang berkeliaran di sekitar tanaman. Pastikan untuk membersihkan perangkap secara teratur.</p>
+        </li>
+        <li>
+          <p>Penggunaan Insektisida</p>
+          <p>Anda juga dapat menggunakan insektisida untuk membunuh hama lalat buah. Namun, pastikan untuk memilih insektisida yang aman dan tidak merusak tanaman jambu kristal.</p>
+        </li>
+        <li>
+          <p>Memanfaatkan predator alami</p>
+          <p>Beberapa jenis serangga seperti lebah dan capung dapat menjadi predator alami dari hama lalat buah. Anda dapat mempertimbangkan untuk menanam tanaman-tanaman tertentu yang menarik kedatangan serangga-serangga tersebut.</p>
+        </li>
+        <li>
+          <p>Menerapkan rotasi tanaman</p>
+          <p>Hama lalat buah dapat bertahan hidup dalam tanah untuk waktu yang lama. Oleh karena itu, melakukan rotasi tanaman dapat membantu mengurangi keberadaan hama lalat buah pada tanaman jambu kristal.</p>
+        </li>
+      </ol>
+      `,
+    activeIngredient: `
+      <ol>
+        <li>Mankozeb 80%</li>
+        <li>
+      </ol>
+      `,
   },
 ];
 
