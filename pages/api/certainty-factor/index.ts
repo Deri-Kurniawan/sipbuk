@@ -18,7 +18,6 @@ export default async function handler(
       const conclusion = (await instance.generateConclusion()).conclusion;
 
       try {
-        // @ts-ignore
         const saveDiagnoseHistory = await prisma.usersDiagnoseHistory.create({
           data: {
             id: `dh-${uuidv4()}`,
@@ -32,6 +31,7 @@ export default async function handler(
         res.status(200).json({
           diagnoseId: saveDiagnoseHistory.id,
         });
+        await prisma.$disconnect();
       } catch (error: any) {
         console.log(error);
         throw new Error(error);
@@ -42,5 +42,4 @@ export default async function handler(
       res.setHeader("Allow", ["POST"]);
       res.status(405).end(`Method ${method} Not Allowed`);
   }
-  prisma.$disconnect();
 }

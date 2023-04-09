@@ -1,6 +1,5 @@
 import React from "react";
 
-// react node element
 export interface SafeLayoutProps {
   children: React.ReactNode;
 }

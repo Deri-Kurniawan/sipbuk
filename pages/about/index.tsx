@@ -18,7 +18,6 @@ export async function getServerSideProps({ req, res }: { req: any, res: any }) {
       }
     }
   } catch (error) {
-    // console.log(error)
     return {
       props: {
         user: null,
@@ -65,7 +64,7 @@ export default function About({ user }: AboutProps) {
               alt=""
             />
           </div>
-          {/* info */}
+          {/* expert info */}
           <div className="col-span-2 md:col-span-1">
             <div className="text-base lg:text-xl">
               <h3 className="font-bold text-2xl md:text-3xl leading-[37px] md:leading-[48px] mb-4">
@@ -101,7 +100,7 @@ export default function About({ user }: AboutProps) {
           </div>
         </div>
 
-        {/* expert info */}
+        {/* developer info */}
         <div className="grid grid-flow-row grid-cols-2 items-center gap-[40px] md:gap-[80px] lg:gap-[50px]">
           {/* image */}
           <div className="flex justify-start col-span-2 md:col-span-1 md:order-last md:justify-end">
@@ -140,16 +139,6 @@ export default function About({ user }: AboutProps) {
                 dari aplikasi SIPBUK.
               </p>
             </div>
-          </div>
-        </div>
-
-        {/* developer info */}
-        <div>
-          <div>
-            {/* info */}
-            <div></div>
-            {/* image */}
-            <div></div>
           </div>
         </div>
       </main>

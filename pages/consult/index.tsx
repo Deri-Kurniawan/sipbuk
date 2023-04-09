@@ -20,7 +20,7 @@ export async function getServerSideProps({ req, res }: { req: any, res: any }) {
     },
   });
 
-  const questionList = fetchSymptoms.map(({ code, info, imageUrl }: { code: number, info: string, imageUrl: string }, index: number) => ({
+  const questionList = fetchSymptoms.map(({ code, info, imageUrl }: { code: number, info: string, imageUrl: string }) => ({
     sympCode: code,
     question: info,
     image: imageUrl,
@@ -37,7 +37,7 @@ export async function getServerSideProps({ req, res }: { req: any, res: any }) {
       }
     }
   } catch (error) {
-    // console.log(error)
+    console.log(error)
     return {
       props: {
         user: null,
@@ -82,14 +82,14 @@ export default function Consult({ user, questionList }: ConsultProps) {
     // );
 
     // if (isAllValueZero) {
-    //   toast.error("Mohon pilih salah satu jawaban");
+    //   toast.error("Mohon pilih setidaknya salah satu jawaban selain 'Sangat Tidak Yakin");
     //   return;
     // }
 
-    // manipulate for test purpose (development only)
-    // remapDataToObject["13"] = 0.4; //sedikit yakin
-    // remapDataToObject["19"] = 0.6; // cukup yakin
-    // remapDataToObject["20"] = 0.8; // yakin
+    // manipulate data for test purpose (development only)
+    remapDataToObject["13"] = 0.4; //sedikit yakin
+    remapDataToObject["19"] = 0.6; // cukup yakin
+    remapDataToObject["20"] = 0.8; // yakin
 
     const remapDataToArray = [remapDataToObject];
 
@@ -128,10 +128,8 @@ export default function Consult({ user, questionList }: ConsultProps) {
       }
 
       router.push(`/consult/${diagnoseId}`);
-      // setFetchIsLoading(false);
     } catch (error) {
       toast.error('Sistem gagal mendiagnosa, ada kesalahan pada sistem');
-      // console.error(error);
       setFetchIsLoading(false);
     }
   };

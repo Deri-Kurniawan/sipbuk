@@ -1,6 +1,5 @@
 import { deleteCookie } from "cookies-next";
 import Link from "next/link";
-// @ts-ignore
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/router";
 import { toast } from "react-hot-toast";

@@ -12,7 +12,6 @@ import Link from 'next/link';
 export async function getServerSideProps({ params: { diagnoseId }, req, res }: any) {
     const prisma = new PrismaClient();
 
-    // @ts-ignore
     const foundDiagnoseHistory = await prisma.usersDiagnoseHistory.findUnique({
         where: {
             id: diagnoseId
@@ -29,15 +28,13 @@ export async function getServerSideProps({ params: { diagnoseId }, req, res }: a
         }
     }
 
-    // @ts-ignore
     const CFInstance = new CertaintyFactor(JSON.parse(foundDiagnoseHistory.userInputData))
     const newHistoryStep = (await CFInstance.calculateCombinationRule()).calculatedCombinationRuleCF;
 
     try {
-        // @ts-ignore
         const userCookie = JSON.parse(getCookie("user", { req, res }));
 
-        prisma.$disconnect();
+        await prisma.$disconnect();
         return {
             props: {
                 user: userCookie,

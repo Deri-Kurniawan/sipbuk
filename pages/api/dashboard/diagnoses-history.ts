@@ -45,6 +45,7 @@ export default async function handler(
           return;
         }
 
+        await prisma.$disconnect();
         res.status(200).json({
           code: 200,
           message: "Berhasil menyimpan riwayat diagnosa sebelumnya",

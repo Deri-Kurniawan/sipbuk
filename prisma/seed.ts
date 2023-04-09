@@ -8,7 +8,7 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  // pests and disease seed
+  // Pests and Disease seed
   await prisma.pestsAndDeseases.createMany({
     data: pestsAndDeseasesRawData,
   });
@@ -18,9 +18,8 @@ async function main() {
     data: symptomsRawData,
   });
 
-  // PestsAndDeseasesHasSymptoms seed
+  // Pests and Deseases has Symptoms seed
   await prisma.pestsAndDeseasesHasSymptoms.createMany({
-    // @ts-ignore
     data: pestsAndDeseasesHasSymptomsRawData,
   });
 }

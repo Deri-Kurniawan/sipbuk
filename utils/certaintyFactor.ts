@@ -60,7 +60,7 @@ export default class CertaintyFactor implements ICertaintyFactor {
       },
     });
 
-    prisma.$disconnect();
+    await prisma.$disconnect();
 
     this._knowledgeBase = data;
     return this;

@@ -83,12 +83,11 @@ export default async function handler(
         res
           .status(200)
           .json({ code: 200, message: "Masuk Berhasil!", data: user });
+        await prisma.$disconnect();
       } catch (error) {
         console.log("api", error);
         res.status(500).json({ code: 500, message: "Internal server error!" });
       }
-
-      await prisma.$disconnect();
       break;
     default:
       res.setHeader("Allow", ["GET", "POST"]);

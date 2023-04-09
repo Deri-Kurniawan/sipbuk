@@ -107,8 +107,6 @@ export default function ForgotPassword({
         email: email,
       });
 
-      e.target.email.value = "";
-
       try {
         setFetchIsLoading(true);
         const response = await fetch("/api/auth/login/forgot-password", {
@@ -130,9 +128,9 @@ export default function ForgotPassword({
             duration: 5000,
           });
         }
+        e.target.email.value = "";
         setFetchIsLoading(false);
       } catch (error) {
-        // console.log(error);
         toast.error("Terjadi kesalahan, silahkan coba lagi.", {
           duration: 5000,
         });
@@ -183,7 +181,6 @@ export default function ForgotPassword({
         }
         setFetchIsLoading(false);
       } catch (error) {
-        // console.log(error);
         toast.error("Terjadi kesalahan, silahkan coba lagi.", {
           duration: 5000,
         });
@@ -224,8 +221,8 @@ export default function ForgotPassword({
                   ? "Saat ini, Anda memiliki kesempatan untuk mengganti kata sandi Anda."
                   : "Dengan memasukan Email dan klik tombol Kirimi Saya Email, kami akan mengirimkan email berisi link untuk mereset kata sandi anda."}
               </p>
-              {/* form */}
 
+              {/* form */}
               {nextStep ? (
                 <form onSubmit={handleFormNextStep}>
                   <div className="w-full max-w-xl form-control">
