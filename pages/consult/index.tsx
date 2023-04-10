@@ -77,14 +77,14 @@ export default function Consult({ user, questionList }: ConsultProps) {
     }
 
     // check if value is 0 for all keys
-    // const isAllValueZero = Object.values(remapDataToObject).every(
-    //   (value) => value === 0
-    // );
+    const isAllValueZero = Object.values(remapDataToObject).every(
+      (value) => value === 0
+    );
 
-    // if (isAllValueZero) {
-    //   toast.error("Mohon pilih setidaknya salah satu jawaban selain 'Sangat Tidak Yakin");
-    //   return;
-    // }
+    if (isAllValueZero) {
+      toast.error("Mohon pilih setidaknya salah satu jawaban selain 'Sangat Tidak Yakin");
+      return;
+    }
 
     // manipulate data for test purpose (development only)
     // remapDataToObject["13"] = 0.4; //sedikit yakin
