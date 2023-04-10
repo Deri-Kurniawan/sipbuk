@@ -8,12 +8,11 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { method } = req;
+  const { diagnosesId, userId }: { diagnosesId: string[]; userId: string } =
+    req.body;
 
   switch (method) {
     case "POST":
-      const { diagnosesId, userId }: { diagnosesId: string[]; userId: string } =
-        req.body;
-
       try {
         const updatedData = await prisma.usersDiagnoseHistory.updateMany({
           where: {
@@ -60,6 +59,42 @@ export default async function handler(
         // throw new Error(error);
       }
 
+      break;
+
+    case "DELETE":
+      try {
+        const deletedData = await prisma.usersDiagnoseHistory.deleteMany({
+          where: {
+            id: {
+              in: diagnosesId,
+            },
+            userId: {
+              equals: userId,
+            },
+          },
+        });
+
+        if (deletedData.count === 0) {
+          res.status(404).json({
+            code: 404,
+            message: "Riwayat diagnosa tidak ditemukan",
+          });
+          return;
+        }
+
+        res.status(200).json({
+          code: 200,
+          message: "Berhasil menghapus riwayat diagnosa sebelumnya",
+        });
+
+        await prisma.$disconnect();
+      } catch (error: any) {
+        console.log(error);
+        res.status(500).json({
+          code: 500,
+          message: "Gagal menghapus riwayat diagnosa sebelumnya",
+        });
+      }
       break;
     default:
       res.setHeader("Allow", ["GET", "POST"]);

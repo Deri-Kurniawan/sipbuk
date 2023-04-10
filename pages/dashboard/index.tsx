@@ -119,8 +119,9 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
     const [localStorageDiagnosesHistory, setLocalStorageDiagnosesHistory] = useState([]);
     const [selectedDiagnosesHistoryId, setSelectedDiagnosesHistoryId]: string[] | any = useState([]);
     const globalCheckboxRef = React.useRef<HTMLInputElement>(null);
+    const [onDeleteSelectedDiagnoseHistory, setOnDeleteSelectedDiagnoseHistory] = useState(false);
 
-    const handleClickAccept = async () => {
+    const handleClickAcceptSaveDiagnoseHistory = async () => {
         try {
             const savedLocalStorageDiagnosesHistory = (async () => await fetch("/api/dashboard/diagnoses-history", {
                 headers: {
@@ -158,12 +159,49 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
         }
     }
 
-    const handleClickRefuse = () => {
+    const handleClickRefuseSaveDiagnoseHistory = () => {
         if (typeof window !== "undefined") {
             localStorage.removeItem("diagnosesHistoryId");
             setLocalStorageDiagnosesHistory([]);
         }
         setLocalStorageDiagnosesHistory([]);
+    }
+
+    const handleClickDeleteSelectedDiagnoseHistory = async () => {
+        try {
+            setOnDeleteSelectedDiagnoseHistory(true);
+
+            const deletedDiagnosesHistory = (async () => await fetch("/api/dashboard/diagnoses-history", {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "DELETE",
+                body: JSON.stringify({
+                    diagnosesId: selectedDiagnosesHistoryId,
+                    userId: user.id,
+                }),
+            }))();
+
+            const res = await deletedDiagnosesHistory;
+            const deletedData = await res.json();
+
+            if (deletedData.code === 200) {
+                setUserDiagnosesHistory(userDiagnosesHistory.filter((diagnosesHistory: any) => !selectedDiagnosesHistoryId.includes(diagnosesHistory.id)));
+                setSelectedDiagnosesHistoryId([]);
+
+                toast.promise(deletedDiagnosesHistory, {
+                    loading: "Menghapus riwayat diagnosa...",
+                    success: "Riwayat diagnosa berhasil dihapus",
+                    error: "Riwayat diagnosa gagal dihapus",
+                });
+            } else {
+                toast.error(deletedData.message);
+            }
+
+            setOnDeleteSelectedDiagnoseHistory(false);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     useEffect(() => {
@@ -192,15 +230,25 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                                     <span>{`Kamu punya ${localStorageDiagnosesHistory.length} riwayat diagnosa sebelumnya, apakah ingin anda simpan?`}</span>
                                 </div>
                                 <div className="flex-none">
-                                    <button className={`btn btn-sm btn-ghost`} onClick={handleClickRefuse}>Tolak</button>
-                                    <button className={`btn btn-sm btn-primary`} onClick={handleClickAccept}>Terima</button>
+                                    <button className={`btn btn-sm btn-ghost`} onClick={handleClickRefuseSaveDiagnoseHistory}>Tolak</button>
+                                    <button className={`btn btn-sm btn-primary`} onClick={handleClickAcceptSaveDiagnoseHistory}>Terima</button>
+                                </div>
+                            </div>
+                        )}
+                        {selectedDiagnosesHistoryId.length > 0 && (
+                            <div className={`my-6 shadow-lg alert`}>
+                                <div>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="flex-shrink-0 w-6 h-6 stroke-info"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span>{`${selectedDiagnosesHistoryId.length} riwayat diagnosa dipilih`}</span>
+                                </div>
+                                <div className="flex-none">
+                                    <button className={`btn btn-sm btn-primary ${onDeleteSelectedDiagnoseHistory ? "loading" : ""}`} onClick={handleClickDeleteSelectedDiagnoseHistory} disabled={onDeleteSelectedDiagnoseHistory}>{onDeleteSelectedDiagnoseHistory ? "Menghapus" : "Hapus"}</button>
                                 </div>
                             </div>
                         )}
                     </div>
                     <div className="w-full mt-8 overflow-x-auto">
                         <table className="table w-full">
-                            {/* head */}
                             <thead>
                                 <tr>
                                     <th>
@@ -221,7 +269,6 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                                 </tr>
                             </thead>
                             <tbody>
-                                {/* row 1 */}
                                 {userDiagnosesHistory.length > 0 ? (
                                     <>
                                         {userDiagnosesHistory.map((diagnosesHistory: {
