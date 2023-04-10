@@ -87,9 +87,9 @@ export default function Consult({ user, questionList }: ConsultProps) {
     // }
 
     // manipulate data for test purpose (development only)
-    remapDataToObject["13"] = 0.4; //sedikit yakin
-    remapDataToObject["19"] = 0.6; // cukup yakin
-    remapDataToObject["20"] = 0.8; // yakin
+    // remapDataToObject["13"] = 0.4; //sedikit yakin
+    // remapDataToObject["19"] = 0.6; // cukup yakin
+    // remapDataToObject["20"] = 0.8; // yakin
 
     const remapDataToArray = [remapDataToObject];
 
