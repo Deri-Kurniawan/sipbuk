@@ -6,8 +6,14 @@ import SafeLayout from "@/layouts/SafeLayout";
 import Footer from "@/components/Footer";
 import Head from "next/head";
 import { getCookie } from "cookies-next";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export async function getServerSideProps({ req, res }: { req: any, res: any }) {
+type getServerSidePropsType = {
+  req: NextApiRequest;
+  res: NextApiResponse;
+};
+
+export async function getServerSideProps({ req, res }: getServerSidePropsType) {
   try {
     // @ts-ignore
     const userCookie = JSON.parse(getCookie("user", { req, res }));
@@ -28,7 +34,13 @@ export async function getServerSideProps({ req, res }: { req: any, res: any }) {
 }
 
 interface HomeProps {
-  user: any;
+  user: {
+    id: string;
+    email: string;
+    fullname: string;
+    password: string;
+    isVerified: boolean;
+  } | null;
 }
 
 export default function Home({ user }: HomeProps) {

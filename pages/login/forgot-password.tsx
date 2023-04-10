@@ -10,10 +10,19 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { clientSideAESEncrypt } from "@/utils/cryptoAES";
 import { hasCookie } from "cookies-next";
+import { NextApiRequest, NextApiResponse } from "next";
 
 const prisma = new PrismaClient();
 
-export async function getServerSideProps({ query, req, res }: { query: any, req: any, res: any }) {
+type getServerSidePropsType = {
+  query: {
+    token: string | null;
+  };
+  req: NextApiRequest;
+  res: NextApiResponse;
+}
+
+export async function getServerSideProps({ query, req, res }: getServerSidePropsType) {
   const hasLoggedIn = hasCookie("user", { req, res });
 
   if (hasLoggedIn) {
@@ -37,6 +46,7 @@ export async function getServerSideProps({ query, req, res }: { query: any, req:
         },
       };
     }
+
     const user = await prisma.user.findUnique({
       where: {
         // @ts-ignore
@@ -62,7 +72,6 @@ export async function getServerSideProps({ query, req, res }: { query: any, req:
       },
     };
   } catch (error: any) {
-    // console.log(error);
     return {
       props: {
         AES_KEY: process.env.AES_KEY,
@@ -109,7 +118,7 @@ export default function ForgotPassword({
 
       try {
         setFetchIsLoading(true);
-        const response = await fetch("/api/auth/login/forgot-password", {
+        const forgotPasswordFetcher = await fetch("/api/auth/login/forgot-password", {
           method: "POST",
           body: payload,
           headers: {
@@ -117,7 +126,7 @@ export default function ForgotPassword({
           },
         });
 
-        const result = await response.json();
+        const result = await forgotPasswordFetcher.json();
 
         if (result.code === 200) {
           toast.success(result.message, {
@@ -128,6 +137,7 @@ export default function ForgotPassword({
             duration: 5000,
           });
         }
+
         e.target.email.value = "";
         setFetchIsLoading(false);
       } catch (error) {
@@ -156,7 +166,7 @@ export default function ForgotPassword({
 
       try {
         setFetchIsLoading(true);
-        const response = await fetch(
+        const forgotPasswordNextStepFetcher = await fetch(
           "/api/auth/login/forgot-password/next-step",
           {
             method: "POST",
@@ -167,7 +177,7 @@ export default function ForgotPassword({
           }
         );
 
-        const result = await response.json();
+        const result = await forgotPasswordNextStepFetcher.json();
 
         if (result.code === 200) {
           toast.success(result.message, {

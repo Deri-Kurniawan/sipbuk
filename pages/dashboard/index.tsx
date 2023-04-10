@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { NewLifecycle, useEffect, useState } from 'react';
 import { hasCookie, getCookie, deleteCookie } from "cookies-next";
 import { PrismaClient } from '@prisma/client';
 import { serverSideAESDecrypt } from '@/utils/cryptoAES';
@@ -7,8 +7,14 @@ import Head from 'next/head';
 import SafeLayout from '@/layouts/SafeLayout';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export async function getServerSideProps({ req, res }: { req: any, res: any }) {
+type getServerSidePropsType = {
+    req: NextApiRequest;
+    res: NextApiResponse;
+};
+
+export async function getServerSideProps({ req, res }: getServerSidePropsType) {
     const prisma = new PrismaClient();
     const hasLoggedIn = hasCookie("user", { req, res });
 
@@ -77,7 +83,13 @@ export async function getServerSideProps({ req, res }: { req: any, res: any }) {
 }
 
 interface DashboardProps {
-    user: any;
+    user: {
+        id: string;
+        email: string;
+        fullname: string;
+        password: string;
+        isVerified: boolean;
+    };
     _userDiagnosesHistory: {
         id: string;
         userId: string;
@@ -134,19 +146,22 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                 }),
             }))();
 
-            const res = await savedLocalStorageDiagnosesHistory;
-            const savedData = await res.json();
+            const response = await (await savedLocalStorageDiagnosesHistory).json();
 
-            if (savedData.code === 200) {
-                setUserDiagnosesHistory([...userDiagnosesHistory, ...savedData.data]);
+            if (response.code === 200) {
+                setUserDiagnosesHistory([...userDiagnosesHistory, ...response.data]);
 
                 toast.promise(savedLocalStorageDiagnosesHistory, {
                     loading: "Menyimpan riwayat diagnosa...",
                     success: "Riwayat diagnosa berhasil disimpan",
                     error: "Riwayat diagnosa gagal disimpan",
+                }, {
+                    duration: 5000,
                 });
             } else {
-                toast.error(savedData.message);
+                toast.error(response.message, {
+                    duration: 5000,
+                });
             }
 
             if (typeof window !== "undefined") {
@@ -155,7 +170,9 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
 
             setLocalStorageDiagnosesHistory([]);
         } catch (error) {
-            console.log(error);
+            toast.error("Riwayat diagnosa gagal disimpan", {
+                duration: 5000,
+            });
         }
     }
 
@@ -182,10 +199,9 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                 }),
             }))();
 
-            const res = await deletedDiagnosesHistory;
-            const deletedData = await res.json();
+            const response = await (await deletedDiagnosesHistory).json();
 
-            if (deletedData.code === 200) {
+            if (response.code === 200) {
                 setUserDiagnosesHistory(userDiagnosesHistory.filter((diagnosesHistory: any) => !selectedDiagnosesHistoryId.includes(diagnosesHistory.id)));
                 setSelectedDiagnosesHistoryId([]);
 
@@ -193,14 +209,21 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                     loading: "Menghapus riwayat diagnosa...",
                     success: "Riwayat diagnosa berhasil dihapus",
                     error: "Riwayat diagnosa gagal dihapus",
+                }, {
+                    duration: 5000,
                 });
             } else {
-                toast.error(deletedData.message);
+                toast.error(response.message, {
+                    duration: 5000,
+                });
             }
 
             setOnDeleteSelectedDiagnoseHistory(false);
         } catch (error) {
-            console.log(error);
+            setOnDeleteSelectedDiagnoseHistory(false);
+            toast.error("Riwayat diagnosa gagal dihapus", {
+                duration: 5000,
+            });
         }
     }
 

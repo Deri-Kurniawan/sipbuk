@@ -76,13 +76,15 @@ export default async function handler(
         if (!user.isVerified) {
           return res.status(400).json({
             code: 400,
-            message: `Hallo ${user.fullname}, \nEmail anda belum terverifikasi! \nSilahkan cek email anda`,
+            message: `Hallo ${user.fullname}!\nEmail anda belum terverifikasi! \nSilahkan cek email masuk atau email spam anda.`,
           });
         }
 
-        res
-          .status(200)
-          .json({ code: 200, message: "Masuk Berhasil!", data: user });
+        res.status(200).json({
+          code: 200,
+          message: `Selamat datang ${user.fullname}!`,
+          data: user,
+        });
         await prisma.$disconnect();
       } catch (error) {
         console.log("api", error);

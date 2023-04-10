@@ -56,7 +56,6 @@ export default async function handler(
           code: 500,
           message: "Gagal menyimpan riwayat diagnosa sebelumnya",
         });
-        // throw new Error(error);
       }
 
       break;

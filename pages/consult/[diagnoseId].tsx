@@ -8,8 +8,17 @@ import Navbar from '@/components/Navbar';
 import SafeLayout from '@/layouts/SafeLayout';
 import CertaintyFactor from '@/utils/certaintyFactor';
 import Link from 'next/link';
+import { NextApiRequest, NextApiResponse } from 'next';
 
-export async function getServerSideProps({ params: { diagnoseId }, req, res }: any) {
+type getServerSidePropsType = {
+    params: {
+        diagnoseId: string;
+    };
+    req: NextApiRequest;
+    res: NextApiResponse;
+}
+
+export async function getServerSideProps({ params: { diagnoseId }, req, res }: getServerSidePropsType) {
     const prisma = new PrismaClient();
 
     const foundDiagnoseHistory = await prisma.usersDiagnoseHistory.findUnique({
@@ -55,7 +64,13 @@ export async function getServerSideProps({ params: { diagnoseId }, req, res }: a
 }
 
 interface DiagnoseResultProps {
-    user: any;
+    user: {
+        id: string;
+        email: string;
+        fullname: string;
+        password: string;
+        isVerified: boolean;
+    } | null;
     diagnoseHistory: {
         id: string;
         userId: string;

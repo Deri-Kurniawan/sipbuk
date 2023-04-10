@@ -6,14 +6,14 @@ interface Option {
   value: number;
 }
 
-interface Props {
+interface RadioButtonProps {
   sympCode: string;
 }
 
 const optionDescendSort: Option[] = uncertaintyValueRawData.sort((a, b) => b.value - a.value);
 const options: Option[] = optionDescendSort
 
-export default function RadioButton({ sympCode }: Props) {
+export default function RadioButton({ sympCode }: RadioButtonProps) {
   const [selectedOption, setSelectedOption] = useState<string | undefined>(() => {
     const findZero = options.find((option) => option.value === 0);
     return findZero?.label;

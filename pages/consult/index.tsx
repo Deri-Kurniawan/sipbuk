@@ -9,9 +9,14 @@ import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { NextApiRequest, NextApiResponse } from "next";
 
+type getServerSidePropsType = {
+  req: NextApiRequest;
+  res: NextApiResponse;
+};
 
-export async function getServerSideProps({ req, res }: { req: any, res: any }) {
+export async function getServerSideProps({ req, res }: getServerSidePropsType) {
   const prisma = new PrismaClient();
 
   const fetchSymptoms = await prisma.symptoms.findMany({
@@ -48,8 +53,18 @@ export async function getServerSideProps({ req, res }: { req: any, res: any }) {
 }
 
 interface ConsultProps {
-  user: any;
-  questionList: any;
+  user: {
+    id: string;
+    email: string;
+    fullname: string;
+    password: string;
+    isVerified: boolean;
+  } | null;
+  questionList: {
+    sympCode: number;
+    question: string;
+    image: string;
+  }[];
 }
 
 export default function Consult({ user, questionList }: ConsultProps) {

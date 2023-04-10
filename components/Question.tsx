@@ -1,7 +1,7 @@
 import Image from "next/image";
 import RadioButton from "./RadioButton";
 
-interface Props {
+interface QuestionProps {
   sympCode: string;
   image: string | any;
   question?: string;
@@ -13,7 +13,7 @@ export default function Question({
   image,
   question = "Pertanyaan Tidak Diisi",
   index,
-}: Props) {
+}: QuestionProps) {
   return (
     <div className="grid grid-flow-row grid-cols-2 items-center gap-[40px] md:gap-[80px] lg:gap-[50px] py-[56px] lg:py-[86px]">
       {/* image */}

@@ -20,20 +20,27 @@ const navLinks = [
   },
 ];
 
-interface Props {
+interface NavbarProps {
   isSticky?: boolean;
-  user?: any;
+  user?: {
+    id: string;
+    email: string;
+    fullname: string;
+    password: string;
+    isVerified: boolean;
+  } | null;
 }
 
-export default function Navbar({ isSticky = true, user = null }: Props) {
+export default function Navbar({ isSticky = true, user = null }: NavbarProps) {
   const router = useRouter();
   const pathname = usePathname();
 
   const handleClickLogout = () => {
-    deleteCookie("user");
-    toast.success("Berhasil keluar", {
+    toast.success(`Sampai jumpa ${user?.fullname}!`, {
       duration: 5000,
+      icon: "👋",
     });
+    deleteCookie("user");
     router.push("/login");
   }
 

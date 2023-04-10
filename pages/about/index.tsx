@@ -6,8 +6,14 @@ import expertImg from "@/assets/expert.jpg";
 import developerImg from "@/assets/developer.jpg";
 import Head from "next/head";
 import { getCookie } from "cookies-next";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export async function getServerSideProps({ req, res }: { req: any, res: any }) {
+type getServerSidePropsType = {
+  req: NextApiRequest;
+  res: NextApiResponse;
+};
+
+export async function getServerSideProps({ req, res }: getServerSidePropsType) {
   try {
     // @ts-ignore
     const userCookie = JSON.parse(getCookie("user", { req, res }));
@@ -27,7 +33,13 @@ export async function getServerSideProps({ req, res }: { req: any, res: any }) {
 }
 
 interface AboutProps {
-  user: any;
+  user: {
+    id: string;
+    email: string;
+    fullname: string;
+    password: string;
+    isVerified: boolean;
+  } | null;
 }
 
 export default function About({ user }: AboutProps) {

@@ -10,8 +10,14 @@ import { useRouter } from "next/router";
 import { hasCookie, setCookie } from 'cookies-next';
 import { clientSideAESEncrypt } from "@/utils/cryptoAES";
 import { useState } from "react";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export async function getServerSideProps({ req, res }: { req: any, res: any }) {
+type getServerSidePropsType = {
+  req: NextApiRequest;
+  res: NextApiResponse;
+};
+
+export async function getServerSideProps({ req, res }: getServerSidePropsType) {
   const hasLoggedIn = hasCookie("user", { req, res });
 
   if (hasLoggedIn) {
@@ -52,7 +58,7 @@ export default function Login({ AES_KEY }: LoginProps) {
 
       try {
         setFetchIsLoading(true);
-        const response = await fetch('/api/auth/login', {
+        const loginFetcher = await fetch('/api/auth/login', {
           method: 'POST',
           body: payload,
           headers: {
@@ -60,15 +66,15 @@ export default function Login({ AES_KEY }: LoginProps) {
           }
         });
 
-        const result = await response.json();
+        const response = await loginFetcher.json();
 
-        if (result.code === 200) {
-          setCookie('user', JSON.stringify(result.data), {
+        if (response.code === 200) {
+          setCookie('user', JSON.stringify(response.data), {
             maxAge: 60 * 60 * 24 * 7,
             path: '/',
           });
 
-          toast.success(`Selamat datang ${result.data.fullname}!`, {
+          toast.success(response.message, {
             duration: 5000,
             icon: '👋',
           })
@@ -76,20 +82,19 @@ export default function Login({ AES_KEY }: LoginProps) {
           router.push('/dashboard');
         }
 
-        if (result.code === 400) {
-          toast.error(result.message, {
+        if (response.code === 400) {
+          toast.error(response.message, {
             duration: 5000,
           })
         }
 
-        if (result.code === 500) {
-          toast.error(result.message, {
+        if (response.code === 500) {
+          toast.error(response.message, {
             duration: 5000,
           })
         }
         setFetchIsLoading(false);
       } catch (error: any) {
-        // console.log(error);
         if (error.code === 400) {
           toast.error(error.message, {
             duration: 5000,
