@@ -113,7 +113,7 @@ export default function ForgotPassword({
 
     (async () => {
       const payload = JSON.stringify({
-        email: email,
+        email,
       });
 
       try {
@@ -130,8 +130,16 @@ export default function ForgotPassword({
 
         if (result.code === 200) {
           toast.success(result.message, {
-            duration: 5000,
+            duration: 6000,
           });
+
+          const timeout = setTimeout(() => {
+            toast.success("Silakan periksa kotak masuk dan folder spam email Anda.", {
+              duration: 7500,
+              icon: "📧",
+            });
+            clearTimeout(timeout);
+          }, 2000);
         } else {
           toast.error(result.message, {
             duration: 5000,

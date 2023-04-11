@@ -76,7 +76,7 @@ export default async function handler(
         if (!user.isVerified) {
           return res.status(400).json({
             code: 400,
-            message: `Hallo ${user.fullname}!\nEmail anda belum terverifikasi! \nSilahkan cek email masuk atau email spam anda.`,
+            message: `Halo ${user.fullname}! Email anda belum terverifikasi. Silakan periksa kotak masuk dan folder spam email anda.`,
           });
         }
 
@@ -88,7 +88,7 @@ export default async function handler(
         await prisma.$disconnect();
       } catch (error) {
         console.log("api", error);
-        res.status(500).json({ code: 500, message: "Internal server error!" });
+        res.status(500).json({ code: 500, message: "Kesalahan Server!" });
       }
       break;
     default:
