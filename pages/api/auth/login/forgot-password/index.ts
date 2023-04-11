@@ -4,6 +4,7 @@ import { NextApiResponse } from "next";
 import { NextApiRequest } from "next";
 import { v4 as uuidv4 } from "uuid";
 import { transporter } from "@/utils/nodemailer/transporter";
+import passwordResetEmaiOptions from "@/utils/nodemailer/options/passwordResetEmailOptions";
 
 const prisma = new PrismaClient();
 
@@ -57,31 +58,29 @@ export default async function handler(
           },
         });
 
-        const mailOptions = {
-          from: `SIPBUK <${process.env.NODEMAILER_USER}>`,
-          to: userUpdated.email,
-          subject: "Mengatur ulang Kata Sandi Akun SIPBUK anda",
-          html: `<h2>Hallo ${
-            userUpdated.fullname
-          }!</h2><p>Untuk mereset kata sandi anda di aplikasi SIPBUK (Sistem Pakar Jambu Kristal), silahkan <a href="${`${process.env.BASE_URL}/login/forgot-password?token=${newToken}`}">Klik disini</a> untuk melakukan perubahan kata sandi akun anda</p>`,
-        };
-
-        transporter.sendMail(mailOptions, function (error: any, info: any) {
-          if (error) {
-            console.log(error);
-            res.status(200).json({
-              code: 200,
-              message:
-                "Email untuk ubah kata sandi gagal dikirim! silahkan coba lagi",
-            });
-          } else {
-            console.log("Email sent: " + info.response);
-            res.status(200).json({
-              code: 200,
-              message: "Email untuk ubah kata sandi berhasil dikirim!",
-            });
+        transporter.sendMail(
+          passwordResetEmaiOptions(
+            userUpdated.fullname,
+            userUpdated.email,
+            newToken
+          ),
+          function (error: any, info: any) {
+            if (error) {
+              console.log(error);
+              res.status(200).json({
+                code: 200,
+                message:
+                  "Email untuk ubah kata sandi gagal dikirim! silahkan coba lagi",
+              });
+            } else {
+              console.log("Email sent: " + info.response);
+              res.status(200).json({
+                code: 200,
+                message: "Email untuk ubah kata sandi berhasil dikirim!",
+              });
+            }
           }
-        });
+        );
 
         await prisma.$disconnect();
       } catch (error) {

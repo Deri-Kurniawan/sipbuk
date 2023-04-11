@@ -3,6 +3,7 @@ import { serverSideAESDecrypt, serverSideAESEncrypt } from "@/utils/cryptoAES";
 import { PrismaClient } from "@prisma/client";
 import { NextApiResponse } from "next";
 import { NextApiRequest } from "next";
+import passwordChangedEmailOptions from "@/utils/nodemailer/options/passwordChangedEmail";
 
 const prisma = new PrismaClient();
 
@@ -85,37 +86,20 @@ export default async function handler(
           },
         });
 
-        const mailOptions = {
-          from: `SIPBUK <${process.env.NODEMAILER_USER}>`,
-          to: userUpdated.email,
-          subject: "Kata Sandi Akun SIPBUK anda Berhasil Diubah",
-          html: `<h2>Hallo ${
-            userUpdated.fullname
-          }!</h2><p>Kata Sandi anda telah diubah pada ${new Date(
-            userUpdated.updatedAt
-          ).toLocaleString("id-ID", {
-            timeZone: "Asia/Jakarta",
-            weekday: "long",
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-            hour: "numeric",
-            minute: "numeric",
-            second: "numeric",
-          })}.<br/>Jika anda tidak melakukan perubahan, harap segera ubah kata sandi anda <a href="${
-            process.env.BASE_URL
-          }/login/forgot-password">Di sini</a>.</p><p>Terima kasih!</p><p>Admin SIPBUK</p><p>${new Date(
-            userUpdated.updatedAt
-          )}</p>`,
-        };
-
-        transporter.sendMail(mailOptions, function (error: any, info: any) {
-          if (error) {
-            console.log(error);
-          } else {
-            console.log("Email sent: " + info.response);
+        transporter.sendMail(
+          passwordChangedEmailOptions(
+            userUpdated.fullname,
+            userUpdated.email,
+            user.updatedAt
+          ),
+          function (error: any, info: any) {
+            if (error) {
+              console.log(error);
+            } else {
+              console.log("Email sent: " + info.response);
+            }
           }
-        });
+        );
 
         res.status(200).json({
           code: 200,

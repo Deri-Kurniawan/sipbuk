@@ -4,6 +4,7 @@ import { PrismaClient } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 import { regexp } from "@/utils/regexp";
 import { transporter } from "@/utils/nodemailer/transporter";
+import verificationEmailOptions from "@/utils/nodemailer/options/verificationEmailOptions";
 
 const prisma = new PrismaClient();
 
@@ -98,30 +99,26 @@ async function POST(req: NextApiRequest, res: NextApiResponse) {
       },
     });
 
-    // nodemailer here
-    const mailOptions = {
-      from: `SIPBUK <${process.env.NODEMAILER_USER}>`,
-      to: email,
-      subject: "Verifikasi Akun Email SIPBUK",
-      html: `<h2>Hallo ${fullname}!</h2><p>Untuk melanjutkan pendaftaran anda di aplikasi SIPBUK (Sistem Pakar Jambu Kristal), silahkan <a href="${`${process.env.BASE_URL}/api/auth/register/account-activation?token=${verifyToken}`}">Klik disini</a> untuk melakukan verifikasi akun anda.</p><p>Jika link tidak dapat di klik silahkan gunakan link berikut:<br/><a href="${`${process.env.BASE_URL}/api/auth/register/account-activation?token=${verifyToken}`}">${`${process.env.BASE_URL}/api/auth/register/account-activation?token=${verifyToken}`}</a></p>`,
-    };
-
-    transporter.sendMail(mailOptions, function (error: any, info: any) {
-      if (error) {
-        console.log("nodemailer transporter", error);
-        res.status(500).json({
-          code: 500,
-          message:
-            "Daftar Berhasil! Email verifikasi gagal dikirim karena kesalahan server",
-        });
-      } else {
-        console.log("Email sent: " + info.response);
-        res.status(201).json({
-          code: 201,
-          message: `Daftar Berhasil! Silahkan cek email anda untuk melakukan verifikasi akun. Jika tidak ada di inbox, silahkan cek di folder spam atau promosi.`,
-        });
+    transporter.sendMail(
+      verificationEmailOptions(fullname, email, verifyToken),
+      function (error: any, info: any) {
+        if (error) {
+          console.log("nodemailer transporter", error);
+          res.status(500).json({
+            code: 500,
+            message:
+              "Daftar Berhasil! Email verifikasi gagal dikirim karena kesalahan server",
+          });
+        } else {
+          console.log("Email sent: " + info.response);
+          res.status(201).json({
+            code: 201,
+            message:
+              "Berhasil mendaftar! Cek email untuk verifikasi. Jika tidak di inbox, cek spam atau promosi.",
+          });
+        }
       }
-    });
+    );
   } catch (error) {
     console.log("api", error);
     res.status(500).json({ code: 500, message: "Internal server error!" });
