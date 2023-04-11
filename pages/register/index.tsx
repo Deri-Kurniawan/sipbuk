@@ -168,6 +168,12 @@ export default function Register({ AES_KEY }: RegisterPropsType) {
                     placeholder=""
                   />
                 </div>
+                <p className="mt-4">
+                  Tidak menerima email verifikasi?{" "}
+                  <Link className="text-blue-400" href="/register/resend-email-verification">
+                    Kirim ulang
+                  </Link>
+                </p>
                 <button
                   className={`w-full max-w-xl mt-4 btn btn-outline btn-ghost ${fetchIsLoading ? 'loading' : ''}`}
                   type="submit"
