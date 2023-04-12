@@ -9,6 +9,8 @@ import puppeteer from "puppeteer-core";
 
 // <meta property="og:image" content={ogImageUrl} />
 
+// access example: example: http://localhost:3000/api/generateOGImage?url=http://localhost:3000/&width=1200&height=630
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
