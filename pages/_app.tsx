@@ -3,12 +3,26 @@ import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import NextNProgressbar from "nextjs-progressbar";
 import "@/styles/globals.css";
+import { DefaultSeo } from "next-seo";
+import { useRouter } from "next/router";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
   return (
     <>
+      <DefaultSeo
+        description="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis."
+        openGraph={{
+          type: 'website',
+          locale: 'id_ID',
+          url: process.env.APP_URL + router.asPath,
+          siteName: process.env.APP_NAME,
+        }}
+      />
+
       <NextNProgressbar
         color="#00D87F"
         height={5}
