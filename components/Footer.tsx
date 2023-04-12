@@ -2,9 +2,9 @@ export default function Footer() {
   return (
     <>
       <div className="safe-horizontal-padding">
-        <div className="flex flex-col md:flex-row md:justify-between md:items-center h-[80px] text-base md:text-base md:gap-5">
-          <p>©{new Date().getFullYear()} SIPBUK All rights reserved.</p>
-          <div className="flex flex-row gap-1">
+        <div className="flex flex-col md:flex-row md:justify-between md:items-center h-[80px] text-base md:text-base md:gap-5 mt-8">
+          <p className="text-center md:text-left">©{new Date().getFullYear()} SIPBUK All rights reserved.</p>
+          <div className="flex flex-row justify-center gap-1 md:justify-start">
             {/* Terms modal trigger */}
             <label
               htmlFor="terms-modal"
