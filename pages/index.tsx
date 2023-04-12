@@ -67,15 +67,15 @@ export default function Home({ user }: HomeProps) {
                 kristal anda secara gratis.
               </p>
 
-              <div className="flex flex-wrap flex-1 gap-4 mt-4 md:mt-6">
+              <div className="flex flex-wrap flex-1 gap-4 mt-4 md:gap-4 md:mt-6">
                 <Link
-                  className="text-base capitalize btn btn-outline btn-info md:text-base"
+                  className="text-sm capitalize btn btn-outline btn-info md:text-base"
                   href="/consult"
                 >
                   Konsultasi Sekarang
                 </Link>
                 <Link
-                  className="text-base capitalize btn btn-outline btn-success md:text-base"
+                  className="text-sm capitalize btn btn-outline btn-success md:text-base"
                   href="/about"
                 >
                   Tentang Aplikasi
