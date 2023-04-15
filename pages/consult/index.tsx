@@ -108,9 +108,10 @@ export default function Consult({ user, questionList }: ConsultProps) {
 
     const remapDataToArray = [remapDataToObject];
 
-    try {
+    const fetchCertaintyFactorInferenceEngine = (async () => {
       setFetchIsLoading(true);
-      const fetchCertaintyFactorInferenceEngine = (async () => await fetch("/api/certainty-factor", {
+
+      return await fetch("/api/inference-engine", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -119,34 +120,38 @@ export default function Consult({ user, questionList }: ConsultProps) {
           data: remapDataToArray,
           userId: user === null ? "" : user.id,
         }),
-      }))();
+      })
+    });
 
-      const { diagnoseId }: { diagnoseId: string } = await (await fetchCertaintyFactorInferenceEngine).json()
+    toast.promise(fetchCertaintyFactorInferenceEngine()
+      .then((res) => res.json())
+      .then((res) => {
+        if (typeof window !== undefined && !user) {
+          const diagnosesHistoryId = localStorage.getItem("diagnosesHistoryId");
 
-      toast.promise(fetchCertaintyFactorInferenceEngine, {
-        loading: 'Sistem sedang mendiagnosa',
-        success: 'Sistem berhasil mendiagnosa',
-        error: 'Sistem gagal mendiagnosa',
-      });
-
-      if (typeof window !== undefined && !user) {
-        const diagnosesHistoryId = localStorage.getItem("diagnosesHistoryId");
-
-        if (diagnosesHistoryId === null) {
-          const newData = [diagnoseId];
-          localStorage.setItem("diagnosesHistoryId", JSON.stringify(newData));
-        } else {
-          const oldData = JSON.parse(diagnosesHistoryId);
-          const newData = [...oldData, diagnoseId];
-          localStorage.setItem("diagnosesHistoryId", JSON.stringify(newData));
+          if (diagnosesHistoryId === null) {
+            const newData = [res.diagnoseId];
+            localStorage.setItem("diagnosesHistoryId", JSON.stringify(newData));
+          } else {
+            const oldData = JSON.parse(diagnosesHistoryId);
+            const newData = [...oldData, res.diagnoseId];
+            localStorage.setItem("diagnosesHistoryId", JSON.stringify(newData));
+          }
         }
-      }
 
-      router.push(`/consult/${diagnoseId}`);
-    } catch (error) {
-      toast.error('Sistem gagal mendiagnosa, ada kesalahan pada sistem');
-      setFetchIsLoading(false);
-    }
+        router.push(`/consult/${res.diagnoseId}`);
+      }).catch((error) => {
+        console.log(error);
+        toast.error('Sistem gagal mendiagnosa, ada kesalahan pada sistem');
+        setFetchIsLoading(false);
+      }), {
+      loading: 'Sistem sedang mendiagnosa...',
+      success: 'Sistem berhasil mendiagnosa',
+      error: 'Sistem gagal mendiagnosa',
+    }, {
+      duration: 7000,
+    });
+
   };
 
   const handleClickNextQuestion = () => {
