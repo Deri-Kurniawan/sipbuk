@@ -53,6 +53,8 @@ export async function getServerSideProps({ query, req, res }: getServerSideProps
       },
     });
 
+    await prisma.$disconnect();
+
     if (!user) {
       return {
         props: {

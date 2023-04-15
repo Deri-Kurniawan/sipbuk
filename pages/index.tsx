@@ -4,7 +4,7 @@ import guavaImg from "@/assets/guava.jpg";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import Head from "next/head";
-import { getCookie } from "cookies-next";
+import { getCookie, hasCookie } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
 
 type getServerSidePropsType = {
@@ -13,9 +13,10 @@ type getServerSidePropsType = {
 };
 
 export async function getServerSideProps({ req, res }: getServerSidePropsType) {
+  const isCookieExist = hasCookie("user", { req, res });
   try {
     // @ts-ignore
-    const userCookie = JSON.parse(getCookie("user", { req, res }));
+    const userCookie = isCookieExist ? JSON.parse(getCookie("user", { req, res })) : null;
 
     return {
       props: {

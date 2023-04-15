@@ -3,7 +3,7 @@ import Question from "@/components/Question";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { FormEventHandler, Fragment, useEffect, useState } from "react";
 import Head from "next/head";
-import { getCookie } from "cookies-next";
+import { getCookie, hasCookie } from "cookies-next";
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
@@ -17,12 +17,15 @@ type getServerSidePropsType = {
 
 export async function getServerSideProps({ req, res }: getServerSidePropsType) {
   const prisma = new PrismaClient();
+  const isCookieExist = hasCookie("user", { req, res });
 
   const fetchSymptoms = await prisma.symptoms.findMany({
     orderBy: {
       code: "asc",
     },
   });
+
+  await prisma.$disconnect();
 
   const questionList = fetchSymptoms.map(({ code, info, imageUrl }: { code: number, info: string, imageUrl: string }) => ({
     sympCode: code,
@@ -32,7 +35,7 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
 
   try {
     // @ts-ignore
-    const userCookie = JSON.parse(getCookie("user", { req, res }));
+    const userCookie = isCookieExist ? JSON.parse(getCookie("user", { req, res })) : null;
 
     return {
       props: {

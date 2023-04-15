@@ -3,7 +3,7 @@
 import { Fragment } from 'react';
 import { PrismaClient } from '@prisma/client';
 import Head from 'next/head';
-import { getCookie } from "cookies-next";
+import { getCookie, hasCookie } from "cookies-next";
 import Navbar from '@/components/Navbar';
 import CertaintyFactor from '@/utils/certaintyFactor';
 import Link from 'next/link';
@@ -19,6 +19,7 @@ type getServerSidePropsType = {
 
 export async function getServerSideProps({ params: { diagnoseId }, req, res }: getServerSidePropsType) {
     const prisma = new PrismaClient();
+    const isCookieExist = hasCookie("user", { req, res });
 
     const foundDiagnoseHistory = await prisma.usersDiagnoseHistory.findUnique({
         where: {
@@ -40,7 +41,7 @@ export async function getServerSideProps({ params: { diagnoseId }, req, res }: g
     const newHistoryStep = (await CFInstance.calculateCombinationRule()).calculatedCombinationRuleCF;
 
     try {
-        const userCookie = JSON.parse(getCookie("user", { req, res }));
+        const userCookie = isCookieExist ? JSON.parse(getCookie("user", { req, res })) : null;
 
         await prisma.$disconnect();
         return {

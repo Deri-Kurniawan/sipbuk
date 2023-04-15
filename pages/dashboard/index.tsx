@@ -43,6 +43,7 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
             }
         })
 
+        await prisma.$disconnect();
         if (!userFromDB) {
             deleteCookie("user", { req, res });
             return {
