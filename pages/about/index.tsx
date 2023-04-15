@@ -1,6 +1,5 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SafeLayout from "@/layouts/SafeLayout";
 import Image from "next/image";
 import expertImg from "@/assets/expert.jpg";
 import developerImg from "@/assets/developer.jpg";
@@ -44,7 +43,7 @@ interface AboutProps {
 
 export default function About({ user }: AboutProps) {
   return (
-    <SafeLayout>
+    <>
       <Head>
         <title>Tentang - SIPBUK</title>
         <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
@@ -155,6 +154,6 @@ export default function About({ user }: AboutProps) {
         </div>
       </main>
       <Footer />
-    </SafeLayout>
+    </>
   );
 }

@@ -1,6 +1,5 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SafeLayout from "@/layouts/SafeLayout";
 import Image from "next/image";
 import forgotPasswordImage from "@/assets/forgot-password.jpg";
 import Head from "next/head";
@@ -218,103 +217,101 @@ export default function ForgotPassword({
         />
       </Head>
       <Navbar />
-      <SafeLayout>
-        <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
-          <div className="md:grid grid-flow-row grid-cols-2 gap-[32px] items-center">
-            {/* image */}
-            <div className="hidden lg:block">
-              <Image
-                className="object-cover bg-primary"
-                src={forgotPasswordImage}
-                alt=""
-                priority
-              />
-            </div>
-            <div className="col-span-2 lg:col-span-1">
-              <h2 className="text-[30px] md:text-[40px] font-bold leading-[38px] md:leading-[48px] mb-2 md:mb-4">
-                {nextStep ? "Ubah Kata Sandi" : "Lupa Kata Sandi"}
-              </h2>
-              <p className="max-w-xl mb-4 text-base font-normal">
-                {nextStep
-                  ? "Saat ini, Anda memiliki kesempatan untuk mengganti kata sandi Anda."
-                  : "Dengan memasukan Email dan klik tombol Kirimi Saya Email, kami akan mengirimkan email berisi link untuk mereset kata sandi anda."}
-              </p>
-
-              {/* form */}
-              {nextStep ? (
-                <form onSubmit={handleFormNextStep}>
-                  <div className="w-full max-w-xl form-control">
-                    <label className="label" htmlFor="password">
-                      <span className="text-base label-text">Kata sandi</span>
-                    </label>
-                    <input
-                      type="password"
-                      className="w-full input input-bordered"
-                      name="password"
-                      id="password"
-                      placeholder=""
-                      disabled={fetchIsLoading}
-                    />
-                  </div>
-
-                  <div className="w-full max-w-xl form-control">
-                    <label className="label" htmlFor="confirm-password">
-                      <span className="text-base label-text">
-                        Konfirmasi Kata sandi
-                      </span>
-                    </label>
-                    <input
-                      type="password"
-                      className="w-full input input-bordered"
-                      name="passwordConfirm"
-                      id="confirm-password"
-                      placeholder=""
-                      disabled={fetchIsLoading}
-                    />
-                  </div>
-
-                  <button className="mt-4 text-blue-400" onClick={() => setNextStep(false)} type="button">
-                    Kirimi saya email lagi
-                  </button>
-
-                  <button
-                    className={`w-full max-w-xl mt-4 btn btn-outline btn-ghost ${fetchIsLoading ? 'loading' : ''}`}
-                    type="submit"
-                    disabled={fetchIsLoading}
-                  >
-                    {fetchIsLoading ? "Memuat" : `Ubah Kata Sandi`}
-                  </button>
-                </form>
-              ) : (
-                <form onSubmit={handleFormFirstStep}>
-                  {/* email */}
-                  <div className="w-full max-w-xl form-control">
-                    <label className="label" htmlFor="email">
-                      <span className="text-base label-text">Email</span>
-                    </label>
-                    <input
-                      type="email"
-                      className="w-full input input-bordered"
-                      name="email"
-                      id="email"
-                      placeholder=""
-                      disabled={fetchIsLoading}
-                    />
-                  </div>
-
-                  <button
-                    className={`w-full max-w-xl mt-4 btn btn-outline btn-ghost ${fetchIsLoading ? 'loading' : ''}`}
-                    type="submit"
-                    disabled={fetchIsLoading}
-                  >
-                    {fetchIsLoading ? "Memuat" : `Kirimi Saya Email`}
-                  </button>
-                </form>
-              )}
-            </div>
+      <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
+        <div className="md:grid grid-flow-row grid-cols-2 gap-[32px] items-center">
+          {/* image */}
+          <div className="hidden lg:block">
+            <Image
+              className="object-cover bg-primary"
+              src={forgotPasswordImage}
+              alt=""
+              priority
+            />
           </div>
-        </main>
-      </SafeLayout>
+          <div className="col-span-2 lg:col-span-1">
+            <h2 className="text-[30px] md:text-[40px] font-bold leading-[38px] md:leading-[48px] mb-2 md:mb-4">
+              {nextStep ? "Ubah Kata Sandi" : "Lupa Kata Sandi"}
+            </h2>
+            <p className="max-w-xl mb-4 text-base font-normal">
+              {nextStep
+                ? "Saat ini, Anda memiliki kesempatan untuk mengganti kata sandi Anda."
+                : "Dengan memasukan Email dan klik tombol Kirimi Saya Email, kami akan mengirimkan email berisi link untuk mereset kata sandi anda."}
+            </p>
+
+            {/* form */}
+            {nextStep ? (
+              <form onSubmit={handleFormNextStep}>
+                <div className="w-full max-w-xl form-control">
+                  <label className="label" htmlFor="password">
+                    <span className="text-base label-text">Kata sandi</span>
+                  </label>
+                  <input
+                    type="password"
+                    className="w-full input input-bordered"
+                    name="password"
+                    id="password"
+                    placeholder=""
+                    disabled={fetchIsLoading}
+                  />
+                </div>
+
+                <div className="w-full max-w-xl form-control">
+                  <label className="label" htmlFor="confirm-password">
+                    <span className="text-base label-text">
+                      Konfirmasi Kata sandi
+                    </span>
+                  </label>
+                  <input
+                    type="password"
+                    className="w-full input input-bordered"
+                    name="passwordConfirm"
+                    id="confirm-password"
+                    placeholder=""
+                    disabled={fetchIsLoading}
+                  />
+                </div>
+
+                <button className="mt-4 text-blue-400" onClick={() => setNextStep(false)} type="button">
+                  Kirimi saya email lagi
+                </button>
+
+                <button
+                  className={`w-full max-w-xl mt-4 btn btn-outline btn-ghost ${fetchIsLoading ? 'loading' : ''}`}
+                  type="submit"
+                  disabled={fetchIsLoading}
+                >
+                  {fetchIsLoading ? "Memuat" : `Ubah Kata Sandi`}
+                </button>
+              </form>
+            ) : (
+              <form onSubmit={handleFormFirstStep}>
+                {/* email */}
+                <div className="w-full max-w-xl form-control">
+                  <label className="label" htmlFor="email">
+                    <span className="text-base label-text">Email</span>
+                  </label>
+                  <input
+                    type="email"
+                    className="w-full input input-bordered"
+                    name="email"
+                    id="email"
+                    placeholder=""
+                    disabled={fetchIsLoading}
+                  />
+                </div>
+
+                <button
+                  className={`w-full max-w-xl mt-4 btn btn-outline btn-ghost ${fetchIsLoading ? 'loading' : ''}`}
+                  type="submit"
+                  disabled={fetchIsLoading}
+                >
+                  {fetchIsLoading ? "Memuat" : `Kirimi Saya Email`}
+                </button>
+              </form>
+            )}
+          </div>
+        </div>
+      </main>
       <Footer />
     </>
   );

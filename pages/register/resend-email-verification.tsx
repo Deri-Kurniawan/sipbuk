@@ -1,11 +1,9 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
-import SafeLayout from "@/layouts/SafeLayout";
 import Image from "next/image";
 import forgotPasswordImage from "@/assets/forgot-password.jpg";
 import Head from "next/head";
 import { toast } from "react-hot-toast";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { hasCookie } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -103,55 +101,53 @@ export default function ForgotPassword() {
                 />
             </Head>
             <Navbar />
-            <SafeLayout>
-                <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
-                    <div className="md:grid grid-flow-row grid-cols-2 gap-[32px] items-center">
-                        {/* image */}
-                        <div className="hidden lg:block">
-                            <Image
-                                className="object-cover bg-primary"
-                                src={forgotPasswordImage}
-                                alt=""
-                                priority
-                            />
-                        </div>
-                        <div className="col-span-2 lg:col-span-1">
-                            <h2 className="text-[30px] md:text-[40px] font-bold leading-[38px] md:leading-[48px] mb-2 md:mb-4">
-                                Kirim Ulang Email Verifikasi
-                            </h2>
-                            <p className="max-w-xl mb-4 text-base font-normal">
-                                Masukkan email anda untuk mengirim ulang email verifikasi.
-                            </p>
-
-                            {/* form */}
-                            <form onSubmit={handleFormResendVerificationEmail}>
-                                {/* email */}
-                                <div className="w-full max-w-xl form-control">
-                                    <label className="label" htmlFor="email">
-                                        <span className="text-base label-text">Email</span>
-                                    </label>
-                                    <input
-                                        type="email"
-                                        className="w-full input input-bordered"
-                                        name="email"
-                                        id="email"
-                                        placeholder=""
-                                        disabled={fetchIsLoading}
-                                    />
-                                </div>
-
-                                <button
-                                    className={`w-full max-w-xl mt-4 btn btn-outline btn-ghost ${fetchIsLoading ? 'loading' : ''}`}
-                                    type="submit"
-                                    disabled={fetchIsLoading}
-                                >
-                                    {fetchIsLoading ? "Memuat" : `Kirimi Saya Email`}
-                                </button>
-                            </form>
-                        </div>
+            <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
+                <div className="md:grid grid-flow-row grid-cols-2 gap-[32px] items-center">
+                    {/* image */}
+                    <div className="hidden lg:block">
+                        <Image
+                            className="object-cover bg-primary"
+                            src={forgotPasswordImage}
+                            alt=""
+                            priority
+                        />
                     </div>
-                </main>
-            </SafeLayout>
+                    <div className="col-span-2 lg:col-span-1">
+                        <h2 className="text-[30px] md:text-[40px] font-bold leading-[38px] md:leading-[48px] mb-2 md:mb-4">
+                            Kirim Ulang Email Verifikasi
+                        </h2>
+                        <p className="max-w-xl mb-4 text-base font-normal">
+                            Masukkan email anda untuk mengirim ulang email verifikasi.
+                        </p>
+
+                        {/* form */}
+                        <form onSubmit={handleFormResendVerificationEmail}>
+                            {/* email */}
+                            <div className="w-full max-w-xl form-control">
+                                <label className="label" htmlFor="email">
+                                    <span className="text-base label-text">Email</span>
+                                </label>
+                                <input
+                                    type="email"
+                                    className="w-full input input-bordered"
+                                    name="email"
+                                    id="email"
+                                    placeholder=""
+                                    disabled={fetchIsLoading}
+                                />
+                            </div>
+
+                            <button
+                                className={`w-full max-w-xl mt-4 btn btn-outline btn-ghost ${fetchIsLoading ? 'loading' : ''}`}
+                                type="submit"
+                                disabled={fetchIsLoading}
+                            >
+                                {fetchIsLoading ? "Memuat" : `Kirimi Saya Email`}
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </main>
             <Footer />
         </>
     );

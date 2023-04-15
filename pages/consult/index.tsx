@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar";
-import SafeLayout from "@/layouts/SafeLayout";
 import Question from "@/components/Question";
 import { GrPrevious, GrNext } from "react-icons/gr";
 import { FormEventHandler, Fragment, useEffect, useState } from "react";
@@ -270,55 +269,53 @@ export default function Consult({ user, questionList }: ConsultProps) {
         <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
       </Head>
       <Navbar isSticky={false} user={user} />
-      <SafeLayout>
-        <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
-          {questionList && questionList?.length > 0 ? (
-            <Fragment>
-              {/* questions */}
-              <form onSubmit={handleFormSubmit}>
-                {questionList.map((ql: any, index: number) => (
-                  <div
-                    key={index}
-                    className="query-question"
-                    id={`question-${index}`}
-                  >
-                    <Question {...ql} index={index} />
-                  </div>
-                ))}
-                <div className="flex flex-col items-center justify-center text-center mb-[112px] lg:mb-[172px]">
-                  <h4 className="mb-3 text-3xl font-bold max-w-[552px]">
-                    Apakah anda sudah yakin dengan semua jawaban anda?
-                  </h4>
-                  <p className="mb-6 text-base max-w-[552px]">
-                    Jika belum yakin, anda dapat mengeceknya kembali. Jika sudah
-                    yakin, anda bisa klik tombol <b>*Yakin dan Diagnosa*</b> berikut
-                  </p>
-                  <button
-                    className={`${fetchIsLoading ? 'loading' : ''} capitalize btn btn-active btn-ghost`}
-                    type="submit"
-                    disabled={fetchIsLoading}
-                  >
-                    {fetchIsLoading ? 'Memproses...' : 'Yakin dan Diagnosa'}
-                  </button>
+      <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
+        {questionList && questionList?.length > 0 ? (
+          <Fragment>
+            {/* questions */}
+            <form onSubmit={handleFormSubmit}>
+              {questionList.map((ql: any, index: number) => (
+                <div
+                  key={index}
+                  className="query-question"
+                  id={`question-${index}`}
+                >
+                  <Question {...ql} index={index} />
                 </div>
-              </form>
-              {/* end of questions */}
-            </Fragment>
-          ) : (
-            <div className="flex flex-col items-center justify-center text-center mb-[112px] lg:mb-[172px]">
-              <h4 className="mb-3 text-3xl font-bold max-w-[552px]">
-                Maaf, terjadi kesalahan
-              </h4>
-              <p className="mb-6 text-base max-w-[552px]">
-                Terjadi kesalahan pada sistem. Silahkan coba lagi nanti.
-              </p>
-              <Link href="/" className="capitalize btn btn-active btn-ghost">
-                Kembali ke Beranda
-              </Link>
-            </div>
-          )}
-        </main>
-      </SafeLayout>
+              ))}
+              <div className="flex flex-col items-center justify-center text-center mb-[112px] lg:mb-[172px]">
+                <h4 className="mb-3 text-3xl font-bold max-w-[552px]">
+                  Apakah anda sudah yakin dengan semua jawaban anda?
+                </h4>
+                <p className="mb-6 text-base max-w-[552px]">
+                  Jika belum yakin, anda dapat mengeceknya kembali. Jika sudah
+                  yakin, anda bisa klik tombol <b>*Yakin dan Diagnosa*</b> berikut
+                </p>
+                <button
+                  className={`${fetchIsLoading ? 'loading' : ''} capitalize btn btn-active btn-ghost`}
+                  type="submit"
+                  disabled={fetchIsLoading}
+                >
+                  {fetchIsLoading ? 'Memproses...' : 'Yakin dan Diagnosa'}
+                </button>
+              </div>
+            </form>
+            {/* end of questions */}
+          </Fragment>
+        ) : (
+          <div className="flex flex-col items-center justify-center text-center mb-[112px] lg:mb-[172px]">
+            <h4 className="mb-3 text-3xl font-bold max-w-[552px]">
+              Maaf, terjadi kesalahan
+            </h4>
+            <p className="mb-6 text-base max-w-[552px]">
+              Terjadi kesalahan pada sistem. Silahkan coba lagi nanti.
+            </p>
+            <Link href="/" className="capitalize btn btn-active btn-ghost">
+              Kembali ke Beranda
+            </Link>
+          </div>
+        )}
+      </main>
       {/* floating question navigator bar */}
       <div className="fixed bottom-0 left-0 w-full bg-white h-[72px] border-t border-black/50">
         <div className="flex flex-row items-center justify-between h-full gap-4 md:gap-0">

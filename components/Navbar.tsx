@@ -1,3 +1,4 @@
+import SafeLayout from "@/layouts/SafeLayout";
 import { deleteCookie } from "cookies-next";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

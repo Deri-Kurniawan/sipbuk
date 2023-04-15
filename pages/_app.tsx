@@ -5,6 +5,8 @@ import NextNProgressbar from "nextjs-progressbar";
 import "@/styles/globals.css";
 import { DefaultSeo } from "next-seo";
 import { useRouter } from "next/router";
+import { Analytics } from '@vercel/analytics/react';
+import SafeLayout from "@/layouts/SafeLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -13,6 +15,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <Analytics />
       <DefaultSeo
         description="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis."
         openGraph={{
@@ -43,7 +46,9 @@ export default function App({ Component, pageProps }: AppProps) {
       />
 
       <div className={inter.className}>
-        <Component className={inter.className} {...pageProps} />
+        <SafeLayout>
+          <Component className={inter.className} {...pageProps} />
+        </SafeLayout>
       </div>
     </>
   );
