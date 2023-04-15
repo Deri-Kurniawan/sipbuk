@@ -134,46 +134,39 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
     const [onDeleteSelectedDiagnoseHistory, setOnDeleteSelectedDiagnoseHistory] = useState(false);
 
     const handleClickAcceptSaveDiagnoseHistory = async () => {
-        try {
-            const savedLocalStorageDiagnosesHistory = (async () => await fetch("/api/dashboard/diagnoses-history", {
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                method: "POST",
-                body: JSON.stringify({
-                    diagnosesId: localStorageDiagnosesHistory,
-                    userId: user.id,
-                }),
-            }))();
+        const savedLocalStorageDiagnosesHistory = (async () => await fetch("/api/dashboard/diagnoses-history", {
+            headers: {
+                "Content-Type": "application/json",
+            },
+            method: "POST",
+            body: JSON.stringify({
+                diagnosesId: localStorageDiagnosesHistory,
+                userId: user.id,
+            }),
+        }));
 
-            const response = await (await savedLocalStorageDiagnosesHistory).json();
+        toast.promise(savedLocalStorageDiagnosesHistory()
+            .then((res) => res.json())
+            .then((res) => {
+                setUserDiagnosesHistory([...userDiagnosesHistory, ...res.data]);
 
-            if (response.code === 200) {
-                setUserDiagnosesHistory([...userDiagnosesHistory, ...response.data]);
+                if (typeof window !== "undefined") {
+                    localStorage.removeItem("diagnosesHistoryId");
+                }
 
-                toast.promise(savedLocalStorageDiagnosesHistory, {
-                    loading: "Menyimpan riwayat diagnosa...",
-                    success: "Riwayat diagnosa berhasil disimpan",
-                    error: "Riwayat diagnosa gagal disimpan",
-                }, {
+                setLocalStorageDiagnosesHistory([]);
+            })
+            .catch(() => {
+                toast.error("Riwayat diagnosa gagal disimpan", {
                     duration: 5000,
                 });
-            } else {
-                toast.error(response.message, {
-                    duration: 5000,
-                });
-            }
-
-            if (typeof window !== "undefined") {
-                localStorage.removeItem("diagnosesHistoryId");
-            }
-
-            setLocalStorageDiagnosesHistory([]);
-        } catch (error) {
-            toast.error("Riwayat diagnosa gagal disimpan", {
-                duration: 5000,
-            });
-        }
+            }), {
+            loading: "Menyimpan riwayat diagnosa...",
+            success: "Riwayat diagnosa berhasil disimpan",
+            error: "Riwayat diagnosa gagal disimpan",
+        }, {
+            duration: 5000,
+        });
     }
 
     const handleClickRefuseSaveDiagnoseHistory = () => {
@@ -185,10 +178,10 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
     }
 
     const handleClickDeleteSelectedDiagnoseHistory = async () => {
-        try {
+        const deletedDiagnosesHistory = (async () => {
             setOnDeleteSelectedDiagnoseHistory(true);
 
-            const deletedDiagnosesHistory = (async () => await fetch("/api/dashboard/diagnoses-history", {
+            return await fetch("/api/dashboard/diagnoses-history", {
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -197,34 +190,31 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                     diagnosesId: selectedDiagnosesHistoryId,
                     userId: user.id,
                 }),
-            }))();
+            })
+        });
 
-            const response = await (await deletedDiagnosesHistory).json();
-
-            if (response.code === 200) {
+        toast.promise(deletedDiagnosesHistory()
+            .then((res) => {
+                setOnDeleteSelectedDiagnoseHistory(false);
+                return res.json()
+            })
+            .then((res) => {
                 setUserDiagnosesHistory(userDiagnosesHistory.filter((diagnosesHistory: any) => !selectedDiagnosesHistoryId.includes(diagnosesHistory.id)));
                 setSelectedDiagnosesHistoryId([]);
-
-                toast.promise(deletedDiagnosesHistory, {
-                    loading: "Menghapus riwayat diagnosa...",
-                    success: "Riwayat diagnosa berhasil dihapus",
-                    error: "Riwayat diagnosa gagal dihapus",
-                }, {
+                console.log(res);
+            })
+            .catch(() => {
+                setOnDeleteSelectedDiagnoseHistory(false);
+                toast.error("Riwayat diagnosa gagal dihapus", {
                     duration: 5000,
                 });
-            } else {
-                toast.error(response.message, {
-                    duration: 5000,
-                });
-            }
-
-            setOnDeleteSelectedDiagnoseHistory(false);
-        } catch (error) {
-            setOnDeleteSelectedDiagnoseHistory(false);
-            toast.error("Riwayat diagnosa gagal dihapus", {
-                duration: 5000,
-            });
-        }
+            }), {
+            loading: "Menghapus riwayat diagnosa...",
+            success: "Riwayat diagnosa berhasil dihapus",
+            error: "Riwayat diagnosa gagal dihapus",
+        }, {
+            duration: 7000,
+        });
     }
 
     useEffect(() => {

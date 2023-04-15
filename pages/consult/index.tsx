@@ -140,16 +140,18 @@ export default function Consult({ user, questionList }: ConsultProps) {
         }
 
         router.push(`/consult/${res.diagnoseId}`);
-      }).catch((error) => {
-        console.log(error);
-        toast.error('Sistem gagal mendiagnosa, ada kesalahan pada sistem');
+      })
+      .catch(() => {
+        toast.error('Sistem gagal mendiagnosa, ada kesalahan pada sistem', {
+          duration: 5000,
+        });
         setFetchIsLoading(false);
       }), {
       loading: 'Sistem sedang mendiagnosa...',
       success: 'Sistem berhasil mendiagnosa',
       error: 'Sistem gagal mendiagnosa',
     }, {
-      duration: 7000,
+      duration: 5000,
     });
 
   };
