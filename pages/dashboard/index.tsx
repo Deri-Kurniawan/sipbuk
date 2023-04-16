@@ -130,20 +130,24 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
     const [userDiagnosesHistory, setUserDiagnosesHistory] = useState(_userDiagnosesHistory);
     const [localStorageDiagnosesHistory, setLocalStorageDiagnosesHistory] = useState([]);
     const [selectedDiagnosesHistoryId, setSelectedDiagnosesHistoryId]: string[] | any = useState([]);
-    const globalCheckboxRef = React.useRef<HTMLInputElement>(null);
     const [onDeleteSelectedDiagnoseHistory, setOnDeleteSelectedDiagnoseHistory] = useState(false);
+    const [isLoadingSaveDiagnoseHistory, setIsLoadingSaveDiagnoseHistory] = useState(false);
+    const globalCheckboxRef = React.useRef<HTMLInputElement>(null);
 
     const handleClickAcceptSaveDiagnoseHistory = async () => {
-        const savedLocalStorageDiagnosesHistory = (async () => await fetch("/api/dashboard/diagnoses-history", {
-            headers: {
-                "Content-Type": "application/json",
-            },
-            method: "POST",
-            body: JSON.stringify({
-                diagnosesId: localStorageDiagnosesHistory,
-                userId: user.id,
-            }),
-        }));
+        const savedLocalStorageDiagnosesHistory = (async () => {
+            setIsLoadingSaveDiagnoseHistory(true);
+            return await fetch("/api/dashboard/diagnoses-history", {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    diagnosesId: localStorageDiagnosesHistory,
+                    userId: user.id,
+                }),
+            })
+        });
 
         toast.promise(savedLocalStorageDiagnosesHistory()
             .then((res) => res.json())
@@ -155,6 +159,7 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                 }
 
                 setLocalStorageDiagnosesHistory([]);
+                setIsLoadingSaveDiagnoseHistory(false);
             })
             .catch(() => {
                 toast.error("Riwayat diagnosa gagal disimpan", {
@@ -242,8 +247,8 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                                 <span>{`Kamu punya ${localStorageDiagnosesHistory.length} riwayat diagnosa sebelumnya, apakah ingin anda simpan?`}</span>
                             </div>
                             <div className="flex-none">
-                                <button className={`btn btn-sm btn-ghost`} onClick={handleClickRefuseSaveDiagnoseHistory}>Tolak</button>
-                                <button className={`btn btn-sm btn-primary`} onClick={handleClickAcceptSaveDiagnoseHistory}>Terima</button>
+                                <button className={`btn btn-sm btn-ghost`} onClick={handleClickRefuseSaveDiagnoseHistory} disabled={isLoadingSaveDiagnoseHistory}>Tolak</button>
+                                <button className={`btn btn-sm btn-primary ${isLoadingSaveDiagnoseHistory ? 'loading' : ''}`} onClick={handleClickAcceptSaveDiagnoseHistory} disabled={isLoadingSaveDiagnoseHistory}>Terima</button>
                             </div>
                         </div>
                     )}
