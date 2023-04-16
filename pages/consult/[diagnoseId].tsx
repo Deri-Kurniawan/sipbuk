@@ -168,7 +168,7 @@ export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryS
                     <p className="text-center text-base leading-[24px] max-w-[660px] m-auto mb-10">
                         Berikut merupakan cara pengendalian, serta bahan aktif yang dapat anda gunakan
                     </p>
-                    <div className='flex flex-col lg:flex-row'>
+                    <div className='flex flex-col gap-0 lg:gap-3 lg:flex-row'>
                         <div className='flex-grow'>
                             <h3 className="text-center leading-[38px] md:leading-[48px] text-[20px] md:text-[30px] font-bold mb-4">
                                 Cara Pengendalian
