@@ -31,7 +31,7 @@ export default function Question({
       {/* info */}
       <div className="col-span-2 md:col-span-1">
         <div className="bg-primary text-sm mb-[10px] p-2 rounded-md">
-          Pertanyaan {++index}
+          Pertanyaan ke {++index}
         </div>
         <h2 className="text-lg font-bold mb-[10px]">
           Apakah gejala berikut ada pada tanaman anda?
