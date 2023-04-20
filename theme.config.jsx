@@ -21,6 +21,21 @@ export default {
       </span>
     ),
   },
+  banner: {
+    text: () => {
+      return (
+        <span>
+          🌿 Situs Resmi{" "}
+          <Link href="/" className="text-blue-400">
+            sipbuk.deri.my.id
+          </Link>{" "}
+          🌿
+        </span>
+      );
+    },
+    key: "official-website",
+    dismissible: true,
+  },
   editLink: {
     text: "Edit halaman ini",
   },
