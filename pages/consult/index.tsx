@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Question from "@/components/Question";
 import { GrPrevious, GrNext } from "react-icons/gr";
-import { FormEventHandler, Fragment, useEffect, useRef, useState } from "react";
+import { FormEventHandler, Fragment, SelectHTMLAttributes, useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import { getCookie, hasCookie } from "cookies-next";
 import { PrismaClient } from "@prisma/client";
@@ -274,10 +274,34 @@ export default function Consult({ user, questionList }: ConsultProps) {
       }
     };
 
-    document.addEventListener("keydown", handleCtrlEnter);
+    const handleCtrlQuestionMark = (e: KeyboardEvent) => {
+      if (e.key === "/") {
+        const kbdModal: any = document.querySelector("[for=kbd-modal]");
+        kbdModal?.click();
+      }
+    }
+
+    const keydownHandler = (e: KeyboardEvent) => {
+      handleCtrlEnter(e);
+      handleCtrlQuestionMark(e);
+    }
+
+    const kbdInputModal: HTMLElement | null = document.getElementById("kbd-modal");
+
+    const kbdInputModalKeydownHandler = (e: KeyboardEvent): void => {
+      if (e.key === "Escape") {
+        const kbdInputModal: HTMLElement | null = document.getElementById("kbd-modal");
+        kbdInputModal?.setAttribute("checked", "false");
+      }
+    }
+
+
+    kbdInputModal?.addEventListener("keydown", kbdInputModalKeydownHandler);
+    document.addEventListener("keydown", keydownHandler);
 
     return () => {
-      document.removeEventListener("keydown", handleCtrlEnter);
+      document.removeEventListener("keydown", keydownHandler);
+      kbdInputModal?.removeEventListener("keydown", kbdInputModalKeydownHandler);
     };
   }, [fetchIsLoading])
 
@@ -383,7 +407,7 @@ export default function Consult({ user, questionList }: ConsultProps) {
       </div>
 
       {/* floating shortcut help */}
-      <label htmlFor="kbd-modal" className="fixed right-0 hidden lg:block hover:cursor-help bottom-1/4" title="Pintasan Papan Ketik">
+      <label htmlFor="kbd-modal" className="fixed right-0 hidden lg:block hover:cursor-pointer bottom-1/4" title="Pintasan Papan Ketik (?)" tabIndex={0}>
         <div className="flex items-center justify-center w-12 h-10 rounded-tl-lg rounded-bl-lg shadow-lg bg-primary">
           <AiOutlineQuestionCircle className="text-3xl" />
         </div>
@@ -395,6 +419,14 @@ export default function Consult({ user, questionList }: ConsultProps) {
       <div className="modal">
         <div className="w-11/12 max-w-3xl modal-box">
           <h3 className="text-4xl font-bold text-center">Pintasan Papan Ketik</h3>
+          <div className="pt-6 pb-3">
+            <div className="shadow-lg alert alert-info">
+              <div>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="flex-shrink-0 w-6 h-6 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>Tekan <kbd className="kbd">/</kbd> untuk menampilkan Pintasan Papan Ketik</span>
+              </div>
+            </div>
+          </div>
           <div className="py-6">
             <div className="w-full overflow-x-auto">
               <table className="table w-full">
