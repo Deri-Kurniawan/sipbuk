@@ -66,7 +66,7 @@ export default function Footer() {
                 Sistem Pakar Jambu Kristal
               </p>
 
-              <p className="mt-4 text-base hover:text-accent">
+              <p className="mt-4 text-base">
                 Membantu anda dalam mengidentifikasi hama dan penyakit pada tanaman jambu kristal.
               </p>
             </div>
