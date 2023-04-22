@@ -107,7 +107,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <div className="py-6 md:py-8">
+        <div className="py-6 md:py-8 safe-horizontal-padding">
           <p className="text-center">
             Copyright &copy;2022-{new Date().getFullYear()} SIPBUK. All rights reserved.
           </p>
