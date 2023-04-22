@@ -2,6 +2,7 @@ import { serverSideAESDecrypt } from "@/utils/cryptoAES";
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 import { regexp } from "@/utils/regexp";
+import { v4 as uuidv4 } from "uuid";
 
 const prisma = new PrismaClient();
 
@@ -46,7 +47,7 @@ export default async function handler(
       }
 
       try {
-        const user = await prisma.user.findFirst({
+        const foundedUser = await prisma.user.findFirst({
           where: {
             email,
           },
@@ -59,13 +60,15 @@ export default async function handler(
           },
         });
 
-        if (!user) {
+        if (!foundedUser) {
           return res
             .status(400)
             .json({ code: 400, message: "Email tidak terdaftar!" });
         }
 
-        const decryptedUserPassword = serverSideAESDecrypt(user.password);
+        const decryptedUserPassword = serverSideAESDecrypt(
+          foundedUser.password
+        );
 
         if (decryptedUserPassword !== password) {
           return res
@@ -73,17 +76,32 @@ export default async function handler(
             .json({ code: 400, message: "Password salah!" });
         }
 
-        if (!user.isVerified) {
+        if (!foundedUser.isVerified) {
           return res.status(400).json({
             code: 400,
-            message: `Halo ${user.fullname}! Email anda belum terverifikasi. Silakan periksa kotak masuk dan folder spam email anda.`,
+            message: `Halo ${foundedUser.fullname}! Email anda belum terverifikasi. Silakan periksa kotak masuk dan folder spam email anda.`,
           });
         }
 
+        const authToken = `at-${uuidv4()}`;
+
+        const updatedUser = await prisma.user.update({
+          where: {
+            id: foundedUser.id,
+          },
+          data: {
+            authToken,
+          },
+        });
+
         res.status(200).json({
           code: 200,
-          message: `Selamat datang ${user.fullname}!`,
-          data: user,
+          message: `Selamat datang ${foundedUser.fullname}!`,
+          data: {
+            id: updatedUser.id,
+            fullname: updatedUser.fullname,
+            authToken: updatedUser.authToken,
+          },
         });
         await prisma.$disconnect();
       } catch (error) {

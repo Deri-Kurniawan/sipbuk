@@ -29,14 +29,14 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
     try {
         // @ts-ignore
         const userCookie = JSON.parse(getCookie("user", { req, res }));
-        const userFromDB = await prisma.user.findUnique({
+        const foundedUser = await prisma.user.findUnique({
             where: {
-                email: userCookie.email,
+                authToken: userCookie.authToken,
             }
         });
         const _userDiagnosesHistory = await prisma.usersDiagnoseHistory.findMany({
             where: {
-                userId: userFromDB?.id,
+                userId: foundedUser?.id,
             },
             include: {
                 pestsAndDeseases: true,
@@ -44,17 +44,7 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
         })
 
         await prisma.$disconnect();
-        if (!userFromDB) {
-            deleteCookie("user", { req, res });
-            return {
-                redirect: {
-                    destination: '/login',
-                    permanent: true,
-                }
-            }
-        }
-
-        if (serverSideAESDecrypt(userFromDB.password) !== serverSideAESDecrypt(userCookie.password)) {
+        if (!foundedUser) {
             deleteCookie("user", { req, res });
             return {
                 redirect: {

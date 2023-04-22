@@ -15,6 +15,7 @@ model User {
   password             String
   isVerified           Boolean                @default(false)
   verifyToken          String?                @unique
+  authToken            String?                @unique
   passwordResetToken   String?                @unique
   createdAt            DateTime               @default(now())
   updatedAt            DateTime               @updatedAt
