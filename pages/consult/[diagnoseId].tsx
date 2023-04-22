@@ -64,13 +64,7 @@ export async function getServerSideProps({ params: { diagnoseId }, req, res }: g
 }
 
 interface DiagnoseResultProps {
-    user: {
-        id: string;
-        email: string;
-        fullname: string;
-        password: string;
-        isVerified: boolean;
-    } | null;
+    user: loggedInUserDataType | null;
     diagnoseHistory: {
         id: string;
         userId: string;
@@ -149,7 +143,7 @@ export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryS
                 <title>Konsultasi - SIPBUK</title>
                 <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
             </Head>
-            <Navbar isSticky={true} user={user} />
+            <Navbar isSticky={true} userFullname={user?.fullname} />
             <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
                 <div className="h-full md:h-[482px] bg-primary rounded-2xl flex flex-col justify-center items-center p-6 md:p-6">
                     <h2 className="text-center leading-[38px] md:leading-[48px] text-[30px] md:text-[40px] font-bold mb-4">

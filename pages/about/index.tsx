@@ -5,12 +5,7 @@ import expertImg from "@/assets/expert.jpg";
 import developerImg from "@/assets/developer.jpg";
 import Head from "next/head";
 import { getCookie, hasCookie } from "cookies-next";
-import { NextApiRequest, NextApiResponse } from "next";
-
-type getServerSidePropsType = {
-  req: NextApiRequest;
-  res: NextApiResponse;
-};
+import { getServerSidePropsType, loggedInUserDataType } from "@/types";
 
 export async function getServerSideProps({ req, res }: getServerSidePropsType) {
   const isCookieExist = hasCookie("user", { req, res });
@@ -34,13 +29,7 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
 }
 
 interface AboutProps {
-  user: {
-    id: string;
-    email: string;
-    fullname: string;
-    password: string;
-    isVerified: boolean;
-  } | null;
+  user: loggedInUserDataType | null;
 }
 
 export default function About({ user }: AboutProps) {
@@ -50,7 +39,7 @@ export default function About({ user }: AboutProps) {
         <title>Tentang - SIPBUK</title>
         <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
       </Head>
-      <Navbar user={user} />
+      <Navbar userFullname={user?.fullname} />
       <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
         {/* about the app */}
         <div className="h-full md:h-[482px] bg-primary rounded-2xl flex flex-col justify-center items-center p-8 md:p-6 mb-[112px] lg:mb-[172px]">

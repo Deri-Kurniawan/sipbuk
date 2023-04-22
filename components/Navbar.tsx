@@ -23,21 +23,15 @@ const navLinks = [
 
 interface NavbarProps {
   isSticky?: boolean;
-  user?: {
-    id: string;
-    email: string;
-    fullname: string;
-    password: string;
-    isVerified: boolean;
-  } | null;
+  userFullname?: string | null;
 }
 
-export default function Navbar({ isSticky = true, user = null }: NavbarProps) {
+export default function Navbar({ isSticky = true, userFullname = null }: NavbarProps) {
   const router = useRouter();
   const pathname = usePathname();
 
   const handleClickLogout = () => {
-    toast.success(`Sampai jumpa ${user?.fullname}!`, {
+    toast.success(`Sampai jumpa ${userFullname}!`, {
       duration: 5000,
       icon: "👋",
     });
@@ -73,13 +67,13 @@ export default function Navbar({ isSticky = true, user = null }: NavbarProps) {
                   {nl.label}
                 </Link>
               ))}
-              {user ? (
+              {userFullname ? (
                 <div className="dropdown dropdown-bottom dropdown-end">
                   <label
                     tabIndex={0}
                     className="m-1 text-white btn btn-outline btn-success"
                   >
-                    {user.fullname}
+                    {userFullname}
                   </label>
                   <ul
                     tabIndex={0}
@@ -116,7 +110,7 @@ export default function Navbar({ isSticky = true, user = null }: NavbarProps) {
                   tabIndex={0}
                   className="p-2 shadow dropdown-content menu bg-base-100 rounded-box w-52"
                 >
-                  {user && (
+                  {userFullname && (
                     <li>
                       <Link href="/dashboard">Dashboard</Link>
                     </li>
@@ -127,7 +121,7 @@ export default function Navbar({ isSticky = true, user = null }: NavbarProps) {
                     </li>
                   ))}
                   <li>
-                    {user ? (
+                    {userFullname ? (
                       <button onClick={handleClickLogout}>Keluar</button>
                     ) : (
                       <Link href="/login">Masuk</Link>

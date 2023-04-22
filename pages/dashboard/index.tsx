@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { hasCookie, getCookie, deleteCookie } from "cookies-next";
 import { PrismaClient } from '@prisma/client';
-import { serverSideAESDecrypt } from '@/utils/cryptoAES';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import { NextApiRequest, NextApiResponse } from 'next';
+import { loggedInUserDataType } from '@/types';
 
 type getServerSidePropsType = {
     req: NextApiRequest;
@@ -73,13 +73,7 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
 }
 
 interface DashboardProps {
-    user: {
-        id: string;
-        email: string;
-        fullname: string;
-        password: string;
-        isVerified: boolean;
-    };
+    user: loggedInUserDataType;
     _userDiagnosesHistory: {
         id: string;
         userId: string;
@@ -130,6 +124,8 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
             return await fetch("/api/dashboard/diagnoses-history", {
                 headers: {
                     "Content-Type": "application/json",
+                    // bearer token using user.authToken
+                    "Authorization": `Bearer ${user.authToken}`
                 },
                 method: "POST",
                 body: JSON.stringify({
@@ -224,7 +220,7 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                 <title>Dashboard - SIPBUK</title>
                 <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
             </Head>
-            <Navbar user={user} />
+            <Navbar userFullname={user.fullname} />
             <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
                 <h4 className="mb-3 text-xl font-bold">
                     Selamat {dayTimeText()} 👋 {user.fullname || "Tanpa nama"}

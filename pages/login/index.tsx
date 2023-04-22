@@ -9,12 +9,7 @@ import { useRouter } from "next/router";
 import { hasCookie, setCookie } from 'cookies-next';
 import { clientSideAESEncrypt } from "@/utils/cryptoAES";
 import { useState } from "react";
-import { NextApiRequest, NextApiResponse } from "next";
-
-type getServerSidePropsType = {
-  req: NextApiRequest;
-  res: NextApiResponse;
-};
+import { getServerSidePropsType } from "@/types";
 
 export async function getServerSideProps({ req, res }: getServerSidePropsType) {
   const hasLoggedIn = hasCookie("user", { req, res });

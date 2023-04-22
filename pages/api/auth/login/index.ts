@@ -1,4 +1,4 @@
-import { serverSideAESDecrypt } from "@/utils/cryptoAES";
+import { serverSideAESDecrypt, serverSideAESEncrypt } from "@/utils/cryptoAES";
 import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
 import { regexp } from "@/utils/regexp";
@@ -99,6 +99,7 @@ export default async function handler(
           message: `Selamat datang ${foundedUser.fullname}!`,
           data: {
             id: updatedUser.id,
+            email: updatedUser.email,
             fullname: updatedUser.fullname,
             authToken: updatedUser.authToken,
           },

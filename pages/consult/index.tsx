@@ -1,20 +1,15 @@
 import Navbar from "@/components/Navbar";
 import Question from "@/components/Question";
 import { GrPrevious, GrNext } from "react-icons/gr";
-import { FormEventHandler, Fragment, SelectHTMLAttributes, useEffect, useRef, useState } from "react";
+import { FormEventHandler, Fragment, useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import { getCookie, hasCookie } from "cookies-next";
 import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
-import { NextApiRequest, NextApiResponse } from "next";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
-
-type getServerSidePropsType = {
-  req: NextApiRequest;
-  res: NextApiResponse;
-};
+import { getServerSidePropsType, loggedInUserDataType } from "@/types";
 
 export async function getServerSideProps({ req, res }: getServerSidePropsType) {
   const prisma = new PrismaClient();
@@ -56,13 +51,7 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
 }
 
 interface ConsultProps {
-  user: {
-    id: string;
-    email: string;
-    fullname: string;
-    password: string;
-    isVerified: boolean;
-  } | null;
+  user: loggedInUserDataType | null;
   questionList: {
     sympCode: number;
     question: string;
@@ -299,7 +288,7 @@ export default function Consult({ user, questionList }: ConsultProps) {
         <title>Konsultasi - SIPBUK</title>
         <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
       </Head>
-      <Navbar isSticky={false} user={user} />
+      <Navbar isSticky={false} userFullname={user?.fullname} />
       <main className="safe-horizontal-padding mt-[16px] md:mt-[48px]">
         {questionList && questionList?.length > 0 ? (
           <Fragment>
