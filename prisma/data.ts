@@ -409,3 +409,13 @@ export const pestsAndDeseasesHasSymptomsRawData = [
   { pestAndDeseaseCode: 8, symptomCode: 27, expertCF: 1 },
   { pestAndDeseaseCode: 8, symptomCode: 28, expertCF: 1 },
 ];
+
+export const userDemoAccount = {
+  fullname: "SIPBUK Demo Account",
+  email: "demo@sipbuk.com",
+  password: "demo123", // must be AES encrypted while seeding
+  isVerified: true,
+  verifyToken: "vt-573d4ffb-a0e6-4b02-be9e-44d487dd090f",
+  authToken: null,
+  passwordResetToken: null,
+};
