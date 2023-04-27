@@ -18,7 +18,7 @@ export default function passwordResetEmaiOptions(
   return {
     from: `SIPBUK <${process.env.NODEMAILER_USER}>`,
     to: email,
-    subject: "Reset Kata Sandi Akun SIPBUK",
+    subject: "Pengaturan Ulang Kata Sandi Akun SIPBUK",
     html: resetPasswordEmailHTML
       .replaceAll("{{FULL_NAME}}", fullname)
       .replaceAll("{{RESET_TOKEN}}", resetToken)
