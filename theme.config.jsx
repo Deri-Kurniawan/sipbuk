@@ -95,7 +95,7 @@ export default {
   footer: {
     text: (
       <p>
-        ©{new Date().getFullYear()}{" "}
+        Copyright ©{new Date().getFullYear()}{" "}
         <Link href="/" className="text-blue-400">
           SIPBUK
         </Link>
