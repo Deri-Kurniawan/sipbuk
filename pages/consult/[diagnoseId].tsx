@@ -8,6 +8,7 @@ import Navbar from '@/components/Navbar';
 import CertaintyFactor from '@/utils/certaintyFactor';
 import Link from 'next/link';
 import { NextApiRequest, NextApiResponse } from 'next';
+import Footer from '@/components/Footer';
 
 type getServerSidePropsType = {
     params: {
@@ -347,6 +348,7 @@ export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryS
                     </Link>
                 </div>
             </main>
+            <Footer />
         </>
     )
 }
