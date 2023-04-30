@@ -28,7 +28,7 @@ export default {
     const { asPath } = useRouter();
     if (asPath !== "/") {
       return {
-        titleTemplate: "%s - SIPBUK Dokumentasi",
+        titleTemplate: "%s - Dokumentasi SIPBUK",
       };
     }
   },
