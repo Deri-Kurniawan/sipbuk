@@ -95,7 +95,7 @@ export default {
   footer: {
     text: (
       <p>
-        Copyright ©{new Date().getFullYear()}{" "}
+        Copyright ©2022-{new Date().getFullYear()}{" "}
         <Link href="/" className="text-blue-400">
           SIPBUK
         </Link>
