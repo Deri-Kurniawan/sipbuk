@@ -163,7 +163,7 @@ export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryS
                     <p className="text-center text-base leading-[24px] max-w-[660px] m-auto mb-2">
                         Berikut merupakan cara pengendalian, serta bahan aktif yang dapat anda gunakan
                     </p>
-                    <p className='text-center text-base leading-[24px] max-w-[660px] m-auto mb-10 text-gray-500'>Terakhir diperbarui pada {new Date(diagnoseHistory.updatedAt).toLocaleDateString("id-ID", {
+                    <p className='text-center text-base leading-[24px] max-w-[660px] m-auto mb-10 text-gray-500'>Terakhir diperbarui pada {new Date(diagnoseHistory.pestsAndDeseases.updatedAt).toLocaleDateString("id-ID", {
                         weekday: "long",
                         year: "numeric",
                         month: "long",
