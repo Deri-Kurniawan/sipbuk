@@ -243,13 +243,27 @@ export const pestsAndDeseasesRawData = [
     solution: `
       <ol>
         <li>
-          <p>Belum ada data</p>
+          <p>Mengurangi kepadatan tajuk tanaman</p>
+          <p>Karena hama ini menyukai kelembaban, maka dianjurkan untuk mengurangi kepadatan tajuk tanaman dan buah, serta menjaga kebersihan lingkungan di sekitar tanaman.</p>
+        </li>
+        <li>
+          <p>Membersihkan bagian tanaman yang terinfeksi</p>
+          <p>Menjaga kebersihan tanaman dengan cara membuang daun atau bagian tanaman yang telah mati atau terinfeksi kutu putih.</p>
+        </li>
+        <li>
+          <p>Memangkas cabang yang terinfeksi</p>
+          <p>Memangkas cabang yang terinfeksi kutu putih untuk mengurangi populasi kutu putih dan mencegah penyebaran ke bagian tanaman lain.</p>
         </li>
       </ol>
       `,
     activeIngredient: `
       <ol>
-        <li>Belum ada data</li>
+        <li>
+        ${extLink(
+          "Deltametrin 20gr/ltr",
+          "https://www.google.com/search?q=Deltametrin%20adalah"
+        )}
+        </li>
       </ol>
       `,
   },
