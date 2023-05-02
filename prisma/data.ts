@@ -303,15 +303,33 @@ export const pestsAndDeseasesRawData = [
     solution: `
       <ol>
         <li>
-          <p>Belum ada data</p>
+          <p>Tanam tumbuhan pengusir belalang, seperti tanaman lavender atau serai, di sekitar area pertanian atau kebun Anda. Belalang akan menghindari daerah yang memiliki bau-bauan dari tanaman-tanaman ini.</p>
+        </li>
+        <li>
+          <p>Pasang perangkap belalang di area pertanian atau kebun Anda. Perangkap belalang dapat dibuat dengan menggunakan botol plastik bekas yang diberi cairan manis atau minuman beralkohol sebagai umpannya.</p>
+        </li>
+        <li>
+          <p>Gunakan insektisida pengusir belalang yang mengandung bahan aktif seperti lambda-cyhalothrin atau deltamethrin. Insektisida ini biasanya tersedia dalam bentuk cairan atau serbuk yang dapat dicampur dengan air.</p>
+          <p>Sebelum menggunakan insektisida, pastikan Anda membaca instruksi dan dosis penggunaannya dengan benar, serta mengenakan perlengkapan keselamatan seperti masker dan sarung tangan.</p>
         </li>
       </ol>
       `,
     activeIngredient: `
       <ol>
-        <li>Belum ada data</li>
+        <li>
+          ${extLink(
+            "Deltamethrin 2.5gr/ltr",
+            "https://www.google.com/search?q=Deltamethrin%20adalah"
+          )}
+        </li>
+        <li>
+          ${extLink(
+            "Sihalotrin 5gr/ltr",
+            "https://www.google.com/search?q=Sihalotrin%20adalah"
+          )}
+        </li>
       </ol>
-      `,
+    `,
   },
   {
     code: 5,
@@ -319,17 +337,36 @@ export const pestsAndDeseasesRawData = [
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
     solution: `
-      <ol>
-        <li>
-          <p>Belum ada data</p>
-        </li>
-      </ol>
-      `,
+    <ol>
+      <li>
+        <p>Menjaga kebersihan lingkungan sekitar tanaman</p>
+        <p>Karat daun seringkali menyerang tanaman yang tumbuh di lingkungan yang lembab dan kotor. Oleh karena itu, pastikan lingkungan sekitar tanaman tetap bersih dan kering.</p>
+      </li>
+      <li>
+        <p>Membuang daun-daun yang terinfeksi</p>
+        <p>Jika sudah ada daun yang terinfeksi karat daun, sebaiknya segera dipotong dan dibuang jauh dari tanaman. Hal ini bertujuan agar spora penyebab penyakit tidak menyebar ke daun-daun lain.</p>
+      </li>
+      <li>
+        <p>Penggunaan fungisida</p>
+        <p>Jika serangan penyakit sudah parah, Anda bisa menggunakan fungisida yang direkomendasikan oleh sistem. Pastikan Anda membaca instruksi dan dosis penggunaannya dengan benar, dan mengenakan perlengkapan keselamatan saat menggunakan fungisida.</p>
+      </li>
+    </ol>`,
     activeIngredient: `
-      <ol>
-        <li>Belum ada data</li>
-      </ol>
-      `,
+    <ol>
+      <li> ${extLink(
+        "Propineb 70%",
+        "https://www.google.com/search?q=Propineb%20adalah"
+      )}</li>
+      <li> ${extLink(
+        "Tebuconazole 25 gr/ltr",
+        "https://www.google.com/search?q=Tebuconazole%20adalah"
+      )}</li>
+      <li>${extLink(
+        "Triadimenol 25 gr/ltr",
+        "https://www.google.com/search?q=Triadimenol%20adalah"
+      )}</li>
+    </ol>
+    `,
   },
   {
     code: 6,
@@ -339,15 +376,46 @@ export const pestsAndDeseasesRawData = [
     solution: `
       <ol>
         <li>
-          <p>Belum ada data</p>
+          <p>Menjaga sirkulasi udara di sekitar tanaman</p>
+          <p>
+            Embun jelaga seringkali menyerang tanaman yang tumbuh di daerah yang lembab dan memiliki sirkulasi udara yang buruk. Oleh karena itu, pastikan sirkulasi udara di sekitar tanaman tetap baik dengan melakukan pemangkasan daun-daun yang terlalu rapat dan menjaga jarak tanam yang cukup antara satu tanaman dengan tanaman lainnya.
+          </p>
+        </li>
+        <li>
+          <p>Mengurangi kelembaban di sekitar tanaman</p>
+          <p>
+            Embun jelaga dapat muncul pada daun yang basah atau lembab. Oleh karena itu, pastikan tanaman tidak terlalu sering disiram dan menghindari penyiraman pada malam hari. Jika terlalu lembab, dapat mempertimbangkan penggunaan pengering udara atau dehumidifier di sekitar tanaman.
+          </p>
+        </li>
+        <li>
+          <p>Penggunaan fungisida</p>
+          <p>
+            Jika serangan penyakit sudah parah, Anda bisa menggunakan fungisida yang direkomendasikan oleh sistem. Pastikan Anda membaca instruksi dan dosis penggunaannya dengan benar, dan mengenakan perlengkapan keselamatan saat menggunakan fungisida.
+          </p>
         </li>
       </ol>
-      `,
+    `,
     activeIngredient: `
       <ol>
-        <li>Belum ada data</li>
+        <li> ${extLink(
+          "Propineb 70%",
+          "https://www.google.com/search?q=Propineb%20adalah"
+        )}
+        </li>
+        <li>
+          ${extLink(
+            "Triforine 50 gr/ltr",
+            "https://www.google.com/search?q=Triforine%20adalah"
+          )}
+        </li>
+        <li>
+          ${extLink(
+            "Tebuconazole 25 gr/ltr",
+            "https://www.google.com/search?q=Tebuconazole%20adalah"
+          )}
+        </li>
       </ol>
-      `,
+    `,
   },
   {
     code: 7,
@@ -357,15 +425,39 @@ export const pestsAndDeseasesRawData = [
     solution: `
       <ol>
         <li>
-          <p>Belum ada data</p>
+          <p>Memetik buah yang sudah matang</p>
+          <p>Pada saat panen, pastikan Anda memetik buah yang sudah matang sepenuhnya. Buah yang masih setengah matang atau belum matang dapat membusuk lebih cepat, sehingga menjadi mudah terserang penyakit busuk buah.</p>
+        </li>
+        <li>
+          <p>Menjaga kebersihan lingkungan</p>
+          <p>Pastikan lingkungan sekitar kebun tetap bersih dan terjaga. Buang daun atau sisa-sisa tanaman yang sudah mati, sehingga tidak menimbulkan kelembaban yang berlebihan dan mempercepat perkembangan jamur.</p>
+        </li>
+        <li>
+          <p>Memisahkan buah yang terinfeksi</p>
+          <p>Jika ada buah yang sudah terinfeksi penyakit busuk buah, segera pisahkan dari buah yang sehat. Hal ini dapat membantu mengurangi penyebaran penyakit ke buah-buah yang masih sehat.</p>
+        </li>
+        <li>
+          <p>Penggunaan fungisida</p>
+          <p>Jika serangan penyakit sudah parah, Anda bisa menggunakan fungisida yang direkomendasikan oleh sistem. Pastikan Anda membaca instruksi dan dosis penggunaannya dengan benar, dan mengenakan perlengkapan keselamatan saat menggunakan fungisida.</p>
         </li>
       </ol>
-      `,
+    `,
     activeIngredient: `
       <ol>
-        <li>Belum ada data</li>
+        <li>
+          ${extLink(
+            "Mancozeb 50 gr/ltr",
+            "https://www.google.com/search?q=Mancozeb%20adalah"
+          )}
+        </li>
+        <li>
+          ${extLink(
+            "Mancozeb 80wp",
+            "https://www.google.com/search?q=Mancozeb%20adalah"
+          )}
+        </li>
       </ol>
-      `,
+    `,
   },
   {
     code: 8,
@@ -375,13 +467,39 @@ export const pestsAndDeseasesRawData = [
     solution: `
       <ol>
         <li>
-          <p>Belum ada data</p>
+          <p><strong>Pengaturan Drainase</strong></p>
+          <p>Penyakit busuk akar disebabkan oleh lingkungan yang lembab dan tanah yang tergenang air. Pastikan area tanaman memiliki drainase yang cukup agar air tidak tergenang di sekitar akar tanaman.</p>
+        </li>
+        <li>
+          <p><strong>Perbaikan Tanah</strong></p>
+          <p>Jika tanah di sekitar tanaman terlalu padat atau kurang subur, cobalah untuk menambahkan kompos atau pupuk organik ke dalam tanah agar tanah menjadi lebih gembur dan subur. Hal ini akan membantu memperbaiki sistem perakaran tanaman dan meningkatkan daya tahan terhadap penyakit.</p>
+        </li>
+        <li>
+          <p><strong>Penggunaan Fungisida</strong></p>
+          <p>Jika penyakit sudah sangat parah, Anda bisa menggunakan fungisida yang direkomendasikan oleh sistem. Pastikan Anda membaca instruksi dan dosis penggunaannya dengan benar, dan mengenakan perlengkapan keselamatan saat menggunakan fungisida.</p>
         </li>
       </ol>
       `,
     activeIngredient: `
       <ol>
-        <li>Belum ada data</li>
+        <li>
+          ${extLink(
+            "Pupuk Hayati",
+            "https://www.google.com/search?q=Pupuk%20Hayati%20adalah"
+          )}
+        </li>
+        <li>
+          ${extLink(
+            "Trikonazol 20%",
+            "https://www.google.com/search?q=Trikonazol%20adalah"
+          )}
+        </li>
+        <li>
+          ${extLink(
+            "Mankozeb 64%",
+            "https://www.google.com/search?q=Mankozeb%20adalah"
+          )}
+        </li>
       </ol>
       `,
   },
