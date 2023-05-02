@@ -61,6 +61,18 @@ const initialSeeds = async () => {
   createUser();
 };
 
+const updatePestsAndDesease = async () => {
+  const code = Number(process.argv[3]);
+  await prisma.pestsAndDeseases.update({
+    where: {
+      code,
+    },
+    data: {
+      ...pestsAndDeseasesRawData.find((_) => _.code == code),
+    },
+  });
+};
+
 async function main() {
   /* example argv usage: `yarn db:seed --init` and so on */
   process.argv.find((_) => _ == "--init") && initialSeeds();
@@ -70,6 +82,8 @@ async function main() {
     createManyPestsAndDeseasesHasSymptoms();
   process.argv.find((_) => _ == "--cu") && createUser();
   process.argv.find((_) => _ == "--du") && deleteUser();
+  // usage: yarn db:seed --upad 1 (1 is the code of the pest or desease)
+  process.argv.find((_) => _ == "--upad") && updatePestsAndDesease();
 }
 
 main()

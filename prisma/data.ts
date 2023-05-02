@@ -275,13 +275,23 @@ export const pestsAndDeseasesRawData = [
     solution: `
       <ol>
         <li>
-          <p>Belum ada data</p>
+          <p><strong>Manual Pemindahan Kantung</strong></p>
+          <p>Jika hanya ada sedikit kantung ulat kantong pada tanaman anda, anda bisa mencoba untuk memindahkan kantung-kantung tersebut menggunakan tangan ke daun atau tanaman lain yang tidak terlalu penting. Hal ini dilakukan agar ulat kantong tidak meluas ke tanaman lain.</p>
+        </li>
+        <li>
+          <p><strong>Penggunaan Insektisida</strong></p>
+          <p>Jika serangan ulat kantong sudah sangat parah, Anda bisa menggunakan insektisida yang direkomendasikan oleh sistem. Pastikan Anda membaca instruksi dan dosis penggunaannya dengan benar, dan mengenakan perlengkapan keselamatan saat menggunakan insektisida.</p>
         </li>
       </ol>
       `,
     activeIngredient: `
       <ol>
-        <li>Belum ada data</li>
+        <li>
+        ${extLink(
+          "Deltametrin 20gr/ltr",
+          "https://www.google.com/search?q=Deltametrin%20adalah"
+        )}
+        </li>
       </ol>
       `,
   },
