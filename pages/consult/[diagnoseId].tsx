@@ -5,7 +5,7 @@ import { PrismaClient } from '@prisma/client';
 import Head from 'next/head';
 import { getCookie, hasCookie } from "cookies-next";
 import Navbar from '@/components/Navbar';
-import CertaintyFactor from '@/utils/certaintyFactor';
+import CertaintyFactor, { TCalculatedCombinationRuleCF } from '@/utils/certaintyFactor';
 import Link from 'next/link';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Footer from '@/components/Footer';
@@ -84,30 +84,7 @@ interface DiagnoseResultProps {
             updatedAt: string
         }
     };
-    diagnoseHistoryStep: {
-        code: number;
-        name: string;
-        imageUrl: string;
-        createdAt: string;
-        updatedAt: string;
-        PestsAndDeseasesHasSymptoms: {
-            id: number;
-            pestAndDeseaseCode: number;
-            symptomCode: number;
-            expertCF: number;
-            symptoms: {
-                code: number;
-                info: string;
-                imageUrl: string;
-                createdAt: string;
-                updatedAt: string
-            };
-            userCF: number;
-        }[];
-        calculatedSingleRuleCF: number;
-        combinationRuleCF: number;
-        finalCF: number;
-    }[];
+    diagnoseHistoryStep: TCalculatedCombinationRuleCF[];
 }
 
 export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryStep }: DiagnoseResultProps): JSX.Element {
@@ -296,7 +273,7 @@ export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryS
                                             <br />
                                             <table className='text-left'>
                                                 <tbody>
-                                                    {JSON.parse(JSON.stringify(step.combinationRuleCF)).map((PD, j) => (
+                                                    {JSON.parse(JSON.stringify(step.calculatedCombinationRuleCF)).map((PD, j) => (
                                                         <Fragment key={`${j}-padhs`}>
                                                             <tr>
                                                                 <td><pre data-prefix={j + 1}>CF[H,E]<sub>{j === 0 ? (
@@ -311,7 +288,7 @@ export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryS
                                                                 <td><pre>+</pre></td>
                                                                 <td>
                                                                     <pre className='text-yellow-400'>
-                                                                        {j === 0 ? toFixedEmitter(step.calculatedSingleRuleCF[1]) : toFixedEmitter(step.combinationRuleCF[j - 1])}
+                                                                        {j === 0 ? toFixedEmitter(step.calculatedSingleRuleCF[1]) : toFixedEmitter(step.calculatedCombinationRuleCF[j - 1])}
                                                                     </pre>
                                                                 </td>
                                                                 <td><pre>*</pre></td>
