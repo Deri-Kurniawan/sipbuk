@@ -31,27 +31,27 @@ type TData<T = {}, PestsAndDeseasesHasSymptoms = {}> = {
   PestsAndDeseasesHasSymptoms: TPestsAndDeseasesHasSymptoms<PestsAndDeseasesHasSymptoms>[];
 } & T;
 
-type TKnowledgeBase = TData;
+export type TKnowledgeBase = TData;
 
-type TMixedKnowledgeBaseWithUserCFInput = TData<{}, { userCF: number }>;
+export type TMixedKnowledgeBaseWithUserCFInput = TData<{}, { userCF: number }>;
 
-type TCalculatedSingleRuleCF = TData<
+export type TCalculatedSingleRuleCF = TData<
   {
     calculatedSingleRuleCF: number[];
   },
   { userCF: number }
 >;
 
-type TCalculatedCombinationRuleCF = TData<
+export type TCalculatedCombinationRuleCF = TData<
   {
     calculatedSingleRuleCF: number[];
-    combinationRuleCF: number[];
+    calculatedCombinationRuleCF: number[];
     finalCF: number;
   },
   { userCF: number }
 >;
 
-type TConclusion = TCalculatedCombinationRuleCF;
+export type TConclusion = TCalculatedCombinationRuleCF;
 
 interface ICertaintyFactor {
   userInputData: TUserInputData;
@@ -203,7 +203,7 @@ export default class CertaintyFactor implements ICertaintyFactor {
         const { calculatedSingleRuleCF, name } = rule;
 
         let finalCF: number = 0;
-        const combinationRuleCF: number[] = [];
+        const calculatedCombinationRuleCF: number[] = [];
 
         switch (calculatedSingleRuleCF.length) {
           case 1: // 1 CF[H,E] cannot be combined with next CF
@@ -225,7 +225,7 @@ export default class CertaintyFactor implements ICertaintyFactor {
                   // CF[H,E]a,b = CF[H,E]a * CF[H,E]b (1 - CF[H,E]a)
                   const newCombinationCF: number =
                     currentCF + prevCF * (1 - currentCF);
-                  combinationRuleCF.push(newCombinationCF);
+                  calculatedCombinationRuleCF.push(newCombinationCF);
                   finalCF = newCombinationCF;
                   return newCombinationCF;
                 }
@@ -242,7 +242,7 @@ export default class CertaintyFactor implements ICertaintyFactor {
 
         return {
           ...rule,
-          combinationRuleCF,
+          calculatedCombinationRuleCF,
           finalCF,
         };
       }
