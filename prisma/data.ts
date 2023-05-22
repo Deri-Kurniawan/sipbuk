@@ -6,175 +6,175 @@ export const symptomsRawData = [
     code: 1,
     info: "Bintik-bintik coklat bekas tusukan pada buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 2,
-    info: "Buah membusuk ",
+    info: "Buah membusuk",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1684642183/buah_membusuk_il6vmw.jpg",
   },
   {
     code: 3,
     info: "Pada biji buah muda terdapat bintik-bintik berwarna kehitaman",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 4,
     info: "Bercak coklat pada buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 5,
     info: "Buah mengalami kerontokan",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 6,
     info: "Pada batang, daun dan buah terlihat ada serbuk putih",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684643321/Pada_batang_daun_dan_buah_terlihat_ada_serbuk_putih_xoa5mz.png",
   },
   {
     code: 7,
     info: "Tanaman di hinggapi banyak semut",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684711280/Tanaman_di_hinggapi_banyak_semut_kwkm7k.jpg",
   },
   {
     code: 8,
     info: "Mengalami kerontokan pada saat muncul bunga",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 9,
     info: "Bakal buah mengalami kerontokan",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1684694938/Bakal_buah_mengalami_kerontokan_bopr41.png",
   },
   {
     code: 10,
     info: "Terdapat lubang-lubang kecil pada daun",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 11,
     info: "Pucuk daun mengulung",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 12,
     info: "Daun mengkerut dan keriting",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 13,
     info: "Kerontokan pada daun",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 14,
     info: "Daun menjadi kering",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 15,
     info: "Terdapat lubang kecil bekas gigitan di buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 16,
     info: "Daun memiliki bercak berwarna merah bata",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684695414/Daun_memiliki_bercak_berwarna_merah_bata_vpt4cr.png",
   },
   {
     code: 17,
-    info: "Bercak kering berwarna putih berbentuk oval di daun ",
+    info: "Bercak kering berwarna putih berbentuk oval di daun",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 18,
     info: "Warna daun berubah menjadi kuning",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 19,
-    info: "Daun jambu dilapisi lapisan berwarna hitam seperti arang ",
+    info: "Daun jambu dilapisi lapisan berwarna hitam seperti arang",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 20,
     info: "Di daun terlihat banyak bercak hitam",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 21,
     info: "Daun menjadi sobek",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 22,
     info: "Daun berlubang besar",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684695412/Daun_berlubang_besar_jtztxz.jpg",
   },
   {
     code: 23,
     info: "Terdapat bintik bintik memar pada kulit buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 24,
     info: "Bintik-bintik hitam pada daun, tangkai, atau kulit buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 25,
     info: "Daun menguning",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 26,
     info: "Pertumbuhan tanaman terasa lambat",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 27,
     info: "Akar berubah warna menjadi warna hitam atau coklat",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 28,
     info: "Beberapa bagian tanaman menjadi layu",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 29,
     info: "Bercak kecil sebesar ukuran jarum",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
 ];
 
@@ -183,7 +183,7 @@ export const pestsAndDeseasesRawData = [
     code: 1,
     name: "Hama Lalat buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
     solution: `
       <ol>
         <li>
@@ -239,7 +239,7 @@ export const pestsAndDeseasesRawData = [
     code: 2,
     name: "Hama Kutu Putih",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
     solution: `
       <ol>
         <li>
@@ -271,7 +271,7 @@ export const pestsAndDeseasesRawData = [
     code: 3,
     name: "Hama Ulat Kantong",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
     solution: `
       <ol>
         <li>
@@ -299,7 +299,7 @@ export const pestsAndDeseasesRawData = [
     code: 4,
     name: "Hama Belalang",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
     solution: `
       <ol>
         <li>
@@ -335,7 +335,7 @@ export const pestsAndDeseasesRawData = [
     code: 5,
     name: "Penyakit Karat Daun",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
     solution: `
     <ol>
       <li>
@@ -372,7 +372,7 @@ export const pestsAndDeseasesRawData = [
     code: 6,
     name: "Penyakit Embun Jelaga",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
     solution: `
       <ol>
         <li>
@@ -421,7 +421,7 @@ export const pestsAndDeseasesRawData = [
     code: 7,
     name: "Penyakit Busuk Buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
     solution: `
       <ol>
         <li>
@@ -463,7 +463,7 @@ export const pestsAndDeseasesRawData = [
     code: 8,
     name: "Penyakit Busuk Akar",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1680159231/guava_xysrju.jpg",
+      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
     solution: `
       <ol>
         <li>
