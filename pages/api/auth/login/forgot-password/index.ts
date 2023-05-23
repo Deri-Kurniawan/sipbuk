@@ -1,12 +1,10 @@
 import { regexp } from "@/utils/regexp";
-import { PrismaClient } from "@prisma/client";
 import { NextApiResponse } from "next";
 import { NextApiRequest } from "next";
 import { v4 as uuidv4 } from "uuid";
 import { transporter } from "@/utils/nodemailer/transporter";
 import passwordResetEmaiOptions from "@/utils/nodemailer/options/passwordResetEmailOptions";
-
-const prisma = new PrismaClient();
+import prisma from "@/prisma";
 
 export default async function handler(
   req: NextApiRequest,

@@ -4,15 +4,14 @@ import { GrPrevious, GrNext } from "react-icons/gr";
 import { FormEventHandler, Fragment, useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import { getCookie, hasCookie } from "cookies-next";
-import { PrismaClient } from "@prisma/client";
 import Link from "next/link";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import { getServerSidePropsType, loggedInUserDataType } from "@/types";
+import prisma from "@/prisma";
 
 export async function getServerSideProps({ req, res }: getServerSidePropsType) {
-  const prisma = new PrismaClient();
   const isCookieExist = hasCookie("user", { req, res });
 
   const fetchSymptoms = await prisma.symptoms.findMany({

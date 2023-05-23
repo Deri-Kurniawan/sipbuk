@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { hasCookie, getCookie, deleteCookie } from "cookies-next";
-import { PrismaClient } from '@prisma/client';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { loggedInUserDataType } from '@/types';
+import prisma from '@/prisma';
 
 type getServerSidePropsType = {
     req: NextApiRequest;
@@ -14,7 +14,6 @@ type getServerSidePropsType = {
 };
 
 export async function getServerSideProps({ req, res }: getServerSidePropsType) {
-    const prisma = new PrismaClient();
     const hasLoggedIn = hasCookie("user", { req, res });
 
     if (!hasLoggedIn) {

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import prisma from "@/prisma";
 
 type TUserInputData = {
   [key: string]: number;
@@ -97,8 +97,6 @@ export default class CertaintyFactor implements ICertaintyFactor {
   }
 
   async generateKnowledgeBase() {
-    const prisma = new PrismaClient();
-
     const data = await prisma.pestsAndDeseases.findMany({
       include: {
         PestsAndDeseasesHasSymptoms: {

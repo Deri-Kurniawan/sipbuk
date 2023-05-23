@@ -4,14 +4,12 @@ import Image from "next/image";
 import forgotPasswordImage from "@/assets/forgot-password.jpg";
 import Head from "next/head";
 import { toast } from "react-hot-toast";
-import { PrismaClient } from "@prisma/client";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { clientSideAESEncrypt } from "@/utils/cryptoAES";
 import { hasCookie } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
-
-const prisma = new PrismaClient();
+import prisma from "@/prisma";
 
 type getServerSidePropsType = {
   query: {

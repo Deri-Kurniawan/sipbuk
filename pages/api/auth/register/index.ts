@@ -1,12 +1,10 @@
 import { serverSideAESDecrypt } from "@/utils/cryptoAES";
 import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
 import { v4 as uuidv4 } from "uuid";
 import { regexp } from "@/utils/regexp";
 import { transporter } from "@/utils/nodemailer/transporter";
 import verificationEmailOptions from "@/utils/nodemailer/options/verificationEmailOptions";
-
-const prisma = new PrismaClient();
+import prisma from "@/prisma";
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
   const { method } = req;

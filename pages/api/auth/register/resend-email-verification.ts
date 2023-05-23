@@ -1,11 +1,9 @@
 import { transporter } from "@/utils/nodemailer/transporter";
 import { regexp } from "@/utils/regexp";
-import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
 import { v4 as uuidv4 } from "uuid";
 import verificationEmailOptions from "@/utils/nodemailer/options/verificationEmailOptions";
-
-const prisma = new PrismaClient();
+import prisma from "@/prisma";
 
 export default async function handler(
   req: NextApiRequest,

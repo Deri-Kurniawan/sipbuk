@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import { Fragment } from 'react';
-import { PrismaClient } from '@prisma/client';
 import Head from 'next/head';
 import { getCookie, hasCookie } from "cookies-next";
 import Navbar from '@/components/Navbar';
@@ -19,7 +18,6 @@ type getServerSidePropsType = {
 }
 
 export async function getServerSideProps({ params: { diagnoseId }, req, res }: getServerSidePropsType) {
-    const prisma = new PrismaClient();
     const isCookieExist = hasCookie("user", { req, res });
 
     const foundDiagnoseHistory = await prisma.usersDiagnoseHistory.findUnique({

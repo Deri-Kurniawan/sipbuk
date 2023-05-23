@@ -1,10 +1,8 @@
-import { serverSideAESDecrypt, serverSideAESEncrypt } from "@/utils/cryptoAES";
+import { serverSideAESDecrypt } from "@/utils/cryptoAES";
 import { NextApiRequest, NextApiResponse } from "next";
-import { PrismaClient } from "@prisma/client";
 import { regexp } from "@/utils/regexp";
 import { v4 as uuidv4 } from "uuid";
-
-const prisma = new PrismaClient();
+import prisma from "@/prisma";
 
 export default async function handler(
   req: NextApiRequest,

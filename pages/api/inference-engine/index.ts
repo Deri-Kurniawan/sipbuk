@@ -1,10 +1,8 @@
+import prisma from "@/prisma";
 import CertaintyFactor from "@/utils/certaintyFactor";
-import { PrismaClient } from "@prisma/client";
 import { NextApiResponse } from "next";
 import { NextApiRequest } from "next";
 import { v4 as uuidv4 } from "uuid";
-
-const prisma = new PrismaClient();
 
 export default async function handler(
   req: NextApiRequest,

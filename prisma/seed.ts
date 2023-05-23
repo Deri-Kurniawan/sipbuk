@@ -5,9 +5,7 @@ import {
   symptomsRawData,
   userDemoAccount,
 } from "./data";
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient();
+import prisma from ".";
 
 const createManyPestsAndDeseases = async () => {
   await prisma.pestsAndDeseases.createMany({

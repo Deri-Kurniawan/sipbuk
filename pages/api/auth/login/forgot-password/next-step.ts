@@ -1,11 +1,9 @@
 import { transporter } from "@/utils/nodemailer/transporter";
 import { serverSideAESDecrypt, serverSideAESEncrypt } from "@/utils/cryptoAES";
-import { PrismaClient } from "@prisma/client";
 import { NextApiResponse } from "next";
 import { NextApiRequest } from "next";
 import passwordChangedEmailOptions from "@/utils/nodemailer/options/passwordChangedEmail";
-
-const prisma = new PrismaClient();
+import prisma from "@/prisma";
 
 export default async function handler(
   req: NextApiRequest,
