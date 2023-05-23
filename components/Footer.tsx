@@ -37,6 +37,10 @@ const footLinks = [
         name: "Kirim Ulang Verifikasi",
         href: "/register/resend-email-verification",
       },
+      {
+        name: "Hubungi Kami",
+        href: `mailto:${process.env.NODEMAILER_USER}?subject=Hi%20SIPBUK%20Team`,
+      },
     ],
   },
   {
@@ -58,7 +62,7 @@ export default function Footer() {
   return (
     <>
       <footer>
-        <div className="safe-horizontal-padding pt-8">
+        <div className="pt-8 safe-horizontal-padding">
           <div className="block lg:flex lg:justify-between lg:gap-8">
             <div className="lg:max-w-sm lg:flex-1">
               <h1 className="text-3xl font-bold font-kodchasan">SIPBUK</h1>
