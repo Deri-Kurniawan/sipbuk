@@ -8,6 +8,7 @@ import CertaintyFactor, { TCalculatedCombinationRuleCF } from '@/utils/certainty
 import Link from 'next/link';
 import { NextApiRequest, NextApiResponse } from 'next';
 import Footer from '@/components/Footer';
+import prisma from '@/prisma';
 
 type getServerSidePropsType = {
     params: {
