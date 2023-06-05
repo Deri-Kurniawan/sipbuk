@@ -1,38 +1,34 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SIPBUK Web Application
 
-## Getting Started
+![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E&color=black)
+![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=2F74C0&color=black)
+![Next JS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white&color=black)
+![PlanetScale](https://img.shields.io/badge/planetscale-%23000000.svg?style=for-the-badge&logo=planetscale&logoColor=white&color=black)
+![MySQL](https://img.shields.io/badge/mysql-%2300f.svg?style=for-the-badge&logo=mysql&logoColor=DE8900&color=black)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=38BCF9&color=black)
+![DaisyUI](https://img.shields.io/badge/daisyui-5A0EF8?style=for-the-badge&logo=daisyui&logoColor=E49E4D&color=black)
+![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=8BBF3D&color=black)
+![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=2C8EBB&color=black)
+![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white&color=black)
 
-First, run the development server:
+SIPBUK (Sistem Pakar Jambu Kristal) berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+⚡️ Diagnosa Hama dan Penyakit Jambu Kristal dengan cepat dan akurat
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+💸 Solusi Hama dan Penyakit Jambu Kristal secara gratis
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+💯 Data yang digunakan berasal dari sumber yang terpercaya
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+💥 Dapat digunakan oleh siapa saja
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+📱 Dapat digunakan di mana saja
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+SIPBUK menggunakan metode Certainty Factor (CF) untuk menentukan tingkat kepastian dari suatu gejala yang dialami oleh tanaman jambu kristal.
 
-## Learn More
+## Website Resmi
 
-To learn more about Next.js, take a look at the following resources:
+Untuk menggunakan aplikasi, website resmi SIPBUK hanya di [sipbuk.deri.my.id](https://sipbuk.deri.my.id)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Dokumentasi dan Panduan Pengguna
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Untuk melihat dokumentasi dan cara penggunaan aplikasi, anda dapat mengunjungi halaman [sipbuk.deri.my.id/docs](https://sipbuk.deri.my.id/docs)
