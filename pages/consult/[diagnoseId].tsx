@@ -95,13 +95,13 @@ export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryS
     }
 
     const getAccurationLevel = (accurate: number): string => {
-        if (accurate === 1) {
+        if (accurate >= 0.9 && accurate <= 1) {
             return "Sangat Tinggi"
-        } else if (accurate >= 0.8) {
+        } else if (accurate >= 0.8 && accurate < 0.9) {
             return "Tinggi"
-        } else if (accurate >= 0.6) {
+        } else if (accurate >= 0.6 && accurate < 0.8) {
             return "Sedang"
-        } else if (accurate >= 0.4) {
+        } else if (accurate >= 0.4 && accurate < 0.6) {
             return "Rendah"
         } else {
             return "Sangat Rendah"
@@ -109,10 +109,8 @@ export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryS
     }
 
     const toFixedEmitter = (num: number): number => {
-        return Number(num) % 2 === 0 ? Number(num).toFixed(0) : Number(num).toFixed(4);
+        return Number(num) % 2 == 0 ? Number(num).toFixed(0) : Number(num).toFixed(2);
     }
-
-    const userInputParsed = JSON.parse(diagnoseHistory.userInputData)[0];
 
     return (
         <>
@@ -176,142 +174,31 @@ export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryS
                     <input type="checkbox" className="peer" />
 
                     <div className="text-xl font-medium collapse-title">
-                        Perhitungan Yang Dilakukan Sistem
+                        Persentase Kemungkinan Penyakit Lainnya
                     </div>
                     <div className="collapse-content">
-                        {/* collapse 1 */}
-                        <div tabIndex={0} className="my-3 border collapse collapse-plus border-base-300 bg-base-100 rounded-box lg:my-4">
-                            <input type="checkbox" className="peer" />
-
-                            <div className="text-xl font-medium collapse-title">
-                                1. Perhitungan Dengan Kaidah Tunggal
-                            </div>
-                            <div className="collapse-content">
-                                <div className='mockup-code'>
-                                    <pre>Rumus:</pre>
-                                    <pre>CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>] = CF[<span className='text-red-400'>H</span>] * CF[<span className='text-yellow-400'>E</span>]</pre>
-                                    <br />
-                                    <pre>Dimana: </pre>
-                                    <pre><span className='text-red-400'>H</span> = Nilai Keyakinan Pengguna </pre>
-                                    <pre><span className='text-yellow-400'>E</span> = Nilai Keyakinan Pakar </pre>
-                                </div>
-                                {/* collapsed content */}
-                                <div className='my-4 mockup-code'>
-                                    {diagnoseHistoryStep.map((step, i) => (
-                                        <Fragment key={i}>
-                                            <pre>{++i}. {step.name}:</pre>
-                                            <br />
-                                            <table className='text-center'>
-                                                <tbody>
-                                                    {step.PestsAndDeseasesHasSymptoms.map((PD, j) => (
-                                                        <Fragment key={`${j}-spadhs`}>
-                                                            <tr>
-                                                                <td><pre data-prefix={++j}>CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>{j}</sub></pre></td>
-                                                                <td><pre>=</pre></td>
-                                                                <td><pre className='text-red-400'>{userInputParsed[PD.symptomCode]}</pre></td>
-                                                                <td><pre>*</pre></td>
-                                                                <td><pre className='text-yellow-400'>{PD.expertCF}</pre></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td></td>
-                                                                <td><pre>=</pre></td>
-                                                                <td><pre>{(PD.expertCF * userInputParsed[PD.symptomCode] % 2 === 0 ? (
-                                                                    PD.expertCF * userInputParsed[PD.symptomCode]
-                                                                ).toFixed(0) : (
-                                                                    PD.expertCF * userInputParsed[PD.symptomCode]
-                                                                ).toFixed(2))}</pre></td>
-                                                            </tr>
-                                                        </Fragment>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                            <br />
-                                        </Fragment>
+                        <div className="overflow-x-auto">
+                            <table className="table w-full">
+                                <thead>
+                                    <tr>
+                                        <th>Kode</th>
+                                        <th>Nama Hama dan Penyakit</th>
+                                        <th>Persentase</th>
+                                        <th>Keterangan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {diagnoseHistoryStep.sort((a, b) => b.finalCF - a.finalCF).map((step, i) => (
+                                        <tr key={i} className={i == 0 ? 'text-green-500' : ''}>
+                                            <td>HP{step.code}</td>
+                                            <td>{step.name}</td>
+                                            <td>{toFixedEmitter(step.finalCF * 100)}%</td>
+                                            <td>{getAccurationLevel(step.finalCF)}</td>
+                                        </tr>
                                     ))}
-                                </div>
-                                {/* end of collapsed content */}
-                            </div>
+                                </tbody>
+                            </table>
                         </div>
-                        {/* end of collapse 1 */}
-                        {/* collapse 2 */}
-                        <div tabIndex={0} className="my-3 border collapse collapse-plus border-base-300 bg-base-100 rounded-box lg:my-4">
-                            <input type="checkbox" className="peer" />
-
-                            <div className="text-xl font-medium collapse-title">
-                                2. Perhitungan Dengan Kaidah Kombinasi
-                            </div>
-                            <div className="collapse-content">
-                                {/* collapsed content */}
-                                <div className='mockup-code'>
-                                    <pre>Rumus:</pre>
-                                    <pre>1. Diawali dengan:</pre>
-                                    <pre>CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>1,2</sub> = CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>1</sub> * CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>2</sub> + (1 - CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>1</sub>)
-                                    </pre>
-                                    <pre>Dimana </pre>
-                                    <pre>CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>1,2</sub> = Mengkombinasikan hasil kaidah tunggal CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>1</sub> dengan CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>2</sub></pre>
-                                    <br />
-                                    <pre>2. Dilanjutkan dengan</pre>
-                                    <pre>
-                                        CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>old,3</sub> = CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>old</sub> * CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>3</sub> + (1 - CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>old</sub>)
-                                    </pre>
-                                    <pre>Dimana </pre>
-                                    <pre>CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>old,3</sub> = Mengkombinasikan hasil kaidah kombinasi sebelumnya yaitu CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>1,2</sub> atau CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>old</sub> dengan CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>3</sub></pre>
-                                    <br />
-                                    <pre>3. Diakhiri dengan</pre>
-                                    <pre>
-                                        Hasil Persentase = CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>old,n</sub> * 100
-                                    </pre>
-                                    <pre>Dimana</pre>
-                                    <pre>CF[<span className='text-red-400'>H</span>,<span className='text-yellow-400'>E</span>]<sub>old,n</sub> = Hasil kaidah kombinasi terakhir</pre>
-                                </div>
-                                {/* algorithm intepreter 2 */}
-                                <div className='my-4 mockup-code'>
-                                    {diagnoseHistoryStep.map((step, i: number) => (
-                                        <Fragment key={`${i}-dhs`}>
-                                            <pre>{++i}.{step.name}:</pre>
-                                            <br />
-                                            <table className='text-left'>
-                                                <tbody>
-                                                    {JSON.parse(JSON.stringify(step.calculatedCombinationRuleCF)).map((PD, j) => (
-                                                        <Fragment key={`${j}-padhs`}>
-                                                            <tr>
-                                                                <td><pre data-prefix={j + 1}>CF[H,E]<sub>{j === 0 ? (
-                                                                    <>
-                                                                        <span className='text-red-400'>1</span>,<span className='text-yellow-400'>2</span>
-                                                                    </>
-                                                                ) : (<>
-                                                                    <span className='text-red-400'>old</span>,<span className='text-yellow-400'>{j + 2}</span>
-                                                                </>)}</sub></pre></td>
-                                                                <td><pre>=</pre></td>
-                                                                <td><pre className='text-red-400'>{j === 0 ? toFixedEmitter(step.calculatedSingleRuleCF[0]) : toFixedEmitter(step.calculatedSingleRuleCF[j])}</pre></td>
-                                                                <td><pre>+</pre></td>
-                                                                <td>
-                                                                    <pre className='text-yellow-400'>
-                                                                        {j === 0 ? toFixedEmitter(step.calculatedSingleRuleCF[1]) : toFixedEmitter(step.calculatedCombinationRuleCF[j - 1])}
-                                                                    </pre>
-                                                                </td>
-                                                                <td><pre>*</pre></td>
-                                                                <td><pre>(1</pre></td>
-                                                                <td><pre>-</pre></td>
-                                                                <td><pre className='text-red-400'>{j === 0 ? toFixedEmitter(step.calculatedSingleRuleCF[0]) : toFixedEmitter(step.calculatedSingleRuleCF[j])})</pre></td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td><pre></pre></td>
-                                                                <td><pre>=</pre></td>
-                                                                <td><pre>{toFixedEmitter(PD)}</pre></td>
-                                                            </tr>
-                                                        </Fragment>
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                            <br />
-                                        </Fragment >
-                                    ))}
-                                </div>
-                                {/* end of collapsed content */}
-                            </div>
-                        </div>
-                        {/* end of collapse 2 */}
                     </div>
                 </div>
 
