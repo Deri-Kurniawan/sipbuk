@@ -184,7 +184,7 @@ export default function Consult({ user, questionList }: ConsultProps) {
 
   useEffect(() => {
     const handleRightArrowKey = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key === "ArrowRight") {
+      if (e.key === "ArrowRight") {
         const nextQuestionIndex = questionOnViewport.index + 1;
         if (nextQuestionIndex < questionList.length) {
           const nextQuestionId = `question-${nextQuestionIndex}`;
@@ -205,7 +205,7 @@ export default function Consult({ user, questionList }: ConsultProps) {
     };
 
     const handleLeftArrowKey = (e: KeyboardEvent) => {
-      if (e.ctrlKey && e.key === "ArrowLeft") {
+      if (e.key === "ArrowLeft") {
         const prevQuestionIndex = questionOnViewport.index - 1;
         if (prevQuestionIndex >= 0) {
           const prevQuestionId = `question-${prevQuestionIndex}`;
@@ -416,21 +416,17 @@ export default function Consult({ user, questionList }: ConsultProps) {
                 <tbody>
                   <tr>
                     <td>
-                      <kbd className="kbd">Ctrl</kbd>
-                      <span className="px-2">+</span>
-                      <kbd className="kbd">▶︎</kbd>
-                    </td>
-                    <td>Pertanyaan Selanjutnya</td>
-                    <td><button className="btn" onClick={handleClickNextQuestion}>Coba</button></td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <kbd className="kbd">Ctrl</kbd>
-                      <span className="px-2">+</span>
                       <kbd className="kbd">◀︎</kbd>
                     </td>
                     <td>Pertanyaan Sebelumnya</td>
                     <td><button className="btn" onClick={handleClickPrevQuestion}>Coba</button></td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <kbd className="kbd">▶︎</kbd>
+                    </td>
+                    <td>Pertanyaan Selanjutnya</td>
+                    <td><button className="btn" onClick={handleClickNextQuestion}>Coba</button></td>
                   </tr>
                   <tr>
                     <td>
