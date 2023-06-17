@@ -181,7 +181,7 @@ export const symptomsRawData = [
 export const pestsAndDeseasesRawData = [
   {
     code: 1,
-    name: "Hama Lalat buah",
+    name: "Hama Lalat Buah",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
     solution: `
@@ -562,36 +562,10 @@ export const userDemoAccount = {
   passwordResetToken: null,
 };
 
-export const userInputSimulation = [
-  {
-    1: 0,
-    2: 0,
-    3: 0,
-    4: 0,
-    5: 0,
-    6: 0,
-    7: 0,
-    8: 0,
-    9: 0,
-    10: 0,
-    11: 0,
-    12: 0,
-    13: 0.4,
-    14: 0,
-    15: 0,
-    16: 0,
-    17: 0,
-    18: 0,
-    19: 0.6,
-    20: 0.8,
-    21: 0,
-    22: 0,
-    23: 0,
-    24: 0,
-    25: 0,
-    26: 0,
-    27: 0,
-    28: 0,
-    29: 0,
-  },
-];
+export const userInputTemplate = (() => {
+  const objectTemp = Object.create({});
+  for (let n = 1; n <= 29; n++) {
+    objectTemp[n] = 0;
+  }
+  return objectTemp;
+})();
