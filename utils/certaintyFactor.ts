@@ -3,7 +3,6 @@ import prisma from "@/prisma";
 type TUserInputData = {
   [key: string]: number;
 };
-
 type TPestsAndDeseasesHasSymptoms<T = {}> = {
   id: number;
   pestAndDeseaseCode: number;
@@ -29,6 +28,7 @@ type TData<T = {}, PestsAndDeseasesHasSymptoms = {}> = {
   activeIngredients: string;
   PestsAndDeseasesHasSymptoms: TPestsAndDeseasesHasSymptoms<PestsAndDeseasesHasSymptoms>[];
 } & T;
+
 export type TKnowledgeBase = TData;
 export type TMixedKnowledgeBaseWithUserCFInput = TData<{}, { userCF: number }>;
 export type TCalculatedSingleRuleCF = TData<
@@ -45,7 +45,6 @@ export type TCalculatedCombinationRuleCF = TData<
   },
   { userCF: number }
 >;
-
 export type TConclusion = TCalculatedCombinationRuleCF;
 
 interface ICertaintyFactor {
@@ -68,7 +67,7 @@ export default class CertaintyFactor implements ICertaintyFactor {
   private _calculatedCombinationRuleCF: any;
   private _conclusion: any;
 
-  constructor(userInputData: TUserInputData | {}) {
+  constructor(userInputData = {}) {
     this._userInputData = userInputData;
   }
 
@@ -113,35 +112,28 @@ export default class CertaintyFactor implements ICertaintyFactor {
     const knowledgeBase: TKnowledgeBase[] = (await this.generateKnowledgeBase())
       .knowledgeBase;
 
-    const knowledgeBaseRuleWithUserInputData: TMixedKnowledgeBaseWithUserCFInput[] =
-      knowledgeBase.map(
-        (rule: TKnowledgeBase): TMixedKnowledgeBaseWithUserCFInput => {
-          const { PestsAndDeseasesHasSymptoms } = rule;
+    const knowledgeBaseRuleWithUserInputData = knowledgeBase.map((rule) => {
+      const { PestsAndDeseasesHasSymptoms } = rule;
 
-          const PestsAndDeseasesHasSymptomsWithInjectedUserCF: TPestsAndDeseasesHasSymptoms<{
-            userCF: number;
-          }>[] = PestsAndDeseasesHasSymptoms.map(
-            (item: TPestsAndDeseasesHasSymptoms) => {
-              const {
-                symptoms: { code },
-              } = item;
-
-              const userCF: number = this._userInputData[code];
-
-              return {
-                ...item,
-                userCF,
-              };
-            }
-          );
+      const PestsAndDeseasesHasSymptomsWithInjectedUserCF =
+        PestsAndDeseasesHasSymptoms.map((item) => {
+          const {
+            symptoms: { code },
+          } = item;
+          const userCF = this._userInputData[code];
 
           return {
-            ...rule,
-            PestsAndDeseasesHasSymptoms:
-              PestsAndDeseasesHasSymptomsWithInjectedUserCF,
+            ...item,
+            userCF,
           };
-        }
-      );
+        });
+
+      return {
+        ...rule,
+        PestsAndDeseasesHasSymptoms:
+          PestsAndDeseasesHasSymptomsWithInjectedUserCF,
+      };
+    });
 
     this._knowledgeBase = knowledgeBaseRuleWithUserInputData;
     return this;
@@ -152,108 +144,97 @@ export default class CertaintyFactor implements ICertaintyFactor {
       await this.mixKnowledgeBaseWithUserCFInput()
     ).knowledgeBase;
 
-    const calculatedSingleRule: TCalculatedSingleRuleCF[] = knowledgeBase.map(
-      (rule): TCalculatedSingleRuleCF => {
-        const { PestsAndDeseasesHasSymptoms } = rule;
+    const calculatedSingleRule = knowledgeBase.map((rule) => {
+      const { PestsAndDeseasesHasSymptoms } = rule;
 
-        if (PestsAndDeseasesHasSymptoms.length === 1) {
-          const {
-            userCF,
-            expertCF,
-          }: TPestsAndDeseasesHasSymptoms<{ userCF: number }> =
-            PestsAndDeseasesHasSymptoms[0];
-          const CF: number = userCF * expertCF;
-
-          return {
-            ...rule,
-            calculatedSingleRuleCF: [CF],
-          };
-        }
-
-        const calculatedSingleRuleCF = PestsAndDeseasesHasSymptoms.map(
-          ({ userCF, expertCF }) => {
-            const CF: number = userCF * expertCF;
-
-            return CF;
-          }
-        );
+      if (PestsAndDeseasesHasSymptoms.length === 1) {
+        const { userCF, expertCF } = PestsAndDeseasesHasSymptoms[0];
+        const CF = userCF * expertCF;
 
         return {
           ...rule,
-          calculatedSingleRuleCF,
+          calculatedSingleRuleCF: [CF],
         };
       }
-    );
+
+      const calculatedSingleRuleCF = PestsAndDeseasesHasSymptoms.map(
+        ({ userCF, expertCF }) => {
+          const CF = userCF * expertCF;
+          return CF;
+        }
+      );
+
+      return {
+        ...rule,
+        calculatedSingleRuleCF,
+      };
+    });
 
     this._calculatedSingleRuleCF = calculatedSingleRule;
     return this;
   }
 
   async calculateCombinationRule() {
-    const combinationRule: TCalculatedCombinationRuleCF[] = (
+    const calculatedSingleRuleCF: TCalculatedSingleRuleCF[] = (
       await this.calculateSingleRuleCF()
-    ).calculatedSingleRuleCF.map(
-      (rule: TCalculatedSingleRuleCF): TCalculatedCombinationRuleCF => {
-        const { calculatedSingleRuleCF, name } = rule;
+    ).calculatedSingleRuleCF;
 
-        let finalCF: number = 0;
-        const calculatedCombinationRuleCF: number[] = [];
+    const combinationRule = calculatedSingleRuleCF.map((rule) => {
+      const { calculatedSingleRuleCF, name } = rule;
 
-        switch (calculatedSingleRuleCF.length) {
-          case 1: // 1 CF[H,E] cannot be combined with next CF
-            finalCF = calculatedSingleRuleCF[0];
-            break;
+      let finalCF = 0;
+      const calculatedCombinationRuleCF: number[] = [];
 
-          case 2:
-            // 2 CF[H,E] cannot be combined with old CF
-            // CF[H,E]1,2 = CF[H,E]1 * CF[H,E]2 (1 - CF[H,E]1)
-            finalCF =
-              calculatedSingleRuleCF[0] +
-              calculatedSingleRuleCF[1] * (1 - calculatedSingleRuleCF[0]);
-            break;
+      switch (calculatedSingleRuleCF.length) {
+        // 1. CF[H,E] cannot be combined with next CF
+        case 1:
+          finalCF = calculatedSingleRuleCF[0];
+          break;
 
-          default:
-            if (calculatedSingleRuleCF.length > 2) {
-              calculatedSingleRuleCF.reduce(
-                (prevCF: number, currentCF: number) => {
-                  // CF[H,E]a,b = CF[H,E]a * CF[H,E]b (1 - CF[H,E]a)
-                  const newCombinationCF: number =
-                    currentCF + prevCF * (1 - currentCF);
-                  calculatedCombinationRuleCF.push(newCombinationCF);
-                  finalCF = newCombinationCF;
-                  return newCombinationCF;
-                }
-              );
-            } else {
-              throw new Error(
-                `"${name}" pest or desease has ${calculatedSingleRuleCF.length} PestsAndDeseaseHasSymptoms records`,
-                {
-                  cause: `"${name}" pest or desease needs at least 1 PestsAndDeseaseHasSymptoms record`,
-                }
-              );
-            }
-        }
+        case 2:
+          // 2. CF[H,E] cannot be combined with old CF
+          // CF[H,E]1,2 = CF[H,E]1 * CF[H,E]2 (1 - CF[H,E]1)
+          finalCF =
+            calculatedSingleRuleCF[0] +
+            calculatedSingleRuleCF[1] * (1 - calculatedSingleRuleCF[0]);
+          break;
 
-        return {
-          ...rule,
-          calculatedCombinationRuleCF,
-          finalCF,
-        };
+        default:
+          if (calculatedSingleRuleCF.length > 2) {
+            calculatedSingleRuleCF.reduce((prevCF, currentCF) => {
+              const newCombinationCF = currentCF + prevCF * (1 - currentCF);
+              calculatedCombinationRuleCF.push(newCombinationCF);
+              finalCF = newCombinationCF;
+              return newCombinationCF;
+            });
+          } else {
+            throw new Error(
+              `"${name}" pest or desease has ${calculatedSingleRuleCF.length} PestsAndDeseaseHasSymptoms records`,
+              {
+                cause: `"${name}" pest or desease needs at least 1 PestsAndDeseaseHasSymptoms record`,
+              }
+            );
+          }
       }
-    );
+
+      return {
+        ...rule,
+        calculatedCombinationRuleCF,
+        finalCF,
+      };
+    });
 
     this._calculatedCombinationRuleCF = combinationRule;
     return this;
   }
 
   async generateConclusion() {
-    const getHighestFinalCF: TConclusion = (
+    const calculatedCombinationRuleCF: TCalculatedCombinationRuleCF[] = (
       await this.calculateCombinationRule()
-    ).calculatedCombinationRuleCF.reduce(
-      (
-        prev: TCalculatedCombinationRuleCF,
-        current: TCalculatedCombinationRuleCF
-      ) => (prev.finalCF > current.finalCF ? prev : current),
+    ).calculatedCombinationRuleCF;
+
+    const getHighestFinalCF = calculatedCombinationRuleCF.reduce(
+      (prev, current) => (prev.finalCF > current.finalCF ? prev : current),
       { finalCF: 0 }
     );
 
