@@ -117,6 +117,17 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
     const [isLoadingSaveDiagnoseHistory, setIsLoadingSaveDiagnoseHistory] = useState(false);
     const globalCheckboxRef = React.useRef<HTMLInputElement>(null);
 
+    // setDataState setState function type
+    const sortSaveByNewestDate = (data: any[], setState: any) => {
+        const sorted = data.sort((a, b) => {
+            const createdAtA: any = new Date(a.createdAt);
+            const createdAtB: any = new Date(b.createdAt);
+            return createdAtB - createdAtA;
+        })
+
+        setState(sorted);
+    }
+
     const handleClickAcceptSaveDiagnoseHistory = async () => {
         const savedLocalStorageDiagnosesHistory = (async () => {
             setIsLoadingSaveDiagnoseHistory(true);
@@ -137,7 +148,7 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
         toast.promise(savedLocalStorageDiagnosesHistory()
             .then((res) => res.json())
             .then((res) => {
-                setUserDiagnosesHistory([...userDiagnosesHistory, ...res.data]);
+                sortSaveByNewestDate([...userDiagnosesHistory, ...res.data], setUserDiagnosesHistory);
 
                 if (typeof window !== "undefined") {
                     localStorage.removeItem("diagnosesHistoryId");
@@ -191,7 +202,6 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
             .then((res) => {
                 setUserDiagnosesHistory(userDiagnosesHistory.filter((diagnosesHistory: any) => !selectedDiagnosesHistoryId.includes(diagnosesHistory.id)));
                 setSelectedDiagnosesHistoryId([]);
-                console.log(res);
             })
             .catch(() => {
                 setOnDeleteSelectedDiagnoseHistory(false);
@@ -212,6 +222,10 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
             setLocalStorageDiagnosesHistory(JSON.parse(localStorage.getItem("diagnosesHistoryId") || "[]"));
         }
     }, [])
+
+    useEffect(() => {
+        sortSaveByNewestDate(userDiagnosesHistory, setUserDiagnosesHistory);
+    }, [userDiagnosesHistory]);
 
     return (
         <>
