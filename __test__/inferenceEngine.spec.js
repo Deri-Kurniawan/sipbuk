@@ -20,7 +20,7 @@ test("pengujian penggabungan basis pengetahuan dengan nilai masukan pengguna", a
   userInput[19] = 0.6;
   userInput[20] = 0.8;
 
-  const instance = new CertaintyFactor([userInput]);
+  const instance = new CertaintyFactor(userInput);
   const data = await (
     await instance.mixKnowledgeBaseWithUserCFInput()
   ).knowledgeBase;
@@ -41,7 +41,7 @@ test("pengujian penggunaan rumus aturan tunggal certainty factor", async () => {
   userInput[19] = 0.6;
   userInput[20] = 0.8;
 
-  const instance = new CertaintyFactor([userInput]);
+  const instance = new CertaintyFactor(userInput);
   const data = (await instance.calculateSingleRuleCF()).calculatedSingleRuleCF;
 
   expect(data).not.toBeNull();
@@ -54,7 +54,7 @@ test("pengujian penggunaan rumus aturan kombinasi certainty factor", async () =>
   userInput[19] = 0.6;
   userInput[20] = 0.8;
 
-  const instance = new CertaintyFactor([userInput]);
+  const instance = new CertaintyFactor(userInput);
   const data = (await instance.calculateCombinationRule())
     .calculatedCombinationRuleCF;
 
@@ -73,7 +73,7 @@ test("pengujian hasi diagnosa certainty factor adalah Penyakit Embun Jelaga deng
   userInput[19] = 0.6;
   userInput[20] = 0.8;
 
-  const instance = new CertaintyFactor([userInput]);
+  const instance = new CertaintyFactor(userInput);
   const data = (await instance.generateConclusion()).conclusion;
 
   expect(data).not.toBeNull();
@@ -94,7 +94,7 @@ test("pengujian hasi diagnosa certainty factor adalah Hama Lalat Buah dengan nil
   userInput[2] = 0.8;
   userInput[4] = 0.4;
 
-  const instance = new CertaintyFactor([userInput]);
+  const instance = new CertaintyFactor(userInput);
   const data = (await instance.generateConclusion()).conclusion;
 
   expect(data).not.toBeNull();

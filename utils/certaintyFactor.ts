@@ -19,7 +19,6 @@ type TPestsAndDeseasesHasSymptoms<T = {}> = {
   createdAt: Date;
   updatedAt: Date;
 } & T;
-
 type TData<T = {}, PestsAndDeseasesHasSymptoms = {}> = {
   code: number;
   name: string;
@@ -30,18 +29,14 @@ type TData<T = {}, PestsAndDeseasesHasSymptoms = {}> = {
   activeIngredients: string;
   PestsAndDeseasesHasSymptoms: TPestsAndDeseasesHasSymptoms<PestsAndDeseasesHasSymptoms>[];
 } & T;
-
 export type TKnowledgeBase = TData;
-
 export type TMixedKnowledgeBaseWithUserCFInput = TData<{}, { userCF: number }>;
-
 export type TCalculatedSingleRuleCF = TData<
   {
     calculatedSingleRuleCF: number[];
   },
   { userCF: number }
 >;
-
 export type TCalculatedCombinationRuleCF = TData<
   {
     calculatedSingleRuleCF: number[];
@@ -62,6 +57,7 @@ interface ICertaintyFactor {
   generateKnowledgeBase(): Promise<this>;
   mixKnowledgeBaseWithUserCFInput(): Promise<this>;
   calculateSingleRuleCF(): Promise<this>;
+  calculateCombinationRule(): Promise<this>;
   generateConclusion(): Promise<this>;
 }
 
@@ -72,7 +68,7 @@ export default class CertaintyFactor implements ICertaintyFactor {
   private _calculatedCombinationRuleCF: any;
   private _conclusion: any;
 
-  constructor(userInputData: any) {
+  constructor(userInputData: TUserInputData | {}) {
     this._userInputData = userInputData;
   }
 
@@ -130,7 +126,7 @@ export default class CertaintyFactor implements ICertaintyFactor {
                 symptoms: { code },
               } = item;
 
-              const userCF: number = this._userInputData[0][code];
+              const userCF: number = this._userInputData[code];
 
               return {
                 ...item,

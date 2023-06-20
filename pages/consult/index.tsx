@@ -98,8 +98,6 @@ export default function Consult({ user, questionList }: ConsultProps) {
     // remapDataToObject["19"] = 0.6; // cukup yakin
     // remapDataToObject["20"] = 0.8; // yakin
 
-    const remapDataToArray = [remapDataToObject];
-
     const fetchCertaintyFactorInferenceEngine = (async () => {
       setFetchIsLoading(true);
 
@@ -109,7 +107,7 @@ export default function Consult({ user, questionList }: ConsultProps) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          data: remapDataToArray,
+          data: remapDataToObject,
           userId: user === null ? "" : user.id,
         }),
       })
