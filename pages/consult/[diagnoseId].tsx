@@ -1,6 +1,5 @@
 // @ts-nocheck
 
-import { Fragment } from 'react';
 import Head from 'next/head';
 import { getCookie, hasCookie } from "cookies-next";
 import Navbar from '@/components/Navbar';
@@ -30,14 +29,14 @@ export async function getServerSideProps({ params: { diagnoseId }, req, res }: g
         }
     });
 
-
     if (!foundDiagnoseHistory) {
         return {
             notFound: true,
         }
     }
 
-    const CFInstance = new CertaintyFactor(JSON.parse(foundDiagnoseHistory.userInputData))
+    const userInput = JSON.parse(foundDiagnoseHistory.userInputData)
+    const CFInstance = new CertaintyFactor(userInput)
     const newHistoryStep = (await CFInstance.calculateCombinationRule()).calculatedCombinationRuleCF;
 
     try {
