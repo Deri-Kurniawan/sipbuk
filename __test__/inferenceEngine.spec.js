@@ -3,7 +3,7 @@ import { userInputTemplate } from "../prisma/data";
 
 test("pengujian ketersediaan dan kesesuaian aturan basis pengetahuan", async () => {
   const pestsDeseaseEachRelationLength = [5, 4, 6, 2, 6, 3, 4, 5];
-  const instance = new CertaintyFactor([]);
+  const instance = new CertaintyFactor({});
   const data = await (await instance.generateKnowledgeBase()).knowledgeBase;
 
   expect(data).not.toBeNull();
@@ -15,10 +15,12 @@ test("pengujian ketersediaan dan kesesuaian aturan basis pengetahuan", async () 
 });
 
 test("pengujian penggabungan basis pengetahuan dengan nilai masukan pengguna", async () => {
-  const userInput = userInputTemplate;
-  userInput[13] = 0.4;
-  userInput[19] = 0.6;
-  userInput[20] = 0.8;
+  const userInput = {
+    ...userInputTemplate,
+    13: 0.4,
+    19: 0.6,
+    20: 0.8,
+  };
 
   const instance = new CertaintyFactor(userInput);
   const data = await (
@@ -36,10 +38,12 @@ test("pengujian penggabungan basis pengetahuan dengan nilai masukan pengguna", a
 });
 
 test("pengujian penggunaan rumus aturan tunggal certainty factor", async () => {
-  const userInput = userInputTemplate;
-  userInput[13] = 0.4;
-  userInput[19] = 0.6;
-  userInput[20] = 0.8;
+  const userInput = {
+    ...userInputTemplate,
+    13: 0.4,
+    19: 0.6,
+    20: 0.8,
+  };
 
   const instance = new CertaintyFactor(userInput);
   const data = (await instance.calculateSingleRuleCF()).calculatedSingleRuleCF;
@@ -49,10 +53,12 @@ test("pengujian penggunaan rumus aturan tunggal certainty factor", async () => {
 });
 
 test("pengujian penggunaan rumus aturan kombinasi certainty factor", async () => {
-  const userInput = userInputTemplate;
-  userInput[13] = 0.4;
-  userInput[19] = 0.6;
-  userInput[20] = 0.8;
+  const userInput = {
+    ...userInputTemplate,
+    13: 0.4,
+    19: 0.6,
+    20: 0.8,
+  };
 
   const instance = new CertaintyFactor(userInput);
   const data = (await instance.calculateCombinationRule())
@@ -68,10 +74,12 @@ test("pengujian hasi diagnosa certainty factor adalah Penyakit Embun Jelaga deng
     finalCF: 0.9456,
   };
 
-  const userInput = userInputTemplate;
-  userInput[13] = 0.4;
-  userInput[19] = 0.6;
-  userInput[20] = 0.8;
+  const userInput = {
+    ...userInputTemplate,
+    13: 0.4,
+    19: 0.6,
+    20: 0.8,
+  };
 
   const instance = new CertaintyFactor(userInput);
   const data = (await instance.generateConclusion()).conclusion;
@@ -83,16 +91,19 @@ test("pengujian hasi diagnosa certainty factor adalah Penyakit Embun Jelaga deng
   expect(data.finalCF).toBe(expectation.finalCF);
 });
 
-test("pengujian hasi diagnosa certainty factor adalah Hama Lalat Buah dengan nilai 0.9520", async () => {
+test("pengujian hasi diagnosa certainty factor adalah Hama Lalat Buah dengan nilai 0.984", async () => {
   const expectation = {
     name: "Hama Lalat Buah",
-    finalCF: 0.952,
+    finalCF: 0.984,
+    percetagge: 98.4,
   };
 
-  const userInput = userInputTemplate;
-  userInput[1] = 0.6;
-  userInput[2] = 0.8;
-  userInput[4] = 0.4;
+  const userInput = {
+    ...userInputTemplate,
+    1: 0.8,
+    2: 0.8,
+    4: 0.6,
+  };
 
   const instance = new CertaintyFactor(userInput);
   const data = (await instance.generateConclusion()).conclusion;
