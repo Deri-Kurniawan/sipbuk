@@ -40,7 +40,7 @@ export default function RadioButton({ sympCode }: RadioButtonProps) {
         <button
           key={index}
           tabIndex={0}
-          className={`${selectedOption === option.label
+          className={`RadioButton ${selectedOption === option.label
             ? "btn-primary"
             : "btn-outline btn-primary"
             } btn col-span-1 text-xs text-center rounded-lg p-2`}

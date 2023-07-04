@@ -279,6 +279,26 @@ export default function Consult({ user, questionList }: ConsultProps) {
     };
   }, [fetchIsLoading])
 
+  useEffect(() => {
+    const radioButtons = document.querySelectorAll(".RadioButton");
+    const handleClickEvent = () => {
+      if (window.innerWidth >= 768) {
+        handleClickNextQuestion();
+      }
+    }
+
+    radioButtons.forEach((radioButton) => {
+      radioButton.addEventListener("click", handleClickEvent);
+
+    })
+
+    return () => {
+      radioButtons.forEach((radioButton) => {
+        radioButton.removeEventListener("click", handleClickEvent);
+      })
+    }
+  }, [handleClickNextQuestion])
+
   return (
     <>
       <Head>
