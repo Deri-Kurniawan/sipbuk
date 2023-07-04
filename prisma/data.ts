@@ -1,6 +1,6 @@
 const extLinkQuery = (label: string, query: string) => {
   const encodedQuery = encodeURIComponent(
-    `Berikan penjelasan tentang ${query} dalam bahasa indonesia`
+    `Berikan penjelasan dalam bahasa indonesia tentang ${query}`
   );
   return `<a href="${`https://www.bing.com/search?q=${encodedQuery}`}" target="_blank">${label}</a>`;
 };
