@@ -1,8 +1,6 @@
 const extLinkQuery = (label: string, query: string) => {
-  const encodedQuery = encodeURIComponent(
-    `Berikan penjelasan dalam bahasa indonesia tentang ${query}`
-  );
-  return `<a href="${`https://www.bing.com/search?q=${encodedQuery}`}" target="_blank">${label}</a>`;
+  const encodedQuery = encodeURIComponent(`Penjelasan tentang ${query}`);
+  return `<a href="${`https://www.bing.com/search?q=${encodedQuery}&setLang=id`}" target="_blank">${label}</a>`;
 };
 
 export const symptomsRawData = [
