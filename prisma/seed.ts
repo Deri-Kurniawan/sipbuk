@@ -59,7 +59,7 @@ const initialSeeds = async () => {
   createUser();
 };
 
-const updatePestsAndDesease = async () => {
+const updatePestOrDesease = async () => {
   const code = Number(process.argv[3]);
   await prisma.pestsAndDeseases.update({
     where: {
@@ -108,7 +108,7 @@ async function main() {
   process.argv.find((_) => _ == "--cu") && createUser();
   process.argv.find((_) => _ == "--du") && deleteUser();
   // usage: yarn db:seed --upad 1 (1 is the code of the pest or desease)
-  process.argv.find((_) => _ == "--upad") && updatePestsAndDesease();
+  process.argv.find((_) => _ == "--upad") && updatePestOrDesease();
   // usage: yarn db:seed --us 1 (1 is the code of the pest or desease)
   process.argv.find((_) => _ == "--us") && updateSymtomps();
 }

@@ -1,94 +1,98 @@
-const extLink = (label: string, url: string) =>
-  `<a href="${url}" target="_blank">${label}</a>`;
+const extLinkQuery = (label: string, query: string) => {
+  const encodedQuery = encodeURIComponent(
+    `Berikan penjelasan tentang ${query} dalam bahasa indonesia`
+  );
+  return `<a href="${`https://www.bing.com/search?q=${encodedQuery}`}" target="_blank">${label}</a>`;
+};
 
 export const symptomsRawData = [
   {
     code: 1,
-    info: "Bintik-bintik coklat bekas tusukan pada buah",
+    info: "Bintik berwarna coklat akibat tusukan pada buah",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 2,
-    info: "Buah membusuk",
+    info: "Buah mengalami pembusukan",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1684642183/buah_membusuk_il6vmw.jpg",
   },
   {
     code: 3,
-    info: "Pada biji buah muda terdapat bintik-bintik berwarna kehitaman",
+    info: "Bintik-bintik berwarna hitam terlihat pada biji buah yang masih muda",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 4,
-    info: "Bercak coklat pada buah",
+    info: "Buah memiliki bercak berwarna coklat",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 5,
-    info: "Buah mengalami kerontokan",
+    info: "Buah berguguran",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 6,
-    info: "Pada batang, daun dan buah terlihat ada serbuk putih",
+    info: "Serbuk putih terlihat pada batang, daun, dan buah",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684643321/Pada_batang_daun_dan_buah_terlihat_ada_serbuk_putih_xoa5mz.png",
   },
   {
     code: 7,
-    info: "Tanaman di hinggapi banyak semut",
+    info: "Banyak semut terlihat berkerumun di tanaman",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684711280/Tanaman_di_hinggapi_banyak_semut_kwkm7k.jpg",
   },
   {
     code: 8,
-    info: "Mengalami kerontokan pada saat muncul bunga",
+    info: "Kerontokan terjadi saat bunga mulai muncul",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 9,
-    info: "Bakal buah mengalami kerontokan",
+    info: "Bakal buah mengalami proses pengguguran",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1684694938/Bakal_buah_mengalami_kerontokan_bopr41.png",
   },
   {
     code: 10,
-    info: "Terdapat lubang-lubang kecil pada daun",
+    info: "Daun memiliki lubang-lubang kecil yang terlihat",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 11,
-    info: "Pucuk daun mengulung",
+    info: "Pucuk daun terlihat menggulung",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 12,
-    info: "Daun mengkerut dan keriting",
+    info: "Daun mengalami kerutan dan menggulung",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 13,
-    info: "Kerontokan pada daun",
+    info: "Daun mengalami kerontokan",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 14,
-    info: "Daun menjadi kering",
+    info: "Daun mengering",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 15,
-    info: "Terdapat lubang kecil bekas gigitan di buah",
+    info: "Buah terdapat lubang bekas gigitan berukuran kecil",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
@@ -100,25 +104,25 @@ export const symptomsRawData = [
   },
   {
     code: 17,
-    info: "Bercak kering berwarna putih berbentuk oval di daun",
+    info: "Daun memiliki bercak kering berwarna putih berbentuk oval",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 18,
-    info: "Warna daun berubah menjadi kuning",
+    info: "Daun menguning",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 19,
-    info: "Daun jambu dilapisi lapisan berwarna hitam seperti arang",
+    info: "Terdapat lapisan seperti arang berwarna hitam pada daun",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
   {
     code: 20,
-    info: "Di daun terlihat banyak bercak hitam",
+    info: "Terdapat bercak yang banyak berwarna hitam pada daun",
     imageUrl:
       "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
   },
@@ -215,22 +219,13 @@ export const pestsAndDeseasesRawData = [
     activeIngredient: `
       <ol>
         <li>
-        ${extLink(
-          "Mancozeb 80%",
-          "https://www.google.com/search?q=Mancozeb%20adalah"
-        )}
+        ${extLinkQuery("Mancozeb 80%", "Mancozeb")}
         </li>
         <li>
-        ${extLink(
-          "Profenofos",
-          "https://www.google.com/search?q=Profenofos%20adalah"
-        )}
+        ${extLinkQuery("Profenofos", "Profenofos")}
         </li>
         <li>
-        ${extLink(
-          "Abamektin",
-          "https://www.google.com/search?q=Abamektin%20adalah"
-        )}
+        ${extLinkQuery("Abamektin", "Abamektin")}
         </li>
       </ol>
       `,
@@ -259,10 +254,7 @@ export const pestsAndDeseasesRawData = [
     activeIngredient: `
       <ol>
         <li>
-        ${extLink(
-          "Deltametrin 20gr/ltr",
-          "https://www.google.com/search?q=Deltametrin%20adalah"
-        )}
+        ${extLinkQuery("Deltametrin 20gr/ltr", "Deltametrin")}
         </li>
       </ol>
       `,
@@ -287,10 +279,7 @@ export const pestsAndDeseasesRawData = [
     activeIngredient: `
       <ol>
         <li>
-        ${extLink(
-          "Deltametrin 20gr/ltr",
-          "https://www.google.com/search?q=Deltametrin%20adalah"
-        )}
+        ${extLinkQuery("Deltametrin 20gr/ltr", "Deltametrin")}
         </li>
       </ol>
       `,
@@ -317,16 +306,10 @@ export const pestsAndDeseasesRawData = [
     activeIngredient: `
       <ol>
         <li>
-          ${extLink(
-            "Deltamethrin 2.5gr/ltr",
-            "https://www.google.com/search?q=Deltamethrin%20adalah"
-          )}
+          ${extLinkQuery("Deltamethrin 2.5gr/ltr", "Deltamethrin")}
         </li>
         <li>
-          ${extLink(
-            "Sihalotrin 5gr/ltr",
-            "https://www.google.com/search?q=Sihalotrin%20adalah"
-          )}
+          ${extLinkQuery("Sihalotrin 5gr/ltr", "Sihalotrin")}
         </li>
       </ol>
     `,
@@ -353,18 +336,9 @@ export const pestsAndDeseasesRawData = [
     </ol>`,
     activeIngredient: `
     <ol>
-      <li> ${extLink(
-        "Propineb 70%",
-        "https://www.google.com/search?q=Propineb%20adalah"
-      )}</li>
-      <li> ${extLink(
-        "Tebuconazole 25 gr/ltr",
-        "https://www.google.com/search?q=Tebuconazole%20adalah"
-      )}</li>
-      <li>${extLink(
-        "Triadimenol 25 gr/ltr",
-        "https://www.google.com/search?q=Triadimenol%20adalah"
-      )}</li>
+      <li> ${extLinkQuery("Propineb 70%", "Propineb")}</li>
+      <li> ${extLinkQuery("Tebuconazole 25 gr/ltr", "Tebuconazole")}</li>
+      <li>${extLinkQuery("Triadimenol 25 gr/ltr", "Triadimenol")}</li>
     </ol>
     `,
   },
@@ -397,22 +371,13 @@ export const pestsAndDeseasesRawData = [
     `,
     activeIngredient: `
       <ol>
-        <li> ${extLink(
-          "Propineb 70%",
-          "https://www.google.com/search?q=Propineb%20adalah"
-        )}
+        <li> ${extLinkQuery("Propineb 70%", "Propineb")}
         </li>
         <li>
-          ${extLink(
-            "Triforine 50 gr/ltr",
-            "https://www.google.com/search?q=Triforine%20adalah"
-          )}
+          ${extLinkQuery("Triforine 50 gr/ltr", "Triforine")}
         </li>
         <li>
-          ${extLink(
-            "Tebuconazole 25 gr/ltr",
-            "https://www.google.com/search?q=Tebuconazole%20adalah"
-          )}
+          ${extLinkQuery("Tebuconazole 25 gr/ltr", "Tebuconazole")}
         </li>
       </ol>
     `,
@@ -445,16 +410,10 @@ export const pestsAndDeseasesRawData = [
     activeIngredient: `
       <ol>
         <li>
-          ${extLink(
-            "Mancozeb 50 gr/ltr",
-            "https://www.google.com/search?q=Mancozeb%20adalah"
-          )}
+          ${extLinkQuery("Mancozeb 50 gr/ltr", "Mancozeb")}
         </li>
         <li>
-          ${extLink(
-            "Mancozeb 80wp",
-            "https://www.google.com/search?q=Mancozeb%20adalah"
-          )}
+          ${extLinkQuery("Mancozeb 80wp", "Mancozeb")}
         </li>
       </ol>
     `,
@@ -483,22 +442,13 @@ export const pestsAndDeseasesRawData = [
     activeIngredient: `
       <ol>
         <li>
-          ${extLink(
-            "Pupuk Hayati",
-            "https://www.google.com/search?q=Pupuk%20Hayati%20adalah"
-          )}
+          ${extLinkQuery("Pupuk Hayati", "Pupuk")}
         </li>
         <li>
-          ${extLink(
-            "Trikonazol 20%",
-            "https://www.google.com/search?q=Trikonazol%20adalah"
-          )}
+          ${extLinkQuery("Trikonazol 20%", "Trikonazol")}
         </li>
         <li>
-          ${extLink(
-            "Mankozeb 64%",
-            "https://www.google.com/search?q=Mankozeb%20adalah"
-          )}
+          ${extLinkQuery("Mankozeb 64%", "Mankozeb")}
         </li>
       </ol>
       `,
