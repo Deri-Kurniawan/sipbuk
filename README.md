@@ -11,9 +11,9 @@
 ![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=2C8EBB&color=black)
 ![Vercel](https://img.shields.io/badge/vercel-%23000000.svg?style=for-the-badge&logo=vercel&logoColor=white&color=black)
 
-SIPBUK (Sistem Pakar Jambu Kristal) berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis.
+SIPBUK (Sistem Pakar Jambu Kristal) berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis.
 
-⚡️ Diagnosa Hama dan Penyakit Jambu Kristal dengan cepat dan akurat
+⚡️ Diagnosis Hama dan Penyakit Jambu Kristal dengan cepat dan akurat
 
 💸 Solusi Hama dan Penyakit Jambu Kristal secara gratis
 

@@ -158,13 +158,13 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                 setIsLoadingSaveDiagnoseHistory(false);
             })
             .catch(() => {
-                toast.error("Riwayat diagnosa gagal disimpan", {
+                toast.error("Riwayat diagnosis gagal disimpan", {
                     duration: 5000,
                 });
             }), {
-            loading: "Menyimpan riwayat diagnosa...",
-            success: "Riwayat diagnosa berhasil disimpan",
-            error: "Riwayat diagnosa gagal disimpan",
+            loading: "Menyimpan riwayat diagnosis...",
+            success: "Riwayat diagnosis berhasil disimpan",
+            error: "Riwayat diagnosis gagal disimpan",
         }, {
             duration: 5000,
         });
@@ -205,13 +205,13 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
             })
             .catch(() => {
                 setOnDeleteSelectedDiagnoseHistory(false);
-                toast.error("Riwayat diagnosa gagal dihapus", {
+                toast.error("Riwayat diagnosis gagal dihapus", {
                     duration: 5000,
                 });
             }), {
-            loading: "Menghapus riwayat diagnosa...",
-            success: "Riwayat diagnosa berhasil dihapus",
-            error: "Riwayat diagnosa gagal dihapus",
+            loading: "Menghapus riwayat diagnosis...",
+            success: "Riwayat diagnosis berhasil dihapus",
+            error: "Riwayat diagnosis gagal dihapus",
         }, {
             duration: 7000,
         });
@@ -231,7 +231,7 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
         <>
             <Head>
                 <title>Dashboard - SIPBUK</title>
-                <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
+                <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
             </Head>
             <Navbar userFullname={user.fullname} />
             <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
@@ -243,7 +243,7 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                         <div className={`my-6 shadow-lg alert`}>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="flex-shrink-0 w-6 h-6 stroke-info"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span>{`Kamu punya ${localStorageDiagnosesHistory.length} riwayat diagnosa sebelumnya, apakah ingin anda simpan?`}</span>
+                                <span>{`Kamu punya ${localStorageDiagnosesHistory.length} riwayat diagnosis sebelumnya, apakah ingin anda simpan?`}</span>
                             </div>
                             <div className="flex-none">
                                 <button className={`btn btn-sm btn-ghost`} onClick={handleClickRefuseSaveDiagnoseHistory} disabled={isLoadingSaveDiagnoseHistory}>Tolak</button>
@@ -255,7 +255,7 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                         <div className={`my-6 shadow-lg alert`}>
                             <div>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="flex-shrink-0 w-6 h-6 stroke-info"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                <span>{`${selectedDiagnosesHistoryId.length} riwayat diagnosa dipilih`}</span>
+                                <span>{`${selectedDiagnosesHistoryId.length} riwayat diagnosis dipilih`}</span>
                             </div>
                             <div className="flex-none">
                                 <button className={`btn btn-sm btn-primary ${onDeleteSelectedDiagnoseHistory ? "loading" : ""}`} onClick={handleClickDeleteSelectedDiagnoseHistory} disabled={onDeleteSelectedDiagnoseHistory}>{onDeleteSelectedDiagnoseHistory ? "Menghapus" : "Hapus"}</button>
@@ -278,7 +278,7 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                                         }} />
                                     </label>
                                 </th>
-                                <th>Terdiagnosa</th>
+                                <th>Terdiagnosis</th>
                                 <th>Persentase</th>
                                 <th>Tanggal Konsultasi</th>
                                 <th>Aksi</th>
@@ -341,7 +341,7 @@ export default function Dashboard({ user, _userDiagnosesHistory }: DashboardProp
                             ) : (
                                 <tr>
                                     <td colSpan={5} className="text-center">
-                                        <div className="text-gray-500">Tidak ada riwayat diagnosa</div>
+                                        <div className="text-gray-500">Tidak ada riwayat diagnosis</div>
                                     </td>
                                 </tr>
                             )}

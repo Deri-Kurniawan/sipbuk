@@ -28,7 +28,7 @@ test("knowledge base harus memiliki 8 hama dan penyakit serta keterikatan terhad
   });
 });
 
-test("hasil diagnosa harus mengindikasikan Hama Lalat Buah dengan nilai 0.9840", async () => {
+test("hasil diagnosis harus mengindikasikan Hama Lalat Buah dengan nilai 0.9840", async () => {
   const expectation = {
     name: "Hama Lalat Buah",
     finalCF: 0.984,

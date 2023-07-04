@@ -37,7 +37,7 @@ export default async function handler(
         if (updatedData.count === 0) {
           res.status(404).json({
             code: 404,
-            message: "Riwayat diagnosa tidak ditemukan",
+            message: "Riwayat diagnosis tidak ditemukan",
           });
           return;
         }
@@ -45,14 +45,14 @@ export default async function handler(
         await prisma.$disconnect();
         res.status(200).json({
           code: 200,
-          message: "Berhasil menyimpan riwayat diagnosa sebelumnya",
+          message: "Berhasil menyimpan riwayat diagnosis sebelumnya",
           data: getUpdatedData,
         });
       } catch (error: any) {
         console.log(error);
         res.status(500).json({
           code: 500,
-          message: "Gagal menyimpan riwayat diagnosa sebelumnya",
+          message: "Gagal menyimpan riwayat diagnosis sebelumnya",
         });
       }
 
@@ -74,14 +74,14 @@ export default async function handler(
         if (deletedData.count === 0) {
           res.status(404).json({
             code: 404,
-            message: "Riwayat diagnosa tidak ditemukan",
+            message: "Riwayat diagnosis tidak ditemukan",
           });
           return;
         }
 
         res.status(200).json({
           code: 200,
-          message: "Berhasil menghapus riwayat diagnosa sebelumnya",
+          message: "Berhasil menghapus riwayat diagnosis sebelumnya",
         });
 
         await prisma.$disconnect();
@@ -89,7 +89,7 @@ export default async function handler(
         console.log(error);
         res.status(500).json({
           code: 500,
-          message: "Gagal menghapus riwayat diagnosa sebelumnya",
+          message: "Gagal menghapus riwayat diagnosis sebelumnya",
         });
       }
       break;

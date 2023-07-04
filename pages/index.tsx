@@ -37,7 +37,7 @@ export default function Home({ user }: HomeProps) {
     <>
       <Head>
         <title>Beranda - SIPBUK</title>
-        <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
+        <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
       </Head>
       <Navbar userFullname={user?.fullname} />
       <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
@@ -45,11 +45,11 @@ export default function Home({ user }: HomeProps) {
           {/* hero left */}
           <div className="col-span-12 lg:col-span-7 lg:max-w-[600px]">
             <h2 className="text-[30px] md:text-[40px] font-bold leading-[38px] md:leading-[48px] mb-2 md:mb-4">
-              Diagnosa Hama dan Penyakit Pada Tanaman Jambu Kristal Anda
+              Diagnosis Hama dan Penyakit Pada Tanaman Jambu Kristal Anda
               Sekarang
             </h2>
             <p className="mb-3 text-base font-normal md:text-lg md:mb-7">
-              Sistem berbasis web ini dapat membantu anda dalam mendiagnosa
+              Sistem berbasis web ini dapat membantu anda dalam mendiagnosis
               hama dan penyakit pada tanaman jambu kristal anda, serta dapat
               memberikan solusi atas masalah yang dialami oleh tanaman jambu
               kristal anda secara gratis.

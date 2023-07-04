@@ -115,16 +115,16 @@ export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryS
         <>
             <Head>
                 <title>Konsultasi - SIPBUK</title>
-                <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
+                <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
             </Head>
             <Navbar isSticky={true} userFullname={user?.fullname} />
             <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
                 <div className="h-full md:h-[482px] bg-primary rounded-2xl flex flex-col justify-center items-center p-6 md:p-6">
                     <h2 className="text-center leading-[38px] md:leading-[48px] text-[30px] md:text-[40px] font-bold mb-4">
-                        Hasil Diagnosa
+                        Hasil Diagnosis
                     </h2>
                     <p className="text-center text-base leading-[24px] max-w-[660px]">
-                        Hasil Diagnosa menunjukan bahwa Tanaman Jambu Kristal anda, terdiagnosa terkena <b className='capitalize'>{diagnoseHistory.pestsAndDeseases.name}</b> dengan tingkat <b>Akurasi {getAccurationLevel(diagnoseHistory.finalCF)}</b> sebesar <b>{getPercentageAccuration(diagnoseHistory.finalCF)}</b>
+                        Hasil Diagnosis menunjukan bahwa Tanaman Jambu Kristal anda, terdiagnosis terkena <b className='capitalize'>{diagnoseHistory.pestsAndDeseases.name}</b> dengan tingkat <b>Akurasi {getAccurationLevel(diagnoseHistory.finalCF)}</b> sebesar <b>{getPercentageAccuration(diagnoseHistory.finalCF)}</b>
                     </p>
                     <a href="#solusi" className="mt-5 btn btn-active btn-ghost">Lihat Solusi</a>
                 </div>
@@ -203,16 +203,16 @@ export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryS
 
                 <div className="flex flex-col items-center justify-center text-center my-[82px] lg:my-[142px]">
                     <h4 className="mb-3 text-3xl font-bold max-w-[552px]">
-                        Apakah anda ingin melakukan diagnosa lagi?
+                        Apakah anda ingin melakukan diagnosis lagi?
                     </h4>
                     <p className="mb-6 text-base max-w-[552px]">
-                        Jika iya, klik tombol <b>*Diagnosa Ulang*</b> dibawah
+                        Jika iya, klik tombol <b>*Diagnosis Ulang*</b> dibawah
                     </p>
                     <Link
                         href="/consult"
                         className={`capitalize btn btn-active btn-ghost`}
                     >
-                        Diagnosa Ulang
+                        Diagnosis Ulang
                     </Link>
                 </div>
             </main>

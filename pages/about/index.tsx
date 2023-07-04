@@ -37,7 +37,7 @@ export default function About({ user }: AboutProps) {
     <>
       <Head>
         <title>Tentang - SIPBUK</title>
-        <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
+        <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
       </Head>
       <Navbar userFullname={user?.fullname} />
       <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
@@ -47,12 +47,12 @@ export default function About({ user }: AboutProps) {
             Tentang Aplikasi SIPBUK
           </h2>
           <p className="text-center text-base leading-[24px] max-w-[660px]">
-            Aplikasi Sistem Pakar Diagnosa Hama dan Penyakit pada Tanaman Jambu
+            Aplikasi Sistem Pakar Diagnosis Hama dan Penyakit pada Tanaman Jambu
             Kristal dengan Metode Certainty Factor adalah sebuah aplikasi yang
             dikembangkan untuk membantu petani dalam mengidentifikasi hama dan
             penyakit pada tanaman jambu kristal. Aplikasi ini menggunakan metode
             certainty factor sebagai dasar untuk membuat keputusan dalam proses
-            diagnosa.
+            diagnosis.
           </p>
         </div>
 

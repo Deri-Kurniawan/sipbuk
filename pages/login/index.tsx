@@ -103,7 +103,7 @@ export default function Login({ AES_KEY }: LoginProps) {
     <>
       <Head>
         <title>Masuk - SIPBUK</title>
-        <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosa hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
+        <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
       </Head>
       <Navbar />
       <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
