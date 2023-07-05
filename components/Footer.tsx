@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+const email = process.env.NODEMAILER_USER;
+
 const footLinks = [
   {
     heading: "Menu",
@@ -39,7 +41,7 @@ const footLinks = [
       },
       {
         name: "Hubungi Kami",
-        href: `mailto:${process.env.NODEMAILER_USER}?subject=Hi%20SIPBUK%20Team`,
+        href: `mailto:${email}?subject=Hi%20SIPBUK%20Team`,
       },
     ],
   },
