@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Question from "@/components/Question";
 import { GrPrevious, GrNext } from "react-icons/gr";
-import { FormEventHandler, Fragment, useEffect, useRef, useState } from "react";
+import { FormEventHandler, Fragment, useCallback, useEffect, useRef, useState } from "react";
 import Head from "next/head";
 import { getCookie, hasCookie } from "cookies-next";
 import Link from "next/link";
@@ -146,7 +146,7 @@ export default function Consult({ user, questionList }: ConsultProps) {
 
   };
 
-  const handleClickNextQuestion = () => {
+  const handleClickNextQuestion = useCallback(() => {
     const nextQuestionIndex = questionOnViewport.index + 1;
     if (nextQuestionIndex < questionList.length) {
       const nextQuestion = document.getElementById(
@@ -161,7 +161,7 @@ export default function Consult({ user, questionList }: ConsultProps) {
         block: "center",
       });
     }
-  };
+  }, [questionOnViewport.index, questionList.length]);
 
   const handleClickPrevQuestion = () => {
     const prevQuestionIndex = questionOnViewport.index - 1;
