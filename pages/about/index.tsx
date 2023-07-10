@@ -1,8 +1,8 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
-import expertImg from "@/assets/expert.jpg";
-import developerImg from "@/assets/developer.jpg";
+import expertImg from "@/assets/expert.webp";
+import developerImg from "@/assets/developer.webp";
 import Head from "next/head";
 import { getCookie, hasCookie } from "cookies-next";
 import { getServerSidePropsType, loggedInUserDataType } from "@/types";

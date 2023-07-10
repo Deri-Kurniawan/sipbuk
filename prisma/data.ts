@@ -8,175 +8,175 @@ export const symptomsRawData = [
     code: 1,
     info: "Bintik berwarna coklat akibat tusukan pada buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 2,
     info: "Buah mengalami pembusukan",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1684642183/buah_membusuk_il6vmw.jpg",
+      "https://res.cloudinary.com/sipbuk/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1688999771/symptoms/2.webp",
   },
   {
     code: 3,
     info: "Bintik-bintik berwarna hitam terlihat pada biji buah yang masih muda",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 4,
     info: "Buah memiliki bercak berwarna coklat",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 5,
     info: "Buah berguguran",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 6,
     info: "Serbuk putih terlihat pada batang, daun, dan buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684643321/Pada_batang_daun_dan_buah_terlihat_ada_serbuk_putih_xoa5mz.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1688999772/symptoms/6.webp",
   },
   {
     code: 7,
     info: "Banyak semut terlihat berkerumun di tanaman",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684711280/Tanaman_di_hinggapi_banyak_semut_kwkm7k.jpg",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1688999772/symptoms/7.webp",
   },
   {
     code: 8,
     info: "Kerontokan terjadi saat bunga mulai muncul",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689002742/symptoms/8.webp",
   },
   {
     code: 9,
     info: "Bakal buah mengalami proses pengguguran",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/w_1000,ar_1:1,c_fill,g_auto,e_art:hokusai/v1684694938/Bakal_buah_mengalami_kerontokan_bopr41.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689002962/symptoms/9.webp",
   },
   {
     code: 10,
     info: "Daun memiliki lubang-lubang kecil yang terlihat",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 11,
     info: "Pucuk daun terlihat menggulung",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 12,
     info: "Daun mengalami kerutan dan menggulung",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 13,
     info: "Daun mengalami kerontokan",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 14,
     info: "Daun mengering",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 15,
     info: "Buah terdapat lubang bekas gigitan berukuran kecil",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 16,
     info: "Daun memiliki bercak berwarna merah bata",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684695414/Daun_memiliki_bercak_berwarna_merah_bata_vpt4cr.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1688999772/symptoms/16.webp",
   },
   {
     code: 17,
     info: "Daun memiliki bercak kering berwarna putih berbentuk oval",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 18,
     info: "Daun menguning",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689003758/symptoms/18.webp",
   },
   {
     code: 19,
     info: "Terdapat lapisan seperti arang berwarna hitam pada daun",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689004258/symptoms/19.webp",
   },
   {
     code: 20,
     info: "Terdapat bercak yang banyak berwarna hitam pada daun",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689005022/symptoms/20.webp",
   },
   {
     code: 21,
     info: "Daun menjadi sobek",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 22,
     info: "Daun berlubang besar",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684695412/Daun_berlubang_besar_jtztxz.jpg",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1688999771/symptoms/22.webp",
   },
   {
     code: 23,
     info: "Terdapat bintik bintik memar pada kulit buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 24,
     info: "Bintik-bintik hitam pada daun, tangkai, atau kulit buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 25,
     info: "Daun menguning",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689003758/symptoms/18.webp",
   },
   {
     code: 26,
     info: "Pertumbuhan tanaman terasa lambat",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 27,
     info: "Akar berubah warna menjadi warna hitam atau coklat",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 28,
     info: "Beberapa bagian tanaman menjadi layu",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
     code: 29,
     info: "Bercak kecil sebesar ukuran jarum",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
 ];
 
@@ -185,7 +185,7 @@ export const pestsAndDeseasesRawData = [
     code: 1,
     name: "Hama Lalat Buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -232,7 +232,7 @@ export const pestsAndDeseasesRawData = [
     code: 2,
     name: "Hama Kutu Putih",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -261,7 +261,7 @@ export const pestsAndDeseasesRawData = [
     code: 3,
     name: "Hama Ulat Kantong",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -286,7 +286,7 @@ export const pestsAndDeseasesRawData = [
     code: 4,
     name: "Hama Belalang",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -316,7 +316,7 @@ export const pestsAndDeseasesRawData = [
     code: 5,
     name: "Penyakit Karat Daun",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
     <ol>
       <li>
@@ -344,7 +344,7 @@ export const pestsAndDeseasesRawData = [
     code: 6,
     name: "Penyakit Embun Jelaga",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -384,7 +384,7 @@ export const pestsAndDeseasesRawData = [
     code: 7,
     name: "Penyakit Busuk Buah",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -420,7 +420,7 @@ export const pestsAndDeseasesRawData = [
     code: 8,
     name: "Penyakit Busuk Akar",
     imageUrl:
-      "https://res.cloudinary.com/dgwvwgnvu/image/upload/v1684697221/placeholder_bvwz3t.png",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>

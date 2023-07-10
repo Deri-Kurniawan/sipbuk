@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
-import forgotPasswordImage from "@/assets/forgot-password.jpg";
+import forgotPasswordImage from "@/assets/forgot-password.webp";
 import Head from "next/head";
 import { toast } from "react-hot-toast";
 import { useState } from "react";

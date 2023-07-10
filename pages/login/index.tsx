@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
-import loginRegisterImage from "@/assets/login-register.jpg";
+import loginRegisterImage from "@/assets/login-register.webp";
 import Link from "next/link";
 import Head from "next/head";
 import { toast } from "react-hot-toast";
