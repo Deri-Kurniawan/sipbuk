@@ -8,7 +8,7 @@ export const symptomsRawData = [
     code: 1,
     info: "Bintik berwarna coklat akibat tusukan pada buah",
     imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689179233/symptoms/1.jpg",
   },
   {
     code: 2,
@@ -20,7 +20,7 @@ export const symptomsRawData = [
     code: 3,
     info: "Bintik-bintik berwarna hitam terlihat pada biji buah yang masih muda",
     imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689175269/symptoms/3.jpg",
   },
   {
     code: 4,
@@ -62,7 +62,7 @@ export const symptomsRawData = [
     code: 10,
     info: "Daun memiliki lubang-lubang kecil yang terlihat",
     imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689176587/symptoms/10%2C17.png",
   },
   {
     code: 11,
@@ -74,7 +74,7 @@ export const symptomsRawData = [
     code: 12,
     info: "Daun mengalami kerutan dan menggulung",
     imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689174641/symptoms/14.jpg",
   },
   {
     code: 13,
@@ -86,7 +86,7 @@ export const symptomsRawData = [
     code: 14,
     info: "Daun mengering",
     imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689174641/symptoms/default.webp",
   },
   {
     code: 15,
@@ -104,7 +104,7 @@ export const symptomsRawData = [
     code: 17,
     info: "Daun memiliki bercak kering berwarna putih berbentuk oval",
     imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689176587/symptoms/10%2C17.png",
   },
   {
     code: 18,
@@ -128,7 +128,7 @@ export const symptomsRawData = [
     code: 21,
     info: "Daun menjadi sobek",
     imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689178813/symptoms/21.jpg",
   },
   {
     code: 22,
@@ -140,13 +140,13 @@ export const symptomsRawData = [
     code: 23,
     info: "Terdapat bintik bintik memar pada kulit buah",
     imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689178215/symptoms/23.webp",
   },
   {
     code: 24,
     info: "Bintik-bintik hitam pada daun, tangkai, atau kulit buah",
     imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
+      "https://res.cloudinary.com/sipbuk/image/upload/v1689174988/symptoms/24.webp",
   },
   {
     code: 25,
