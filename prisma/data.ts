@@ -212,6 +212,10 @@ export const pestsAndDeseasesRawData = [
           <p>Menerapkan rotasi tanaman</p>
           <p>Hama lalat buah dapat bertahan hidup dalam tanah untuk waktu yang lama. Oleh karena itu, melakukan rotasi tanaman dapat membantu mengurangi keberadaan hama lalat buah pada tanaman jambu kristal.</p>
         </li>
+        <li>
+          <p>Penggunaan Kamper</p>
+          <p>Bau pada kamper menyebabkan hama menjauh dari tanaman. Gantungkan kamper menggunakan wadah yang tahan air serta buat lubang-lubah kecil dibawah wadah agar aroma kamper dapat menyebar dan air tidak mudah masuk</p>
+        </li>
       </ol>
       `,
     activeIngredient: `
