@@ -305,7 +305,7 @@ export default function Consult({ user, questionList }: ConsultProps) {
         <title>Konsultasi - SIPBUK</title>
         <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
       </Head>
-      <Navbar isSticky={false} userFullname={user?.fullname} />
+      <Navbar isSticky={false} userFullname={user?.fullname} role={user?.role} />
       <main className="safe-horizontal-padding mt-[16px] md:mt-[48px]">
         {questionList && questionList?.length > 0 ? (
           <Fragment>

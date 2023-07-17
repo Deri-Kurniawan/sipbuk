@@ -184,8 +184,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 1,
     name: "Hama Lalat Buah",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -235,8 +233,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 2,
     name: "Hama Kutu Putih",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -264,8 +260,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 3,
     name: "Hama Ulat Kantong",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -289,8 +283,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 4,
     name: "Hama Belalang",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -319,8 +311,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 5,
     name: "Penyakit Karat Daun",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
     <ol>
       <li>
@@ -347,8 +337,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 6,
     name: "Penyakit Embun Jelaga",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -387,8 +375,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 7,
     name: "Penyakit Busuk Buah",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -423,8 +409,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 8,
     name: "Penyakit Busuk Akar",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -506,6 +490,7 @@ export const pestsAndDeseasesHasSymptomsRawData = [
 
 export const userDemoAccount = {
   fullname: "SIPBUK Demo Account",
+  role: "user",
   email: "demo@sipbuk.com",
   password: "demo123", // must be AES encrypted while seeding
   isVerified: true,

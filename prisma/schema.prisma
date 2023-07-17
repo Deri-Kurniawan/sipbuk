@@ -10,6 +10,7 @@ datasource db {
 
 model User {
   id                   String                 @id @default(uuid())
+  role                 String                 @default("user")
   fullname             String                 @db.VarChar(255)
   email                String                 @unique
   password             String
@@ -25,7 +26,6 @@ model User {
 model PestsAndDeseases {
   code                        Int                           @id @default(autoincrement())
   name                        String                        @db.VarChar(255)
-  imageUrl                    String                        @db.VarChar(255)
   createdAt                   DateTime                      @default(now())
   updatedAt                   DateTime                      @updatedAt
   symptoms                    Symptoms[]                    @relation("PestsAndDeseasesHasSymptoms")

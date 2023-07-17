@@ -39,7 +39,7 @@ export default function About({ user }: AboutProps) {
         <title>Tentang - SIPBUK</title>
         <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
       </Head>
-      <Navbar userFullname={user?.fullname} />
+      <Navbar userFullname={user?.fullname} role={user?.role} />
       <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
         {/* about the app */}
         <div className="h-full md:h-[482px] bg-primary rounded-2xl flex flex-col justify-center items-center p-8 md:p-6 mb-[112px] lg:mb-[172px]">

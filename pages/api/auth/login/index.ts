@@ -97,6 +97,7 @@ export default async function handler(
           message: `Selamat datang ${foundedUser.fullname}!`,
           data: {
             id: updatedUser.id,
+            role: updatedUser.role,
             email: updatedUser.email,
             fullname: updatedUser.fullname,
             authToken: updatedUser.authToken,

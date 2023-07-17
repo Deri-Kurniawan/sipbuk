@@ -73,7 +73,11 @@ export default function Login({ AES_KEY }: LoginProps) {
             icon: '👋',
           })
 
-          router.push('/dashboard');
+          if (response.data.role === "admin") {
+            router.push('/admin');
+          } else {
+            router.push('/dashboard');
+          }
         }
 
         if (response.code === 400) {
