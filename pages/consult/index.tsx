@@ -94,9 +94,9 @@ export default function Consult({ user, questionList }: ConsultProps) {
     }
 
     // manipulate data for test purpose (development only)
-    // remapDataToObject["13"] = 0.4; //sedikit yakin
-    // remapDataToObject["19"] = 0.6; // cukup yakin
-    // remapDataToObject["20"] = 0.8; // yakin
+    // remapDataToObject["1"] = 0.8; // yakin
+    // remapDataToObject["2"] = 0.8; // yakin
+    // remapDataToObject["4"] = 0.6; // cukup yakin
 
     const fetchCertaintyFactorInferenceEngine = (async () => {
       setFetchIsLoading(true);

@@ -3,8 +3,8 @@ import { getCookie, hasCookie } from 'cookies-next';
 import React from 'react'
 import Head from "next/head";
 import Navbar from '@/components/Navbar';
-import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
+import prisma from '@/prisma';
 
 const dayTimeText = () => {
     const newDate = new Date();
@@ -24,7 +24,6 @@ const dayTimeText = () => {
 }
 
 export async function getServerSideProps({ req, res }: getServerSidePropsType) {
-    const prisma = new PrismaClient();
     const isCookieExist = hasCookie("user", { req, res });
 
     try {

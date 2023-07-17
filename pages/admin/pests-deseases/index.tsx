@@ -2,14 +2,13 @@ import { getServerSidePropsType, loggedInUserDataType } from '@/types';
 import { getCookie, hasCookie } from 'cookies-next';
 import Head from "next/head";
 import Navbar from '@/components/Navbar';
-import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
-import { BsPen, BsPlus } from "react-icons/bs"
+import { BsPlus } from "react-icons/bs";
 import { useState } from 'react';
 import { toast } from 'react-hot-toast';
+import prisma from '@/prisma';
 
 export async function getServerSideProps({ req, res }: getServerSidePropsType) {
-    const prisma = new PrismaClient();
     const isCookieExist = hasCookie("user", { req, res });
 
     try {
@@ -25,7 +24,6 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
             }
         }
 
-        // prepare data
         const pestsDeseases = await prisma.pestsAndDeseases.findMany({
             include: {
                 PestsAndDeseasesHasSymptoms: {

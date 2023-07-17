@@ -2,14 +2,13 @@ import { loggedInUserDataType } from '@/types';
 import { getCookie, hasCookie } from 'cookies-next';
 import Head from "next/head";
 import Navbar from '@/components/Navbar';
-import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
-import { BsPlus } from "react-icons/bs"
 import { NextApiRequest, NextApiResponse } from 'next';
 import { uncertaintyValueRawData } from '@/prisma/data';
 import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import prisma from '@/prisma';
 
 type getServerSidePropsType = {
     params: {
@@ -20,7 +19,6 @@ type getServerSidePropsType = {
 }
 
 export async function getServerSideProps({ params: { code }, req, res }: getServerSidePropsType) {
-    const prisma = new PrismaClient();
     const isCookieExist = hasCookie("user", { req, res });
 
     try {
