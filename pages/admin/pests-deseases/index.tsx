@@ -163,7 +163,7 @@ const Admin = ({ user, _pestsDeseases }: AdminProps) => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {pestsDeseases.map((pd: any, index: number) => (
+                                {pestsDeseases.length > 0 ? pestsDeseases.map((pd: any, index: number) => (
                                     <tr key={index}>
                                         <th onClick={() => handleSelectOnePestDesease(pd.code)}>
                                             <label>
@@ -182,7 +182,13 @@ const Admin = ({ user, _pestsDeseases }: AdminProps) => {
                                             <Link href={`/admin/pests-deseases/set-rule/${pd.code}`} className="btn btn-outline btn-accent btn-xs">Atur Rule</Link>
                                         </td>
                                     </tr>
-                                ))}
+                                )) : (
+                                    <tr>
+                                        <td colSpan={5} className="text-center">
+                                            <div className="text-gray-500">Tidak ada data Hama dan Penyakit</div>
+                                        </td>
+                                    </tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
