@@ -27,8 +27,6 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
 
         const symptoms = await prisma.symptoms.findMany()
 
-        console.log(symptoms)
-
         return {
             props: {
                 user: userCookie,
