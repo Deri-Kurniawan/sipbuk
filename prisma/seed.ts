@@ -1,5 +1,6 @@
 import { serverSideAESEncrypt } from "@/utils/cryptoAES";
 import {
+  adminDemoAccount,
   pestsAndDeseasesHasSymptomsRawData,
   pestsAndDeseasesRawData,
   symptomsRawData,
@@ -32,11 +33,17 @@ const createManyPestsAndDeseasesHasSymptoms = async () => {
 };
 
 const createUser = async () => {
-  await prisma.user.create({
-    data: {
-      ...userDemoAccount,
-      password: serverSideAESEncrypt(userDemoAccount.password),
-    },
+  await prisma.user.createMany({
+    data: [
+      {
+        ...userDemoAccount,
+        password: serverSideAESEncrypt(userDemoAccount.password),
+      },
+      {
+        ...adminDemoAccount,
+        password: serverSideAESEncrypt(adminDemoAccount.password),
+      },
+    ],
   });
 
   console.log("User created!");
@@ -46,6 +53,11 @@ const deleteUser = async () => {
   await prisma.user.delete({
     where: {
       email: userDemoAccount.email,
+    },
+  });
+  await prisma.user.delete({
+    where: {
+      email: adminDemoAccount.email,
     },
   });
 

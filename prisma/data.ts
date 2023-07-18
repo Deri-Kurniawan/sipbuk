@@ -489,12 +489,23 @@ export const pestsAndDeseasesHasSymptomsRawData = [
 ];
 
 export const userDemoAccount = {
-  fullname: "SIPBUK Demo Account",
+  fullname: "SIPBUK Demo",
   role: "user",
-  email: "demo@sipbuk.com",
-  password: "demo123", // must be AES encrypted while seeding
+  email: "user@sipbuk.com",
+  password: "user123", // must be AES encrypted while seeding
   isVerified: true,
   verifyToken: "vt-573d4ffb-a0e6-4b02-be9e-44d487dd090f",
+  authToken: null,
+  passwordResetToken: null,
+};
+
+export const adminDemoAccount = {
+  fullname: "SIPBUK Admin",
+  role: "admin",
+  email: "admin@sipbuk.com",
+  password: "admin123", // must be AES encrypted while seeding
+  isVerified: true,
+  verifyToken: "vt-573d4ffb-a0e6-4b02-3u8d-44d487di4wsa",
   authToken: null,
   passwordResetToken: null,
 };
