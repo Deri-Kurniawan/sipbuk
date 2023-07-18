@@ -222,12 +222,12 @@ const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
                                 <tbody>
                                     {symptoms.map((symptom: any, index: number) => (
                                         <tr key={index}>
-                                            <th>
+                                            <th onClick={() => handleSelectOneSymptom(symptom.code)}>
                                                 <label>
-                                                    <input type="checkbox" className="checkbox" value={symptom.code} onClick={() => handleSelectOneSymptom(symptom.code)} checked={selectedSymptomData.find((v) => v === symptom.code) ? true : false} />
+                                                    <input type="checkbox" className="checkbox" value={symptom.code} checked={selectedSymptomData.find((v) => v === symptom.code) ? true : false} />
                                                 </label>
                                             </th>
-                                            <td>{`G${symptom.code}`}</td>
+                                            <td onClick={() => handleSelectOneSymptom(symptom.code)}>{`G${symptom.code}`}</td>
                                             <td>{symptom.info}</td>
                                             <td>
                                                 <select className="w-full max-w-xs select select-bordered" name={symptom.code} disabled={selectedSymptomData.find((v) => v === symptom.code) ? false : true} defaultValue={
