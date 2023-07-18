@@ -119,9 +119,9 @@ const Admin = ({ user, pestsAndDeseasesCount, symptomsCount, usersCount, usersDi
                                 <span style={{ "--value": symptomsCount }}></span>
                             </span>
                         </h2>
-                        <p className='font-bold'>Total Data Hama dan Penyakit</p>
+                        <p className='font-bold'>Total Data Gejala</p>
                         <div className="justify-end card-actions">
-                            <Link href="/admin" className="btn btn-primary">Lihat</Link>
+                            <Link href="/admin/symptoms" className="btn btn-primary">Lihat</Link>
                         </div>
                     </div>
                 </div>
