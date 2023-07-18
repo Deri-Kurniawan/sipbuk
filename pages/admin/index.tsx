@@ -134,9 +134,6 @@ const Admin = ({ user, pestsAndDeseasesCount, symptomsCount, usersCount, usersDi
                             </span>
                         </h2>
                         <p className='font-bold'>Total Pengguna</p>
-                        <div className="justify-end card-actions">
-                            <Link href="/admin" className="btn btn-primary">Lihat</Link>
-                        </div>
                     </div>
                 </div>
                 <div className="shadow-xl card bg-base-100">
@@ -148,9 +145,6 @@ const Admin = ({ user, pestsAndDeseasesCount, symptomsCount, usersCount, usersDi
                             </span>
                         </h2>
                         <p className='font-bold'>Total Diagnosis</p>
-                        <div className="justify-end card-actions">
-                            <Link href="/admin" className="btn btn-primary">Lihat</Link>
-                        </div>
                     </div>
                 </div>
             </div>
