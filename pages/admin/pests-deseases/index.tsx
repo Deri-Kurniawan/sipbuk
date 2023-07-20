@@ -174,12 +174,24 @@ const Admin = ({ user, _pestsDeseases }: AdminProps) => {
                                         </th>
                                         <td onClick={() => handleSelectOnePestDesease(pd.code)}>{`HP${pd.code}`}</td>
                                         <td>{pd.name}</td>
-                                        <td className='max-w-[100px] lg:max-w-[200px] overflow-x-auto'>{pd.PestsAndDeseasesHasSymptoms.length > 0 ? pd.PestsAndDeseasesHasSymptoms.map((item: any, index: number) => (
-                                            `G${item.symptoms.code}${index === pd.PestsAndDeseasesHasSymptoms.length - 1 ? "" : ", "}`
-                                        )) : <span className='text-xs font-bold text-red-500'>*Rule Belum Diatur</span>}</td>
-                                        <td className='flex flex-row items-center justify-start gap-2'>
-                                            <Link href={`/admin/pests-deseases/edit/${pd.code}`} className="btn btn-outline btn-info btn-xs">Ubah</Link>
-                                            <Link href={`/admin/pests-deseases/set-rule/${pd.code}`} className="btn btn-outline btn-accent btn-xs">Atur Rule</Link>
+                                        <td>
+                                            <span className='max-w-[100px] lg:max-w-[200px] overflow-x-auto flex flex-wrap'>
+                                                {pd.PestsAndDeseasesHasSymptoms.length > 0 ?
+                                                    pd.PestsAndDeseasesHasSymptoms.map((item: any, index: number) => (
+                                                        <span key={index}>
+                                                            G{item.symptoms.code}
+                                                            {index === pd.PestsAndDeseasesHasSymptoms.length - 1 ? "" : <span>,&nbsp;</span>}
+                                                        </span>
+                                                    )) : (
+                                                        <span className='text-xs font-bold text-red-500'>*Rule Belum Diatur</span>
+                                                    )}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span className='flex flex-row items-center justify-start gap-2'>
+                                                <Link href={`/admin/pests-deseases/edit/${pd.code}`} className="btn btn-outline btn-info btn-xs">Ubah</Link>
+                                                <Link href={`/admin/pests-deseases/set-rule/${pd.code}`} className="btn btn-outline btn-accent btn-xs">Atur Rule</Link>
+                                            </span>
                                         </td>
                                     </tr>
                                 )) : (
