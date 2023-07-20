@@ -156,7 +156,7 @@ const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
     return (
         <>
             <Head>
-                <title>Dashboard Admin Data Hama dan Penyakit - SIPBUK</title>
+                <title>Atur Rule Data Hama atau Penyakit Terikat Gejala - SIPBUK Admin</title>
                 <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
             </Head>
             <Navbar userFullname={user.fullname} role={user.role} />

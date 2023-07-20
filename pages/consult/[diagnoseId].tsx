@@ -114,7 +114,7 @@ export default function DiagnoseResult({ user, diagnoseHistory, diagnoseHistoryS
     return (
         <>
             <Head>
-                <title>Konsultasi - SIPBUK</title>
+                <title>Hasil Konsultasi - SIPBUK</title>
                 <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
             </Head>
             <Navbar isSticky={true} userFullname={user?.fullname} role={user?.role} />

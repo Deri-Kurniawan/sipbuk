@@ -87,7 +87,7 @@ const AdminCreatePestOrDesease = ({ user }: AdminCreateProps) => {
     return (
         <>
             <Head>
-                <title>Dashboard Admin Data Hama dan Penyakit - SIPBUK</title>
+                <title>Tambah Data Hama atau Penyakit - SIPBUK Admin</title>
                 <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
             </Head>
             <Navbar userFullname={user.fullname} role={user.role} />

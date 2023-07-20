@@ -74,7 +74,7 @@ type AdminProps = {
 const Admin = ({ user, pestsAndDeseasesCount, symptomsCount, usersCount, usersDiagnosesHistoryCount }: AdminProps) => (
     <>
         <Head>
-            <title>Dashboard Admin - SIPBUK</title>
+            <title>Dashboard - SIPBUK Admin</title>
             <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
         </Head>
         <Navbar userFullname={user.fullname} role={user.role} />

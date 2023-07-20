@@ -117,7 +117,7 @@ const AdminCreateSymptom = ({ user, symptom }: AdminCreateProps) => {
     return (
         <>
             <Head>
-                <title>Dashboard Admin Data Hama dan Penyakit - SIPBUK</title>
+                <title>Ubah Data Gejala - SIPBUK Admin</title>
                 <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
             </Head>
             <Navbar userFullname={user.fullname} role={user.role} />
@@ -149,9 +149,9 @@ const AdminCreateSymptom = ({ user, symptom }: AdminCreateProps) => {
                 </h4>
                 <div className="mt-2">
                     <form onSubmit={onSubmitHandler} ref={formRef} encType='multipart/form-data'>
-                        <div className='flex flex-col lg:flex-row gap-4 lg:gap-8 lg:justify-center lg:items-center'>
-                            <div className='w-full flex justify-center lg:justify-start'>
-                                <div className='bg-primary rounded-md'>
+                        <div className='flex flex-col gap-4 lg:flex-row lg:gap-8 lg:justify-center lg:items-center'>
+                            <div className='flex justify-center w-full lg:justify-start'>
+                                <div className='rounded-md bg-primary'>
                                     <Image className='object-cover w-[480px] h-[432px] rounded-md' src={!selectedImageUrl ? "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp" : selectedImageUrl} alt="Preview Gambar" loader={({ src }) => src} width={480} height={432} />
                                 </div>
                             </div>
@@ -160,7 +160,7 @@ const AdminCreateSymptom = ({ user, symptom }: AdminCreateProps) => {
                                     <label className="label" htmlFor='info'>
                                         <span className="label-text">Keterangan Gejala</span>
                                     </label>
-                                    <label className="input-group rounded-md">
+                                    <label className="rounded-md input-group">
                                         <input type="text" name="info" placeholder="Ciri-Ciri Gejala" className="w-full input input-bordered" id='info' required disabled={fetchIsLoading} defaultValue={symptom.info} />
                                     </label>
                                 </div>
@@ -168,12 +168,12 @@ const AdminCreateSymptom = ({ user, symptom }: AdminCreateProps) => {
                                     <label className="label" htmlFor='imageUrl'>
                                         <span className="label-text">URL Gambar</span>
                                     </label>
-                                    <label className="input-group rounded-md">
+                                    <label className="rounded-md input-group">
                                         <input
                                             type="text"
                                             name="imageUrl"
                                             placeholder="URL Gambar"
-                                            className="input input-bordered w-full"
+                                            className="w-full input input-bordered"
                                             id='imageUrl'
                                             disabled={fetchIsLoading}
                                             defaultValue={symptom.imageUrl}
