@@ -86,11 +86,12 @@ const AdminCreateSymptom = ({ user, symptom }: AdminCreateProps) => {
             setFetchIsLoading(true);
 
             return await fetch('/api/admin/symptoms', {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
+                    symptomCode: symptom.code,
                     info: data.info,
                     imageUrl: data.imageUrl,
                 }),

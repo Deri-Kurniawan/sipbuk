@@ -11,7 +11,7 @@ export default async function handler(
     switch (method) {
         case "POST":
             try {
-                const createPestOrDesease = await prisma.symptoms.create({
+                const createSymptom = await prisma.symptoms.create({
                     // @ts-ignore
                     data: {
                         info,
@@ -19,7 +19,7 @@ export default async function handler(
                     },
                 });
 
-                if (!createPestOrDesease) {
+                if (!createSymptom) {
                     return res.status(404).json({
                         code: 404,
                         message: "Data gejala gagal disimpan",
@@ -30,13 +30,46 @@ export default async function handler(
                 res.status(200).json({
                     code: 200,
                     message: "Berhasil menyimpan data gejala",
-                    data: createPestOrDesease,
+                    data: createSymptom,
                 });
             } catch (error) {
                 console.error(error);
                 res.status(500).json({
                     code: 500,
                     message: "Gagal menyimpan data gejala",
+                });
+            }
+            break;
+        case "PUT":
+            try {
+                const updateSymptom = await prisma.symptoms.update({
+                    where: {
+                        code: parseInt(req.body.symptomCode),
+                    },
+                    data: {
+                        info,
+                        imageUrl: imageUrl ? imageUrl : "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
+                    },
+                });
+
+                if (!updateSymptom) {
+                    return res.status(404).json({
+                        code: 404,
+                        message: "Data gejala gagal diperbarui",
+                    });
+                }
+
+                await prisma.$disconnect();
+                res.status(200).json({
+                    code: 200,
+                    message: "Berhasil mengubah data gejala",
+                    data: updateSymptom,
+                });
+            } catch (error) {
+                console.error(error);
+                res.status(500).json({
+                    code: 500,
+                    message: "Gagal mengubah data gejala",
                 });
             }
             break;
