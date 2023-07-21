@@ -11,9 +11,9 @@ import dynamic from 'next/dynamic';
 
 const ReactQuill = dynamic(() => import('react-quill'), {
     loading: () => (
-        <div className="flex flex-col gap-4 items-center justify-center w-full text-base text-center border border-black/10 h-36 loading">
+        <div className="flex flex-col items-center justify-center w-full gap-4 text-base text-center border border-black/10 h-36 loading">
             <span>Memuat Konten Editor</span>
-            <progress className="progress w-56"></progress>
+            <progress className="w-56 progress"></progress>
         </div>
     ), ssr: false
 })
@@ -115,7 +115,7 @@ const AdminCreatePestOrDesease = ({ user }: AdminCreateProps) => {
                         <li>
                             <Link href="/admin">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
-                                Admin
+                                Dashboard Admin
                             </Link>
                         </li>
                         <li>
@@ -125,10 +125,8 @@ const AdminCreatePestOrDesease = ({ user }: AdminCreateProps) => {
                             </Link>
                         </li>
                         <li>
-                            <Link href="/admin/pests-deseases/create">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                Tambah Data Hama atau Penyakit
-                            </Link>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 13h6m-3-3v6m5 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                            Tambah Data Hama atau Penyakit
                         </li>
                     </ul>
                 </div>

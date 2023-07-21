@@ -35,7 +35,7 @@ export async function getServerSideProps({ params: { code }, req, res }: getServ
             }
         }
 
-        const pestsOrDeseases = await prisma.pestsAndDeseases.findUnique({
+        const pestOrDesease = await prisma.pestsAndDeseases.findUnique({
             where: {
                 code: parseInt(code),
             },
@@ -53,7 +53,7 @@ export async function getServerSideProps({ params: { code }, req, res }: getServ
         return {
             props: {
                 user: userCookie,
-                pestsOrDeseases: JSON.parse(JSON.stringify(pestsOrDeseases)),
+                pestOrDesease: JSON.parse(JSON.stringify(pestOrDesease)),
                 symptoms: JSON.parse(JSON.stringify(symptoms)),
             }
         }
@@ -69,17 +69,17 @@ export async function getServerSideProps({ params: { code }, req, res }: getServ
 
 type AdminProps = {
     user: loggedInUserDataType;
-    pestsOrDeseases: any;
+    pestOrDesease: any;
     symptoms: any;
 }
 
-const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
+const Admin = ({ user, pestOrDesease, symptoms }: AdminProps) => {
     const [selectedSymptomData, setSelectedSymptomData] = useState<number[]>(() => {
-        const _selectedSymptomData = pestsOrDeseases.PestsAndDeseasesHasSymptoms.map((v: any) => v.symptomCode)
+        const _selectedSymptomData = pestOrDesease.PestsAndDeseasesHasSymptoms.map((v: any) => v.symptomCode)
         return _selectedSymptomData;
     });
     const [selectedSymptomDataCF, setSelectedSymptomDataCF] = useState<number[]>(() => {
-        const _selectedSymptomDataCF = pestsOrDeseases.PestsAndDeseasesHasSymptoms.map((v: any) => v.expertCF)
+        const _selectedSymptomDataCF = pestOrDesease.PestsAndDeseasesHasSymptoms.map((v: any) => v.expertCF)
         return _selectedSymptomDataCF;
     });
     const [fetchIsLoading, setFetchIsLoading] = useState<boolean>(false);
@@ -88,7 +88,7 @@ const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
 
     const onSubmitHandler = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const pestAndDeseaseCode = pestsOrDeseases.code;
+        const pestAndDeseaseCode = pestOrDesease.code;
         // @ts-ignore
         const formData = new FormData(formRef.current);
         const data = Object.fromEntries(formData.entries());
@@ -166,7 +166,7 @@ const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
     return (
         <>
             <Head>
-                <title>Atur Rule Data Hama atau Penyakit Terikat Gejala - SIPBUK Admin</title>
+                <title>Pengaturan Rule untuk [HP{pestOrDesease.code}]: {pestOrDesease.name} - SIPBUK Admin</title>
                 <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
             </Head>
             <Navbar userFullname={user.fullname} role={user.role} />
@@ -176,7 +176,7 @@ const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
                         <li>
                             <Link href="/admin">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
-                                Admin
+                                Dashboard Admin
                             </Link>
                         </li>
                         <li>
@@ -186,17 +186,15 @@ const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
                             </Link>
                         </li>
                         <li>
-                            <a>
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
-                                Pengaturan Rule untuk [HP{pestsOrDeseases.code}] {pestsOrDeseases.name}
-                            </a>
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
+                            Pengaturan Rule untuk [HP{pestOrDesease.code}]: {pestOrDesease.name}
                         </li>
                     </ul>
                 </div>
                 <form onSubmit={onSubmitHandler} ref={formRef}>
                     <div className="flex items-center justify-between">
                         <h4 className="mb-2 text-xl font-bold">
-                            Pengaturan Rule untuk [HP{pestsOrDeseases.code}] {pestsOrDeseases.name}
+                            Pengaturan Rule untuk [HP{pestOrDesease.code}]: {pestOrDesease.name}
                         </h4>
                         <button className={`btn btn-primary ${fetchIsLoading ? 'loading' : ''}`} type='submit' disabled={fetchIsLoading}>Simpan Rule</button>
                     </div>
@@ -214,7 +212,7 @@ const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
                                         <th>
                                             <label>
                                                 <input type="checkbox" className="checkbox" onChange={handleToggleAll} checked={
-                                                    selectedSymptomData.length === symptoms.length ? true : false
+                                                    selectedSymptomData.length === symptoms.length
                                                 } />
                                             </label>
                                         </th>
