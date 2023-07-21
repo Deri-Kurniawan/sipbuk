@@ -124,14 +124,14 @@ const Admin = ({ user, _symptoms }: AdminProps) => {
                         <li>
                             <Link href="/admin/symptoms">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="w-4 h-4 mr-2 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"></path></svg>
-                                Data Hama dan Penyakit
+                                Data Gejala
                             </Link>
                         </li>
                     </ul>
                 </div>
                 <div className="flex items-center justify-between">
                     <h4 className="mb-2 text-xl font-bold">
-                        Data Hama dan Penyakit
+                        Data Gejala
                     </h4>
                     <div className='flex items-center justify-center gap-4'>
                         {selectedSymptoms.length > 0 && (
@@ -194,7 +194,7 @@ const Admin = ({ user, _symptoms }: AdminProps) => {
                                 )) : (
                                     <tr>
                                         <td colSpan={5} className="text-center">
-                                            <div className="text-gray-500">Tidak ada data Hama dan Penyakit</div>
+                                            <div className="text-gray-500">Tidak ada data Gejala</div>
                                         </td>
                                     </tr>
                                 )}
