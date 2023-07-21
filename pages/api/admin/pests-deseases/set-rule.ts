@@ -1,4 +1,5 @@
 import prisma from "@/prisma";
+import { synchronizeUsersDiagnosesHistories } from "@/utils/synchronizeUsersDiagnosesHistories";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -60,13 +61,15 @@ export default async function handler(
 
         await prisma.$disconnect();
 
+        synchronizeUsersDiagnosesHistories();
+
         return res.status(200).json({
           code: 200,
           message: "Berhasil menyimpan rule",
           data: req.body,
         });
-      } catch (error: any) {
-        console.log(error);
+      } catch (error) {
+        console.error(error);
         res.status(500).json({
           code: 500,
           message: "Gagal menyimpan rule",
