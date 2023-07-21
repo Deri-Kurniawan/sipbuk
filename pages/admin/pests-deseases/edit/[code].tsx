@@ -4,12 +4,15 @@ import Head from "next/head";
 import Navbar from '@/components/Navbar';
 import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/prisma';
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
 
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 type getServerSidePropsType = {
     params: {
@@ -71,7 +74,13 @@ type AdminCreateProps = {
 }
 
 const AdminEditPestOrDesease = ({ user, pestsDesease }: AdminCreateProps) => {
+    const [solution, setSolution] = useState<string>(pestsDesease.solution);
+    const [activeIngredient, setActiveIngredient] = useState<string>(pestsDesease.activeIngredient);
     const [fetchIsLoading, setFetchIsLoading] = useState<boolean>(false);
+
+    const [solutionQuillEditor, setSolutionQuillEditor] = useState<any>(null);
+    const [activeIngredientQuillEditor, setActiveIngredientQuillEditor] = useState<any>(null);
+
     const formRef = useRef<HTMLFormElement>(null);
     const router = useRouter();
 
@@ -92,7 +101,11 @@ const AdminEditPestOrDesease = ({ user, pestsDesease }: AdminCreateProps) => {
                 },
                 body: JSON.stringify({
                     pestOrDeseaseCode,
-                    data,
+                    data: {
+                        name: data.name,
+                        solution,
+                        activeIngredient,
+                    }
                 }),
             })
         })
@@ -115,6 +128,11 @@ const AdminEditPestOrDesease = ({ user, pestsDesease }: AdminCreateProps) => {
             duration: 5000,
         });
     }
+
+    useEffect(() => {
+        setSolutionQuillEditor(<ReactQuill theme="snow" value={solution} onChange={setSolution} />)
+        setActiveIngredientQuillEditor(<ReactQuill theme="snow" value={activeIngredient} onChange={setActiveIngredient} />)
+    }, [])
 
     return (
         <>
@@ -160,20 +178,26 @@ const AdminEditPestOrDesease = ({ user, pestsDesease }: AdminCreateProps) => {
                             </label>
                         </div>
                         <div className="form-control">
-                            <label className="label" htmlFor="solution">
+                            <label className="label">
                                 <span className="label-text">Solusi</span>
                             </label>
-                            <textarea className="h-24 textarea textarea-bordered" name='solution' id='solution' placeholder="Konten Solusi" required disabled={fetchIsLoading}>{pestsDesease.solution}</textarea>
-                            <label className="label">
-                            </label>
+                            {!solutionQuillEditor ? (
+                                <div className="flex flex-col gap-4 items-center justify-center w-full text-base text-center border border-black/10 h-36 loading">
+                                    <span>Memuat Konten Editor</span>
+                                    <progress className="progress w-56"></progress>
+                                </div>
+                            ) : solutionQuillEditor}
                         </div>
                         <div className="form-control">
-                            <label className="label" htmlFor="activeIngredient">
+                            <label className="label">
                                 <span className="label-text">Bahan Aktif</span>
                             </label>
-                            <textarea className="h-24 textarea textarea-bordered" name='activeIngredient' id='activeIngredients' placeholder="Konten Solusi" required disabled={fetchIsLoading}>{pestsDesease.activeIngredient}</textarea>
-                            <label className="label">
-                            </label>
+                            {!activeIngredientQuillEditor ? (
+                                <div className="flex flex-col gap-4 items-center justify-center w-full text-base text-center border border-black/10 h-36 loading">
+                                    <span>Memuat Konten Editor</span>
+                                    <progress className="progress w-56"></progress>
+                                </div>
+                            ) : activeIngredientQuillEditor}
                         </div>
                         <button type="submit" className={`mt-4 btn btn-primary ${fetchIsLoading ? 'loading' : ''}`} disabled={fetchIsLoading}>Simpan Perubahan</button>
                     </form>
