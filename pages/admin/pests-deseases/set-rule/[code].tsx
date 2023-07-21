@@ -154,6 +154,14 @@ const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
         }
     }
 
+    const handleToggleAll = () => {
+        if (selectedSymptomData.length === symptoms.length) {
+            setSelectedSymptomData([])
+        } else {
+            setSelectedSymptomData(symptoms.map((symptom: any) => symptom.code))
+        }
+    }
+
     return (
         <>
             <Head>
@@ -204,13 +212,7 @@ const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
                                     <tr>
                                         <th>
                                             <label>
-                                                <input type="checkbox" className="checkbox" onClick={() => {
-                                                    if (selectedSymptomData.length === symptoms.length) {
-                                                        setSelectedSymptomData([])
-                                                    } else {
-                                                        setSelectedSymptomData(symptoms.map((symptom: any) => symptom.code))
-                                                    }
-                                                }} checked={
+                                                <input type="checkbox" className="checkbox" onChange={handleToggleAll} checked={
                                                     selectedSymptomData.length === symptoms.length ? true : false
                                                 } />
                                             </label>
@@ -223,12 +225,12 @@ const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
                                 <tbody>
                                     {symptoms.map((symptom: any, index: number) => (
                                         <tr key={index}>
-                                            <th onClick={() => handleSelectOneSymptom(symptom.code)}>
+                                            <th>
                                                 <label>
-                                                    <input type="checkbox" className="checkbox" value={symptom.code} checked={selectedSymptomData.find((v) => v === symptom.code) ? true : false} />
+                                                    <input type="checkbox" className="checkbox" value={symptom.code} onChange={() => handleSelectOneSymptom(symptom.code)} checked={selectedSymptomData.find((v) => v === symptom.code) ? true : false} />
                                                 </label>
                                             </th>
-                                            <td onClick={() => handleSelectOneSymptom(symptom.code)}>{`G${symptom.code}`}</td>
+                                            <td>{`G${symptom.code}`}</td>
                                             <td>{symptom.info}</td>
                                             <td>
                                                 <select className="w-full max-w-xs select select-bordered" name={symptom.code} disabled={selectedSymptomData.find((v) => v === symptom.code) ? false : true} defaultValue={

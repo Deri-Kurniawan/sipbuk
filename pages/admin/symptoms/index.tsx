@@ -97,6 +97,14 @@ const Admin = ({ user, _symptoms }: AdminProps) => {
         }
     }
 
+    const handleToggleAll = () => {
+        if (selectedSymptoms.length === symptoms.length) {
+            setSelectedSymptoms([])
+        } else {
+            setSelectedSymptoms(symptoms.map((symptom: any) => symptom.code))
+        }
+    }
+
     return (
         <>
             <Head>
@@ -139,13 +147,7 @@ const Admin = ({ user, _symptoms }: AdminProps) => {
                                 <tr>
                                     <th>
                                         <label>
-                                            <input type="checkbox" className="checkbox" onClick={() => {
-                                                if (selectedSymptoms.length === symptoms.length) {
-                                                    setSelectedSymptoms([])
-                                                } else {
-                                                    setSelectedSymptoms(symptoms.map((symptom: any) => symptom.code))
-                                                }
-                                            }} checked={
+                                            <input type="checkbox" className="checkbox" onChange={handleToggleAll} checked={
                                                 selectedSymptoms.length === symptoms.length ? true : false
                                             } disabled={fetchIsLoading} />
                                         </label>
@@ -159,14 +161,14 @@ const Admin = ({ user, _symptoms }: AdminProps) => {
                             <tbody>
                                 {symptoms.length > 0 ? symptoms.map((symptom: any, index: number) => (
                                     <tr key={index}>
-                                        <th onClick={() => handleSelectOneSymptom(symptom.code)}>
+                                        <th>
                                             <label>
-                                                <input type="checkbox" className="checkbox" checked={
+                                                <input type="checkbox" className="checkbox" onChange={() => handleSelectOneSymptom(symptom.code)} checked={
                                                     selectedSymptoms.find((v) => v === symptom.code) ? true : false
                                                 } disabled={fetchIsLoading} />
                                             </label>
                                         </th>
-                                        <td onClick={() => handleSelectOneSymptom(symptom.code)}>{`G${symptom.code}`}</td>
+                                        <td>{`G${symptom.code}`}</td>
                                         <td>
                                             {/* The button to open modal */}
                                             <label htmlFor={`modal-${symptom.code}`}>
