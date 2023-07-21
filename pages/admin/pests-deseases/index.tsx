@@ -104,6 +104,14 @@ const Admin = ({ user, _pestsDeseases }: AdminProps) => {
         }
     }
 
+    const handleToggleAll = () => {
+        if (selectedPestsDeseases.length === pestsDeseases.length) {
+            setSelectedPestsDeseases([])
+        } else {
+            setSelectedPestsDeseases(pestsDeseases.map((pd: any) => pd.code))
+        }
+    }
+
     return (
         <>
             <Head>
@@ -146,15 +154,7 @@ const Admin = ({ user, _pestsDeseases }: AdminProps) => {
                                 <tr>
                                     <th>
                                         <label>
-                                            <input type="checkbox" className="checkbox" onClick={() => {
-                                                if (selectedPestsDeseases.length === pestsDeseases.length) {
-                                                    setSelectedPestsDeseases([])
-                                                } else {
-                                                    setSelectedPestsDeseases(pestsDeseases.map((pd: any) => pd.code))
-                                                }
-                                            }} checked={
-                                                selectedPestsDeseases.length === pestsDeseases.length ? true : false
-                                            } disabled={fetchIsLoading} />
+                                            <input type="checkbox" className="checkbox" onChange={handleToggleAll} checked={selectedPestsDeseases.length === pestsDeseases.length} disabled={fetchIsLoading} />
                                         </label>
                                     </th>
                                     <th>Kode</th>
@@ -166,14 +166,14 @@ const Admin = ({ user, _pestsDeseases }: AdminProps) => {
                             <tbody>
                                 {pestsDeseases.length > 0 ? pestsDeseases.map((pd: any, index: number) => (
                                     <tr key={index}>
-                                        <th onClick={() => handleSelectOnePestDesease(pd.code)}>
+                                        <th>
                                             <label>
-                                                <input type="checkbox" className="checkbox" checked={
+                                                <input type="checkbox" className="checkbox" onChange={() => handleSelectOnePestDesease(pd.code)} checked={
                                                     selectedPestsDeseases.find((v) => v === pd.code) ? true : false
                                                 } disabled={fetchIsLoading} />
                                             </label>
                                         </th>
-                                        <td onClick={() => handleSelectOnePestDesease(pd.code)}>{`HP${pd.code}`}</td>
+                                        <td>{`HP${pd.code}`}</td>
                                         <td>{pd.name}</td>
                                         <td>
                                             <span className='max-w-[100px] lg:max-w-[200px] overflow-x-auto flex flex-wrap'>
