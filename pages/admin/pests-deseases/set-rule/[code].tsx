@@ -9,6 +9,7 @@ import { useRef, useState } from 'react';
 import { toast } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import prisma from '@/prisma';
+import Image from 'next/image';
 
 type getServerSidePropsType = {
     params: {
@@ -218,6 +219,7 @@ const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
                                             </label>
                                         </th>
                                         <th>Kode Gejala</th>
+                                        <th>Gambar</th>
                                         <th>Info Gejala</th>
                                         <th>CF Pakar</th>
                                     </tr>
@@ -231,6 +233,21 @@ const Admin = ({ user, pestsOrDeseases, symptoms }: AdminProps) => {
                                                 </label>
                                             </th>
                                             <td>{`G${symptom.code}`}</td>
+                                            <td>
+                                                {/* The button to open modal */}
+                                                <label htmlFor={`modal-${symptom.code}`} className='w-[110px] h-[100px]'>
+                                                    <Image className='object-cover rounded-md w-[110px] h-[100px]' src={symptom.imageUrl} alt='' width={110} height={100} loader={({ src }) => src} />
+                                                </label>
+
+                                                {/* Put this part before </body> tag */}
+                                                <input type="checkbox" id={`modal-${symptom.code}`} className="modal-toggle" />
+                                                <label htmlFor={`modal-${symptom.code}`} className="cursor-pointer modal">
+                                                    <label className="relative modal-box" htmlFor="">
+                                                        <h3 className="text-lg font-bold">Gambar Gejala (G{symptom.code})</h3>
+                                                        <Image className='bg-cover rounded-md' src={symptom.imageUrl} alt='' width={800} height={500} loader={({ src }) => src} />
+                                                    </label>
+                                                </label>
+                                            </td>
                                             <td>{symptom.info}</td>
                                             <td>
                                                 <select className="w-full max-w-xs select select-bordered" name={symptom.code} disabled={selectedSymptomData.find((v) => v === symptom.code) ? false : true} defaultValue={
