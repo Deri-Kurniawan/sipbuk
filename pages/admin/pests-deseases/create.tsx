@@ -2,11 +2,14 @@ import { getServerSidePropsType, loggedInUserDataType } from '@/types';
 import { getCookie, hasCookie } from 'cookies-next';
 import Head from "next/head";
 import Navbar from '@/components/Navbar';
-import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
+import 'react-quill/dist/quill.snow.css';
+import dynamic from 'next/dynamic';
+
+const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 export async function getServerSideProps({ req, res }: getServerSidePropsType) {
     const isCookieExist = hasCookie("user", { req, res });
@@ -44,7 +47,13 @@ type AdminCreateProps = {
 }
 
 const AdminCreatePestOrDesease = ({ user }: AdminCreateProps) => {
+    const [solution, setSolution] = useState<string>("");
+    const [activeIngredient, setActiveIngredient] = useState<string>("");
     const [fetchIsLoading, setFetchIsLoading] = useState<boolean>(false);
+
+    const [solutionQuillEditor, setSolutionQuillEditor] = useState<any>(null);
+    const [activeIngredientQuillEditor, setActiveIngredientQuillEditor] = useState<any>(null);
+
     const formRef = useRef<HTMLFormElement>(null);
     const router = useRouter();
 
@@ -63,14 +72,18 @@ const AdminCreatePestOrDesease = ({ user }: AdminCreateProps) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(data),
+                body: JSON.stringify({
+                    name: data.name,
+                    solution,
+                    activeIngredient,
+                }),
             })
         })
 
         toast.promise(fetchCreatePestOrDesease()
             .then((res) => res.json())
             .then((res) => {
-                router.push(`/admin/pests-deseases`);
+                router.push(`/admin/pests-deseases/set-rule/${res.data.code}`);
             })
             .catch(() => {
                 toast.error('Sistem gagal menyimpan data, ada kesalahan pada sistem', {
@@ -85,6 +98,12 @@ const AdminCreatePestOrDesease = ({ user }: AdminCreateProps) => {
             duration: 5000,
         });
     }
+
+    useEffect(() => {
+        setSolutionQuillEditor(<ReactQuill theme="snow" value={solution} onChange={setSolution} />)
+        setActiveIngredientQuillEditor(<ReactQuill theme="snow" value={activeIngredient} onChange={setActiveIngredient} />)
+    }, [])
+
     return (
         <>
             <Head>
@@ -132,17 +151,23 @@ const AdminCreatePestOrDesease = ({ user }: AdminCreateProps) => {
                             <label className="label" htmlFor="solution">
                                 <span className="label-text">Solusi</span>
                             </label>
-                            <textarea className="h-24 textarea textarea-bordered" name='solution' id='solution' placeholder="Konten Solusi" required disabled={fetchIsLoading}></textarea>
-                            <label className="label">
-                            </label>
+                            {!solutionQuillEditor ? (
+                                <div className="flex flex-col gap-4 items-center justify-center w-full text-base text-center border border-black/10 h-36 loading">
+                                    <span>Memuat Konten Editor</span>
+                                    <progress className="progress w-56"></progress>
+                                </div>
+                            ) : solutionQuillEditor}
                         </div>
                         <div className="form-control">
                             <label className="label" htmlFor="activeIngredient">
                                 <span className="label-text">Bahan Aktif</span>
                             </label>
-                            <textarea className="h-24 textarea textarea-bordered" name='activeIngredient' id='activeIngredients' placeholder="Konten Solusi" required disabled={fetchIsLoading}></textarea>
-                            <label className="label">
-                            </label>
+                            {!activeIngredientQuillEditor ? (
+                                <div className="flex flex-col gap-4 items-center justify-center w-full text-base text-center border border-black/10 h-36 loading">
+                                    <span>Memuat Konten Editor</span>
+                                    <progress className="progress w-56"></progress>
+                                </div>
+                            ) : activeIngredientQuillEditor}
                         </div>
                         <button type="submit" className={`mt-4 btn btn-primary ${fetchIsLoading ? 'loading' : ''}`} disabled={fetchIsLoading}>Simpan</button>
                     </form>
