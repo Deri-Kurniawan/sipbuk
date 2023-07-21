@@ -3,13 +3,20 @@ import { getCookie, hasCookie } from 'cookies-next';
 import Head from "next/head";
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
+const ReactQuill = dynamic(() => import('react-quill'), {
+    loading: () => (
+        <div className="flex flex-col gap-4 items-center justify-center w-full text-base text-center border border-black/10 h-36 loading">
+            <span>Memuat Konten Editor</span>
+            <progress className="progress w-56"></progress>
+        </div>
+    ), ssr: false
+})
 
 export async function getServerSideProps({ req, res }: getServerSidePropsType) {
     const isCookieExist = hasCookie("user", { req, res });
@@ -50,10 +57,6 @@ const AdminCreatePestOrDesease = ({ user }: AdminCreateProps) => {
     const [solution, setSolution] = useState<string>("");
     const [activeIngredient, setActiveIngredient] = useState<string>("");
     const [fetchIsLoading, setFetchIsLoading] = useState<boolean>(false);
-
-    const [solutionQuillEditor, setSolutionQuillEditor] = useState<any>(null);
-    const [activeIngredientQuillEditor, setActiveIngredientQuillEditor] = useState<any>(null);
-
     const formRef = useRef<HTMLFormElement>(null);
     const router = useRouter();
 
@@ -98,11 +101,6 @@ const AdminCreatePestOrDesease = ({ user }: AdminCreateProps) => {
             duration: 5000,
         });
     }
-
-    useEffect(() => {
-        setSolutionQuillEditor(<ReactQuill theme="snow" value={solution} onChange={setSolution} />)
-        setActiveIngredientQuillEditor(<ReactQuill theme="snow" value={activeIngredient} onChange={setActiveIngredient} />)
-    }, [])
 
     return (
         <>
@@ -151,23 +149,13 @@ const AdminCreatePestOrDesease = ({ user }: AdminCreateProps) => {
                             <label className="label" htmlFor="solution">
                                 <span className="label-text">Solusi</span>
                             </label>
-                            {!solutionQuillEditor ? (
-                                <div className="flex flex-col gap-4 items-center justify-center w-full text-base text-center border border-black/10 h-36 loading">
-                                    <span>Memuat Konten Editor</span>
-                                    <progress className="progress w-56"></progress>
-                                </div>
-                            ) : solutionQuillEditor}
+                            <ReactQuill theme="snow" value={solution} onChange={setSolution} />
                         </div>
                         <div className="form-control">
                             <label className="label" htmlFor="activeIngredient">
                                 <span className="label-text">Bahan Aktif</span>
                             </label>
-                            {!activeIngredientQuillEditor ? (
-                                <div className="flex flex-col gap-4 items-center justify-center w-full text-base text-center border border-black/10 h-36 loading">
-                                    <span>Memuat Konten Editor</span>
-                                    <progress className="progress w-56"></progress>
-                                </div>
-                            ) : activeIngredientQuillEditor}
+                            <ReactQuill theme="snow" value={activeIngredient} onChange={setActiveIngredient} />
                         </div>
                         <button type="submit" className={`mt-4 btn btn-primary ${fetchIsLoading ? 'loading' : ''}`} disabled={fetchIsLoading}>Simpan</button>
                     </form>
