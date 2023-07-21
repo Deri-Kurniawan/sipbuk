@@ -57,6 +57,7 @@ export async function getServerSideProps({ params: { code }, req, res }: getServ
             }
         }
     } catch (error) {
+        console.error(error)
         return {
             redirect: {
                 destination: '/admin/pests-deseases',

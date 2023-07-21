@@ -51,6 +51,7 @@ export async function getServerSideProps({ params: { diagnoseId }, req, res }: g
             }
         }
     } catch (error) {
+        console.error(error)
         return {
             props: {
                 user: null,

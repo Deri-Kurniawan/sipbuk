@@ -38,8 +38,8 @@ export default async function handler(
           message: "Berhasil menyimpan riwayat diagnosis sebelumnya",
           data: createPestOrDesease,
         });
-      } catch (error: any) {
-        console.log(error);
+      } catch (error) {
+        console.error(error);
         res.status(500).json({
           code: 500,
           message: "Gagal menyimpan riwayat diagnosis sebelumnya",
@@ -74,8 +74,8 @@ export default async function handler(
           message: "Berhasil mengubah Hama dan Penyakit",
           data: updatePestOrDesease,
         });
-      } catch (error: any) {
-        console.log(error);
+      } catch (error) {
+        console.error(error);
         res.status(500).json({
           code: 500,
           message: "Gagal mengubah Hama dan Penyakit",
@@ -127,8 +127,8 @@ export default async function handler(
           message: "Berhasil menghapus Hama dan Penyakit",
           data: deletePestOrDesease,
         });
-      } catch (error: any) {
-        console.log(error);
+      } catch (error) {
+        console.error(error);
         res.status(500).json({
           code: 500,
           message: "Gagal menghapus Hama dan Penyakit",

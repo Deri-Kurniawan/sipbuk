@@ -30,6 +30,7 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
             }
         }
     } catch (error) {
+        console.error(error)
         return {
             props: {
                 user: null,

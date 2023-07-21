@@ -32,8 +32,8 @@ export default async function handler(
                     message: "Berhasil menyimpan data gejala",
                     data: createPestOrDesease,
                 });
-            } catch (error: any) {
-                console.log(error);
+            } catch (error) {
+                console.error(error);
                 res.status(500).json({
                     code: 500,
                     message: "Gagal menyimpan data gejala",
@@ -79,8 +79,8 @@ export default async function handler(
                     message: "Berhasil menghapus Gejala",
                     data: symptomsOnPestsAndDeseasesHasSymptoms,
                 });
-            } catch (error: any) {
-                console.log(error);
+            } catch (error) {
+                console.error(error);
                 res.status(500).json({
                     code: 500,
                     message: "Gagal menghapus Gejala",

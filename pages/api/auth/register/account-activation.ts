@@ -45,7 +45,7 @@ export default async function handler(
           );
         }
       } catch (error) {
-        console.log("api", error);
+        console.error(error);
         res.redirect(`/register/email-verification?status=failed`);
       }
 

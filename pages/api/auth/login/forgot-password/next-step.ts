@@ -92,7 +92,7 @@ export default async function handler(
           ),
           function (error: any, info: any) {
             if (error) {
-              console.log(error);
+              console.error(error);
             } else {
               console.log("Email sent: " + info.response);
             }
@@ -106,7 +106,7 @@ export default async function handler(
 
         await prisma.$disconnect();
       } catch (error) {
-        console.log(error);
+        console.error(error);
         return res.status(500).json({
           code: 500,
           message: "Internal Server Error",

@@ -19,7 +19,7 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
       }
     }
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return {
       props: {
         user: null,

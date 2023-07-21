@@ -70,7 +70,8 @@ export async function getServerSideProps({ query, req, res }: getServerSideProps
         _token: token,
       },
     };
-  } catch (error: any) {
+  } catch (error) {
+    console.error(error)
     return {
       props: {
         AES_KEY: process.env.AES_KEY,

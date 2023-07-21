@@ -64,7 +64,7 @@ export default async function handler(
           ),
           function (error: any, info: any) {
             if (error) {
-              console.log(error);
+              console.error(error);
               res.status(200).json({
                 code: 200,
                 message:
@@ -82,7 +82,7 @@ export default async function handler(
 
         await prisma.$disconnect();
       } catch (error) {
-        console.log(error);
+        console.error(error);
         res.status(500).json({
           code: 500,
           message: "Internal server error",
