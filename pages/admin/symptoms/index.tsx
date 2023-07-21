@@ -135,7 +135,7 @@ const Admin = ({ user, _symptoms }: AdminProps) => {
                     </h4>
                     <div className='flex items-center justify-center gap-4'>
                         {selectedSymptoms.length > 0 && (
-                            <button className={`btn btn-error ${fetchIsLoading ? "loading" : ""}`} onClick={handleDeleteSelectedSymptoms} disabled={fetchIsLoading}>Hapus {selectedSymptoms.length} Data</button>
+                            <button className={`btn btn-error text-white ${fetchIsLoading ? "loading" : ""}`} onClick={handleDeleteSelectedSymptoms} disabled={fetchIsLoading}>Hapus {selectedSymptoms.length} Data</button>
                         )}
                         <Link className="btn btn-primary" href="/admin/symptoms/create"><BsPlus size={24} />Tambah Data</Link>
                     </div>

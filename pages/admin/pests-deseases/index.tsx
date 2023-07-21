@@ -142,7 +142,7 @@ const Admin = ({ user, _pestsDeseases }: AdminProps) => {
                     </h4>
                     <div className='flex items-center justify-center gap-4'>
                         {selectedPestsDeseases.length > 0 && (
-                            <button className={`btn btn-error ${fetchIsLoading ? "loading" : ""}`} onClick={handleDeleteSelectedPestsAndDeseases} disabled={fetchIsLoading}>Hapus {selectedPestsDeseases.length} Data</button>
+                            <button className={`btn btn-error text-white ${fetchIsLoading ? "loading" : ""}`} onClick={handleDeleteSelectedPestsAndDeseases} disabled={fetchIsLoading}>Hapus {selectedPestsDeseases.length} Data</button>
                         )}
                         <Link className="btn btn-primary" href="/admin/pests-deseases/create"><BsPlus size={24} />Tambah Data</Link>
                     </div>
