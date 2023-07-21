@@ -92,6 +92,14 @@ export default async function handler(
           },
         });
 
+        await prisma.usersDiagnoseHistory.deleteMany({
+          where: {
+            pestAndDeseaseCode: {
+              in: req.body.selectedPestsDeseases,
+            },
+          },
+        });
+
         const deletePestOrDesease = await prisma.pestsAndDeseases.deleteMany({
           where: {
             code: {
