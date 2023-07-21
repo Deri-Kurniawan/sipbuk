@@ -4,11 +4,13 @@ import Head from "next/head";
 import Navbar from '@/components/Navbar';
 import { PrismaClient } from '@prisma/client';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '@/prisma';
+import { Editor } from '@monaco-editor/react';
+import loader from "@monaco-editor/loader";
 
 
 type getServerSidePropsType = {
@@ -48,7 +50,7 @@ export async function getServerSideProps({ params: { code }, req, res }: getServ
             }
         }
     } catch (error) {
-        console.log(error)
+        console.error(error)
         return {
             redirect: {
                 destination: '/admin/pests-deseases',
@@ -116,6 +118,23 @@ const AdminEditPestOrDesease = ({ user, pestsDesease }: AdminCreateProps) => {
         });
     }
 
+    useEffect(() => {
+        loader.init().then((monaco) => {
+            const wrapper: any = document.getElementById('codeEditorForSolution');
+            wrapper.style.height = '100vh';
+            const properties = {
+                value: pestsDesease.solution,
+                language: 'html',
+                theme: 'vs-dark',
+                StyleSheet: {
+                    '.monaco-editor .margin': '0 !important',
+                }
+            };
+
+            monaco.editor.create(wrapper, properties);
+        });
+    }, [])
+
     return (
         <>
             <Head>
@@ -163,7 +182,10 @@ const AdminEditPestOrDesease = ({ user, pestsDesease }: AdminCreateProps) => {
                             <label className="label" htmlFor="solution">
                                 <span className="label-text">Solusi</span>
                             </label>
-                            <textarea className="h-24 textarea textarea-bordered" name='solution' id='solution' placeholder="Konten Solusi" required disabled={fetchIsLoading}>{pestsDesease.solution}</textarea>
+                            <div id='codeEditorForSolution'></div>
+                            {/* <Editor className='textarea textarea-bordered' height="90vh" defaultLanguage="html" defaultValue={pestsDesease.solution} wrapperProps={{
+                                className: 'w-full',
+                            }} /> */}
                             <label className="label">
                             </label>
                         </div>

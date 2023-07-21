@@ -4,9 +4,9 @@ export const synchronizeUsersDiagnosesHistories = () => {
   })
     .then((res) => res.json())
     .then((res) => {
-      console.log("synchronizeUsersDiagnosesHistories", res);
+      console.log("Synchronize Users Diagnoses Histories Success");
     })
     .catch((err) => {
-      console.error("synchronizeUsersDiagnosesHistories", err);
+      console.error("Synchronize Users Diagnoses Histories Failed", err);
     });
 };

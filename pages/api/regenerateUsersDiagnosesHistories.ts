@@ -11,43 +11,44 @@ export default async function handler(
     case "GET":
       const findManyUsersDiagnosesHistories =
         await prisma.usersDiagnoseHistory.findMany();
-
       const regenerateTemp: any[] = [];
 
-      await Promise.all(
-        findManyUsersDiagnosesHistories.map(async (item) => {
-          const CFInstance = await new CertaintyFactor(
-            //@ts-ignore
-            JSON.parse(item.userInputData)
-          ).generateConclusion();
+      if (findManyUsersDiagnosesHistories.length > 0) {
+        await Promise.all(
+          findManyUsersDiagnosesHistories.map(async (item) => {
+            const CFInstance = await new CertaintyFactor(
+              //@ts-ignore
+              JSON.parse(item.userInputData)
+            ).generateConclusion();
 
-          const conclusion = await CFInstance.conclusion;
-          const userInputData = await CFInstance.userInputData;
+            const conclusion = await CFInstance.conclusion;
+            const userInputData = await CFInstance.userInputData;
 
-          regenerateTemp.push({
-            id: item.id,
-            userId: item.userId,
-            pestAndDeseaseCode: conclusion.code,
-            finalCF: conclusion.finalCF,
-            userInputData: JSON.stringify(userInputData),
-          });
-        })
-      );
-
-      await Promise.all(
-        regenerateTemp.map(async (item) => {
-          await prisma.usersDiagnoseHistory.update({
-            where: {
+            regenerateTemp.push({
               id: item.id,
-            },
-            data: {
-              pestAndDeseaseCode: item.pestAndDeseaseCode,
-              finalCF: item.finalCF,
-              userInputData: item.userInputData,
-            },
-          });
-        })
-      );
+              userId: item.userId,
+              pestAndDeseaseCode: conclusion.code,
+              finalCF: conclusion.finalCF,
+              userInputData: JSON.stringify(userInputData),
+            });
+          })
+        );
+
+        await Promise.all(
+          regenerateTemp.map(async (item) => {
+            await prisma.usersDiagnoseHistory.update({
+              where: {
+                id: item.id,
+              },
+              data: {
+                pestAndDeseaseCode: item.pestAndDeseaseCode,
+                finalCF: item.finalCF,
+                userInputData: item.userInputData,
+              },
+            });
+          })
+        );
+      }
 
       res.status(200).json({
         code: 200,
