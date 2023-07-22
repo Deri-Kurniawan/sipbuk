@@ -1,4 +1,5 @@
 import prisma from "@/prisma";
+import { synchronizeUsersDiagnosesHistories } from "@/utils/synchronizeUsersDiagnosesHistories";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -104,6 +105,8 @@ export default async function handler(
                         message: "Gejala tidak ditemukan",
                     });
                 }
+
+                synchronizeUsersDiagnosesHistories();
 
                 await prisma.$disconnect();
 
