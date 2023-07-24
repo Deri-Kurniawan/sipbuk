@@ -53,6 +53,10 @@ const footLinks = [
         href: "/docs",
       },
       {
+        name: "Panduan Admin",
+        href: "/docs/admin-guide",
+      },
+      {
         name: "Panduan Pengguna",
         href: "/docs/user-guide",
       },
