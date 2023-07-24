@@ -127,11 +127,11 @@ const Admin = ({ user, _symptoms }: AdminProps) => {
                         </li>
                     </ul>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col flex-wrap items-start justify-between lg:items-center lg:flex-row">
                     <h4 className="mb-2 text-xl font-bold">
                         Data Gejala
                     </h4>
-                    <div className='flex items-center justify-center gap-4'>
+                    <div className='flex flex-row-reverse items-center justify-center gap-4 lg:flex-row'>
                         {selectedSymptoms.length > 0 && (
                             <button className={`btn btn-error text-white ${fetchIsLoading ? "loading" : ""}`} onClick={handleDeleteSelectedSymptoms} disabled={fetchIsLoading}>Hapus {selectedSymptoms.length} Data</button>
                         )}

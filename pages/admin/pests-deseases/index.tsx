@@ -134,11 +134,11 @@ const Admin = ({ user, _pestsDeseases }: AdminProps) => {
                         </li>
                     </ul>
                 </div>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col flex-wrap items-start justify-between lg:items-center lg:flex-row">
                     <h4 className="mb-2 text-xl font-bold">
                         Data Hama dan Penyakit
                     </h4>
-                    <div className='flex items-center justify-center gap-4'>
+                    <div className='flex flex-row-reverse items-center justify-center gap-4 lg:flex-row'>
                         {selectedPestsDeseases.length > 0 && (
                             <button className={`btn btn-error text-white ${fetchIsLoading ? "loading" : ""}`} onClick={handleDeleteSelectedPestsAndDeseases} disabled={fetchIsLoading}>Hapus {selectedPestsDeseases.length} Data</button>
                         )}
