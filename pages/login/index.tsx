@@ -8,7 +8,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/router";
 import { hasCookie, setCookie } from 'cookies-next';
 import { clientSideAESEncrypt } from "@/utils/cryptoAES";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getServerSidePropsType } from "@/types";
 
 export async function getServerSideProps({ req, res }: getServerSidePropsType) {
@@ -102,6 +102,21 @@ export default function Login({ AES_KEY }: LoginProps) {
       }
     })();
   };
+
+  useEffect(() => {
+    if (router.query.code === "403") {
+      toast.error("Anda tidak memiliki akses ke halaman tersebut", {
+        duration: 5000,
+      })
+
+      const timeout = setTimeout(() => {
+        router.replace(router.pathname, undefined, { shallow: false });
+      }, 100);
+
+      return () => clearTimeout(timeout);
+    }
+
+  }, [router])
 
   return (
     <>

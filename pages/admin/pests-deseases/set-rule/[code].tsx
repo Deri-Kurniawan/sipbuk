@@ -44,7 +44,7 @@ export async function getServerSideProps({ params: { code }, req, res }: getServ
             deleteCookie("user", { req, res });
             return {
                 redirect: {
-                    destination: '/login',
+                    destination: '/login?code=403',
                     permanent: true,
                 }
             }
@@ -76,7 +76,7 @@ export async function getServerSideProps({ params: { code }, req, res }: getServ
         console.error(error)
         return {
             redirect: {
-                destination: '/login',
+                destination: '/login?code=403',
                 permanent: true,
             }
         };
