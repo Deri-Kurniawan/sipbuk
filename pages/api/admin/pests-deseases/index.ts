@@ -1,10 +1,40 @@
 import prisma from "@/prisma";
+import { deleteCookie, getCookie } from "cookies-next";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const isCookieExist = getCookie("user", { req, res });
+  const userCookie = isCookieExist
+    ? // @ts-ignore
+      JSON.parse(getCookie("user", { req, res }))
+    : null;
+
+  if ((userCookie && userCookie.role !== "admin") || !userCookie) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: true,
+      },
+    };
+  }
+
+  const foundedUser = await prisma.user.findUnique({
+    where: {
+      authToken: userCookie.authToken,
+    },
+  });
+
+  if (!foundedUser) {
+    deleteCookie("user", { req, res });
+    return res.status(401).json({
+      code: 401,
+      message: "Unauthorized",
+    });
+  }
+
   const { method } = req;
   const {
     name,
