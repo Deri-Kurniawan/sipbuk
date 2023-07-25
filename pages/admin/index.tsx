@@ -1,6 +1,5 @@
 import { getServerSidePropsType, loggedInUserDataType } from '@/types';
-import { getCookie, hasCookie } from 'cookies-next';
-import React from 'react'
+import { deleteCookie, getCookie, hasCookie } from 'cookies-next';
 import Head from "next/head";
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
@@ -30,7 +29,7 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
         // @ts-ignore
         const userCookie = isCookieExist ? JSON.parse(getCookie("user", { req, res })) : null;
 
-        if (userCookie.role !== 'admin') {
+        if (userCookie && userCookie.role !== 'admin' || !userCookie) {
             return {
                 redirect: {
                     destination: '/dashboard',
@@ -39,7 +38,21 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
             }
         }
 
-        // prepare data
+        const foundedUser = await prisma.user.findUnique({
+            where: {
+                authToken: userCookie.authToken,
+            }
+        });
+        if (!foundedUser) {
+            deleteCookie("user", { req, res });
+            return {
+                redirect: {
+                    destination: '/login',
+                    permanent: true,
+                }
+            }
+        }
+
         const pestsAndDeseasesCount = await prisma.pestsAndDeseases.count()
         const symptomsCount = await prisma.symptoms.count()
         const usersCount = await prisma.user.count()
@@ -57,8 +70,9 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
     } catch (error) {
         console.error(error)
         return {
-            props: {
-                user: null,
+            redirect: {
+                destination: '/login',
+                permanent: true,
             }
         };
     }

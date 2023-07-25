@@ -33,6 +33,15 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
                 authToken: userCookie.authToken,
             }
         });
+        if (!foundedUser) {
+            deleteCookie("user", { req, res });
+            return {
+                redirect: {
+                    destination: '/login',
+                    permanent: true,
+                }
+            }
+        }
         const _userDiagnosesHistory = await prisma.usersDiagnoseHistory.findMany({
             where: {
                 userId: foundedUser?.id,
@@ -43,15 +52,6 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
         })
 
         await prisma.$disconnect();
-        if (!foundedUser) {
-            deleteCookie("user", { req, res });
-            return {
-                redirect: {
-                    destination: '/login',
-                    permanent: true,
-                }
-            }
-        }
 
         return {
             props: {
