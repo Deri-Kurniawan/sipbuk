@@ -29,6 +29,6 @@ SIPBUK menggunakan metode Certainty Factor (CF) untuk menentukan tingkat kepasti
 
 Untuk menggunakan aplikasi, website resmi SIPBUK hanya di [sipbuk.deri.my.id](https://sipbuk.deri.my.id)
 
-## Dokumentasi dan Panduan Pengguna
+## Dokumentasi Resmi
 
-Untuk melihat dokumentasi dan cara penggunaan aplikasi, anda dapat mengunjungi halaman [sipbuk.deri.my.id/docs](https://sipbuk.deri.my.id/docs)
+Untuk melihat dokumentasi mengenai cara penggunaan aplikasi sebagai pengguna dan admin serta cara instalasi aplikasi, anda dapat mengunjungi halaman [sipbuk.deri.my.id/docs](https://sipbuk.deri.my.id/docs)
