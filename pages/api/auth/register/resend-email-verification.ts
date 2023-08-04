@@ -87,7 +87,7 @@ export default async function handler(
         });
         await prisma.$disconnect();
       } catch (error) {
-        console.log("api", error);
+        console.error(error);
         res.status(500).json({ code: 500, message: "Internal server error!" });
       }
   }

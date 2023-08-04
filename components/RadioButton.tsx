@@ -10,7 +10,7 @@ interface RadioButtonProps {
   sympCode: string;
 }
 
-const optionDescendSort: Option[] = uncertaintyValueRawData.sort((a, b) => b.value - a.value);
+const optionDescendSort: Option[] = [...uncertaintyValueRawData].sort((a, b) => b.value - a.value);
 const options: Option[] = optionDescendSort
 
 export default function RadioButton({ sympCode }: RadioButtonProps) {

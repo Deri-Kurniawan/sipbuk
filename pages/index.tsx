@@ -19,7 +19,7 @@ export async function getServerSideProps({ req, res }: getServerSidePropsType) {
       }
     }
   } catch (error) {
-    console.log(error)
+    console.error(error)
     return {
       props: {
         user: null,
@@ -39,7 +39,7 @@ export default function Home({ user }: HomeProps) {
         <title>Beranda - SIPBUK</title>
         <meta name="description" content="Sistem Pakar berbasis web ini dapat membantu anda dalam mendiagnosis hama dan penyakit pada tanaman jambu kristal anda, serta dapat memberikan solusi atas masalah yang dialami oleh tanaman jambu kristal anda secara gratis." />
       </Head>
-      <Navbar userFullname={user?.fullname} />
+      <Navbar userFullname={user?.fullname} role={user?.role} />
       <main className="safe-horizontal-padding my-[16px] md:my-[48px]">
         <div className="md:grid grid-flow-row grid-cols-12 gap-[32px] items-center">
           {/* hero left */}

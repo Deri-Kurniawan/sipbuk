@@ -150,30 +150,24 @@ export const symptomsRawData = [
   },
   {
     code: 25,
-    info: "Daun menguning",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689003758/symptoms/18.webp",
-  },
-  {
-    code: 26,
     info: "Pertumbuhan tanaman terasa lambat",
     imageUrl:
       "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
-    code: 27,
+    code: 26,
     info: "Akar berubah warna menjadi warna hitam atau coklat",
     imageUrl:
       "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
-    code: 28,
+    code: 27,
     info: "Beberapa bagian tanaman menjadi layu",
     imageUrl:
       "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
   },
   {
-    code: 29,
+    code: 28,
     info: "Bercak kecil sebesar ukuran jarum",
     imageUrl:
       "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
@@ -184,8 +178,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 1,
     name: "Hama Lalat Buah",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -235,8 +227,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 2,
     name: "Hama Kutu Putih",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -264,8 +254,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 3,
     name: "Hama Ulat Kantong",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -289,8 +277,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 4,
     name: "Hama Belalang",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -319,8 +305,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 5,
     name: "Penyakit Karat Daun",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
     <ol>
       <li>
@@ -347,8 +331,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 6,
     name: "Penyakit Embun Jelaga",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -387,8 +369,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 7,
     name: "Penyakit Busuk Buah",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -423,8 +403,6 @@ export const pestsAndDeseasesRawData = [
   {
     code: 8,
     name: "Penyakit Busuk Akar",
-    imageUrl:
-      "https://res.cloudinary.com/sipbuk/image/upload/v1689001147/symptoms/default.webp",
     solution: `
       <ol>
         <li>
@@ -496,7 +474,7 @@ export const pestsAndDeseasesHasSymptomsRawData = [
   { pestAndDeseaseCode: 7, symptomCode: 13, expertCF: 0.4 },
   { pestAndDeseaseCode: 7, symptomCode: 23, expertCF: 1 },
   { pestAndDeseaseCode: 7, symptomCode: 24, expertCF: 0.6 },
-  { pestAndDeseaseCode: 7, symptomCode: 29, expertCF: 1 },
+  { pestAndDeseaseCode: 7, symptomCode: 18, expertCF: 1 },
   { pestAndDeseaseCode: 8, symptomCode: 13, expertCF: 1 },
   { pestAndDeseaseCode: 8, symptomCode: 25, expertCF: 1 },
   { pestAndDeseaseCode: 8, symptomCode: 26, expertCF: 1 },
@@ -505,18 +483,30 @@ export const pestsAndDeseasesHasSymptomsRawData = [
 ];
 
 export const userDemoAccount = {
-  fullname: "SIPBUK Demo Account",
-  email: "demo@sipbuk.com",
-  password: "demo123", // must be AES encrypted while seeding
+  fullname: "SIPBUK Demo",
+  role: "user",
+  email: "user@sipbuk.com",
+  password: "user123", // must be AES encrypted while seeding
   isVerified: true,
   verifyToken: "vt-573d4ffb-a0e6-4b02-be9e-44d487dd090f",
   authToken: null,
   passwordResetToken: null,
 };
 
+export const adminDemoAccount = {
+  fullname: "SIPBUK Admin",
+  role: "admin",
+  email: "admin@sipbuk.com",
+  password: "admin123", // must be AES encrypted while seeding
+  isVerified: true,
+  verifyToken: "vt-573d4ffb-a0e6-4b02-3u8d-44d487di4wsa",
+  authToken: null,
+  passwordResetToken: null,
+};
+
 export const userInputTemplate = (() => {
   const objectTemp = Object.create({});
-  for (let n = 1; n <= 29; n++) {
+  for (let n = 1; n <= 28; n++) {
     objectTemp[n] = 0;
   }
   return objectTemp;

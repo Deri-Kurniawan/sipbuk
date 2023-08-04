@@ -1,4 +1,6 @@
 {
   "index": "Pendahuluan",
-  "user-guide": "Panduan Pengguna"
+  "installation-guide": "Panduan Instalasi",
+  "user-guide": "Panduan Pengguna",
+  "admin-guide": "Panduan Admin"
 }

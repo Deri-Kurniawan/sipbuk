@@ -31,7 +31,7 @@ export default async function handler(
         });
         await prisma.$disconnect();
       } catch (error: any) {
-        console.log(error);
+        console.error(error);
         throw new Error(error);
       }
 

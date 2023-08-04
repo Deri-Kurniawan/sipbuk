@@ -97,6 +97,7 @@ export default async function handler(
           message: `Selamat datang ${foundedUser.fullname}!`,
           data: {
             id: updatedUser.id,
+            role: updatedUser.role,
             email: updatedUser.email,
             fullname: updatedUser.fullname,
             authToken: updatedUser.authToken,
@@ -104,7 +105,7 @@ export default async function handler(
         });
         await prisma.$disconnect();
       } catch (error) {
-        console.log("api", error);
+        console.error(error);
         res.status(500).json({ code: 500, message: "Kesalahan Server!" });
       }
       break;

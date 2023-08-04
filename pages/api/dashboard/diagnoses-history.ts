@@ -48,8 +48,8 @@ export default async function handler(
           message: "Berhasil menyimpan riwayat diagnosis sebelumnya",
           data: getUpdatedData,
         });
-      } catch (error: any) {
-        console.log(error);
+      } catch (error) {
+        console.error(error);
         res.status(500).json({
           code: 500,
           message: "Gagal menyimpan riwayat diagnosis sebelumnya",
@@ -85,8 +85,8 @@ export default async function handler(
         });
 
         await prisma.$disconnect();
-      } catch (error: any) {
-        console.log(error);
+      } catch (error) {
+        console.error(error);
         res.status(500).json({
           code: 500,
           message: "Gagal menghapus riwayat diagnosis sebelumnya",

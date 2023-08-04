@@ -24,9 +24,10 @@ const navLinks = [
 interface NavbarProps {
   isSticky?: boolean;
   userFullname?: string | null;
+  role?: string | null;
 }
 
-export default function Navbar({ isSticky = true, userFullname = null }: NavbarProps) {
+export default function Navbar({ isSticky = true, userFullname = null, role = null }: NavbarProps) {
   const router = useRouter();
   const pathname = usePathname();
 
@@ -79,8 +80,13 @@ export default function Navbar({ isSticky = true, userFullname = null }: NavbarP
                     tabIndex={0}
                     className="p-2 shadow dropdown-content menu bg-base-100 rounded-box w-52"
                   >
+                    {role === "admin" && (
+                      <li>
+                        <Link href="/admin">Admin Dashboard</Link>
+                      </li>
+                    )}
                     <li>
-                      <Link href="/dashboard">Dashboard</Link>
+                      <Link href="/dashboard">{role === "admin" && "User "}Dashboard</Link>
                     </li>
                     <li>
                       <button onClick={handleClickLogout}>Keluar</button>
@@ -110,9 +116,14 @@ export default function Navbar({ isSticky = true, userFullname = null }: NavbarP
                   tabIndex={0}
                   className="p-2 shadow dropdown-content menu bg-base-100 rounded-box w-52"
                 >
+                  {role === "admin" && (
+                    <li>
+                      <Link href="/admin">Admin Dashboard</Link>
+                    </li>
+                  )}
                   {userFullname && (
                     <li>
-                      <Link href="/dashboard">Dashboard</Link>
+                      <Link href="/dashboard">{role === "admin" && "User "}Dashboard</Link>
                     </li>
                   )}
                   {navLinks.map((nl, index) => (
