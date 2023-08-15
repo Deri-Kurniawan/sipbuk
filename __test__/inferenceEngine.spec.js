@@ -28,16 +28,16 @@ test("knowledge base harus memiliki 8 hama dan penyakit serta keterikatan terhad
   });
 });
 
-test("hasil diagnosis harus mengindikasikan Hama Lalat Buah dengan nilai 0.9840", async () => {
+test("hasil diagnosis harus mengindikasikan Penyakit Busuk Akar dengan nilai 0.9760", async () => {
   const expectation = {
-    name: "Hama Lalat Buah",
-    finalCF: 0.984,
+    name: "Penyakit Busuk Akar",
+    finalCF: 0.976,
   };
   const userInput = {
-    1: 0.8,
-    2: 0.8,
+    1: 0,
+    2: 0,
     3: 0,
-    4: 0.6,
+    4: 0,
     5: 0,
     6: 0,
     7: 0,
@@ -58,11 +58,10 @@ test("hasil diagnosis harus mengindikasikan Hama Lalat Buah dengan nilai 0.9840"
     22: 0,
     23: 0,
     24: 0,
-    25: 0,
+    25: 0.4,
     26: 0,
-    27: 0,
-    28: 0,
-    29: 0,
+    27: 0.8,
+    28: 0.8,
   };
 
   const instance = new CertaintyFactor(userInput);
