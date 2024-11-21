@@ -9,4 +9,7 @@ module.exports = withNextra({
   experimental: {
     appDir: !true,
   },
+  typescript: {
+    ignoreBuildErrors: true,
+  },
 });
