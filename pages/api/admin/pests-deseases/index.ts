@@ -27,7 +27,7 @@ export default async function handler(
     },
   });
 
-  if (!foundedUser) {
+  if (!foundedUser || (foundedUser && foundedUser.role !== "admin")) {
     deleteCookie("user", { req, res });
     return res.status(401).json({
       code: 401,
