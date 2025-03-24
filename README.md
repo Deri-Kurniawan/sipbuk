@@ -24,11 +24,3 @@ SIPBUK (Sistem Pakar Jambu Kristal) berbasis web ini dapat membantu anda dalam m
 📱 Dapat digunakan di mana saja
 
 SIPBUK menggunakan metode Certainty Factor (CF) untuk menentukan tingkat kepastian dari suatu gejala yang dialami oleh tanaman jambu kristal.
-
-## Website Resmi
-
-Untuk menggunakan aplikasi, website resmi SIPBUK hanya di [sipbuk.deri.my.id](https://sipbuk.deri.my.id)
-
-## Dokumentasi Resmi
-
-Untuk melihat dokumentasi mengenai cara penggunaan aplikasi sebagai pengguna dan admin serta cara instalasi aplikasi, anda dapat mengunjungi halaman [sipbuk.deri.my.id/docs](https://sipbuk.deri.my.id/docs)
